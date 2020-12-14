@@ -26,3 +26,5 @@ $router->get('/co_detil','CompanyController@co_detil');
 $router->post('/co_add','CompanyController@co_add');
 //修改公司详情
 $router->post('/co_edit','CompanyController@co_edit');
+
+//$router->post('/co_edit','CompanyController@co_edit');

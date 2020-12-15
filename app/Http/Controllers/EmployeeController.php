@@ -20,9 +20,11 @@ class EmployeeController extends Controller
     /**
      *员工列表接口
      */
-    public function ee_list(){
-        //todo 分页
-        $ee_list = employee::all();
+    public function ee_list(Request $request){
+        $currentPage = (int)$request->input('current_page');
+        $perage = (int)$request->input('perpage');
+        $limitprame = ($currentPage -1) * $perage;
+        $ee_list = employee::skip($limitprame)->take($perage)->get();
         return $this->returnMessage($ee_list);
     }
     /**

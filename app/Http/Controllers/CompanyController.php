@@ -20,9 +20,12 @@ class CompanyController extends Controller
     /**
      *公司列表接口
      */
-    public function co_list(){
-        //todo 分页
-        $co_list = company::all();
+    public function co_list(Request $request){
+        //获取到当前currentpage 和perpage 每页多少条
+        $currentPage = (int)$request->input('current_page');
+        $perage = (int)$request->input('perpage');
+        $limitprame = ($currentPage -1) * $perage;
+        $co_list = company::skip($limitprame)->take($perage)->get();
         return $this->returnMessage($co_list);
     }
     /**

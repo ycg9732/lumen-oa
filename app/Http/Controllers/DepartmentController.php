@@ -21,9 +21,13 @@ class DepartmentController extends Controller
     /**
      *组织架构列表接口
      */
-    public function de_list(){
+    public function de_list(Request $request){
         //todo 分页
-        $de_list = department::all();
+
+        $currentPage = (int)$request->input('current_page');
+        $perage = (int)$request->input('perpage');
+        $limitprame = ($currentPage -1) * $perage;
+        $de_list = department::skip($limitprame)->take($perage)->get();
         return $this->returnMessage($de_list);
     }
     /**

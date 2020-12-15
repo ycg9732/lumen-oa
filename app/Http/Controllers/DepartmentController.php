@@ -23,11 +23,12 @@ class DepartmentController extends Controller
      */
     public function de_list(Request $request){
         //todo 分页
-
-        $currentPage = (int)$request->input('current_page');
-        $perage = (int)$request->input('perpage');
+        $currentPage = (int)$request->input('current_page','1');
+        $perage = (int)$request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
         $de_list = department::skip($limitprame)->take($perage)->get();
+        $de_count = department::all()->count();
+        $all = ceil($de_count/$perage);
         return $this->returnMessage($de_list);
     }
     /**

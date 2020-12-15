@@ -22,10 +22,12 @@ class CompanyController extends Controller
      */
     public function co_list(Request $request){
         //获取到当前currentpage 和perpage 每页多少条
-        $currentPage = (int)$request->input('current_page');
-        $perage = (int)$request->input('perpage');
+        $currentPage = (int)$request->input('current_page','1');
+        $perage = (int)$request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
         $co_list = company::skip($limitprame)->take($perage)->get();
+        $co_count = company::all()->count();
+        $all = ceil($co_count/$perage);
         return $this->returnMessage($co_list);
     }
     /**

@@ -46,7 +46,6 @@ class DepartmentController extends Controller
             $department->dept_name = $request->input('de_name');
 //            $department->co_code = $request->input('co_code');
             $department->save();
-            //todo
             return $this->returnMessage('','ok');
         }
     }
@@ -59,7 +58,6 @@ class DepartmentController extends Controller
         $department->dept_name = $request->input('de_name');
 //        $department->co_code = $request->input('co_code');
         $department->save();
-        //todo
         return $this->returnMessage('','ok');
     }
 

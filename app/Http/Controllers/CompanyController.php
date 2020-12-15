@@ -45,7 +45,6 @@ class CompanyController extends Controller
             $company->co_name = $request->input('co_name');
             $company->co_code = $request->input('co_code');
             $company->save();
-            //todo
             return $this->returnMessage('','ok');
         }
     }
@@ -58,7 +57,6 @@ class CompanyController extends Controller
         $company->co_name = $request->input('co_name');
         $company->co_code = $request->input('co_code');
         $company->save();
-        //todo
         return $this->returnMessage('','ok');
     }
 }

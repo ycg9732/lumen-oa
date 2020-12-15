@@ -45,7 +45,6 @@ class EmployeeController extends Controller
             $employee->ee_name = $request->input('ee_name');
             $employee->id_card = $request->input('id_card');
             $employee->save();
-            //todo
             return $this->returnMessage('','ok');
         }
     }
@@ -58,7 +57,6 @@ class EmployeeController extends Controller
         $employee->ee_name = $request->input('ee_name');
         $employee->id_card = $request->input('id_card');
         $employee->save();
-        //todo
         return $this->returnMessage('','ok');
     }
 }

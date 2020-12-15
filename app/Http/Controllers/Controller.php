@@ -13,7 +13,7 @@ class Controller extends BaseController
      * @param int $code
      * @return array
      */
-    public function returnMessage($message=null,$data=[],$status=true,$code=400200){
+    public function returnMessage($data=[],$message='ok',$status=true,$code=400200){
         return ['status'=>$status,'message'=>$message,'data'=>$data,'code'=>$code];
     }
 }

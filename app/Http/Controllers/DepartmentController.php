@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\department;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\returnValueMap;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +16,7 @@ class DepartmentController extends Controller
     public function de_search(Request $request){
         $name = $request->input('de_name');
         $de_list = department::where('dept_name','like','%'.$name.'%')->get();
-        return $de_list;
+        return $this->returnMessage($de_list);
     }
     /**
      *组织架构列表接口
@@ -23,7 +24,7 @@ class DepartmentController extends Controller
     public function de_list(){
         //todo 分页
         $de_list = department::all();
-        return $de_list;
+        return $this->returnMessage($de_list);
     }
     /**
      * 组织架构详情
@@ -31,7 +32,7 @@ class DepartmentController extends Controller
     public function de_detil(Request $request){
         $de_id = $request->input('de_id');
         $de_info = department::where('id',$de_id)->get();
-        return $de_info;
+        return $this->returnMessage($de_info);
     }
     /**
      * 添加组织架构
@@ -46,7 +47,7 @@ class DepartmentController extends Controller
 //            $department->co_code = $request->input('co_code');
             $department->save();
             //todo
-            return 'ok';
+            return $this->returnMessage('','ok');
         }
     }
     /**
@@ -59,7 +60,7 @@ class DepartmentController extends Controller
 //        $department->co_code = $request->input('co_code');
         $department->save();
         //todo
-        return 'ok';
+        return $this->returnMessage('','ok');
     }
 
 }

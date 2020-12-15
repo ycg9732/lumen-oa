@@ -15,7 +15,7 @@ class CompanyController extends Controller
     public function search(Request $request){
         $name = $request->input('co_name');
         $co_list = company::where('co_name','like','%'.$name.'%')->get();
-        return $co_list;
+        return $this->returnMessage($co_list);
     }
     /**
      *公司列表接口
@@ -23,7 +23,7 @@ class CompanyController extends Controller
     public function co_list(){
         //todo 分页
         $co_list = company::all();
-        return $co_list;
+        return $this->returnMessage($co_list);
     }
     /**
      * 公司详情
@@ -31,7 +31,7 @@ class CompanyController extends Controller
     public function co_detil(Request $request){
         $co_id = $request->input('co_id');
         $co_info = company::where('id',$co_id)->get();
-        return $co_info;
+        return $this->returnMessage($co_info);
     }
     /**
      * 添加公司
@@ -46,7 +46,7 @@ class CompanyController extends Controller
             $company->co_code = $request->input('co_code');
             $company->save();
             //todo
-            return 'ok';
+            return $this->returnMessage('','ok');
         }
     }
     /**
@@ -59,6 +59,6 @@ class CompanyController extends Controller
         $company->co_code = $request->input('co_code');
         $company->save();
         //todo
-        return 'ok';
+        return $this->returnMessage('','ok');
     }
 }

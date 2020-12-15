@@ -15,7 +15,7 @@ class EmployeeController extends Controller
     public function ee_search(Request $request){
         $name = $request->input('ee_name');
         $ee_list = employee::where('ee_name','like','%'.$name.'%')->get();
-        return $ee_list;
+        return $this->returnMessage($ee_list);
     }
     /**
      *员工列表接口
@@ -23,7 +23,7 @@ class EmployeeController extends Controller
     public function ee_list(){
         //todo 分页
         $ee_list = employee::all();
-        return $ee_list;
+        return $this->returnMessage($ee_list);
     }
     /**
      * 员工详情
@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     public function ee_detil(Request $request){
         $ee_id = $request->input('ee_id');
         $ee_info = employee::where('id',$ee_id)->get();
-        return $ee_info;
+        return $this->returnMessage($ee_info);
     }
     /**
      * 添加员工
@@ -46,7 +46,7 @@ class EmployeeController extends Controller
             $employee->id_card = $request->input('id_card');
             $employee->save();
             //todo
-            return 'ok';
+            return $this->returnMessage('','ok');
         }
     }
     /**
@@ -59,6 +59,6 @@ class EmployeeController extends Controller
         $employee->id_card = $request->input('id_card');
         $employee->save();
         //todo
-        return 'ok';
+        return $this->returnMessage('','ok');
     }
 }

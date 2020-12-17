@@ -64,4 +64,12 @@ class CompanyController extends Controller
         $company->save();
         return $this->returnMessage('','ok');
     }
+    /**
+     * 树状结构
+     */
+    public function tree(){
+//        $tree = company::with('allchildren')->first();  //单数结构
+        $tree = company::get(['co_name','parent']);//双树结构
+        return $this->returnMessage($tree);
+    }
 }

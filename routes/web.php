@@ -46,3 +46,7 @@ $router->get('/ee_detil','EmployeeController@ee_detil');
 $router->post('/ee_add','EmployeeController@ee_add');
 //修改员工详情
 $router->post('/ee_edit','EmployeeController@ee_edit');
+//tree
+$router->get('/co_tree','CompanyController@tree');
+
+

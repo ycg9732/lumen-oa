@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
@@ -49,8 +50,8 @@ class CompanyController extends Controller
             $company = new company;
             $company->co_name = $request->input('co_name');
             $company->co_code = $request->input('co_code');
-            $company->co_pid = $request->input('co_pid');
-            $company->co_parent = $request->input('co_parent');
+//            $company->co_pid = $request->input('co_pid');
+//            $company->co_parent = $request->input('co_parent');
             $company->save();
             return $this->returnMessage('','ok');
         }
@@ -70,15 +71,15 @@ class CompanyController extends Controller
      * 树状结构
      */
     public function tree(){
-//        $tree = company::with('allchildren')->first();  //单树结构
-        $tree = company::get(['co_name','parent','dir']);//双树结构
+//        $tree = company::with('children')->first();  //单树结构
+        //双树结构
+//        $tree = DB::select('select co_name ,parent,dir from company');
         return $this->returnMessage($tree);
     }
     /**
      * 单选框接口
      */
     public function co_select(){
-//todo
-//        return
+
     }
 }

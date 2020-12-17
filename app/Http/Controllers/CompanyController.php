@@ -49,6 +49,8 @@ class CompanyController extends Controller
             $company = new company;
             $company->co_name = $request->input('co_name');
             $company->co_code = $request->input('co_code');
+            $company->co_pid = $request->input('co_pid');
+            $company->co_parent = $request->input('co_parent');
             $company->save();
             return $this->returnMessage('','ok');
         }
@@ -69,7 +71,14 @@ class CompanyController extends Controller
      */
     public function tree(){
 //        $tree = company::with('allchildren')->first();  //单树结构
-        $tree = company::get(['co_name','parent']);//双树结构
+        $tree = company::get(['co_name','parent','dir']);//双树结构
         return $this->returnMessage($tree);
+    }
+    /**
+     * 单选框接口
+     */
+    public function co_select(){
+//todo
+//        return
     }
 }

@@ -25,6 +25,9 @@ class ContractController extends Controller
     public function con_search(){
         $name = $this->request->input('con_name');
         $co_list = contract::where('con_name','like','%'.$name.'%')->get();
+        foreach ($co_list as $con){
+            $con['con_img'] = env('APP_URL').'/img/img/'.$con['con_img'];
+        }
         return $this->returnMessage($co_list);
 
     }
@@ -84,6 +87,10 @@ class ContractController extends Controller
         $con_list = contract::skip($limitprame)->take($perage)->get();
         $con_count = contract::all()->count();
         $all = ceil($con_count/$perage);
+
+        foreach ($con_list as $con) {
+            $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
+        }
         return $this->returnMessage($con_list);
     }
 }

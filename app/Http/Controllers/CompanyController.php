@@ -64,6 +64,17 @@ class CompanyController extends Controller
         $company = company::find($co_id);
         $company->co_name = $request->input('co_name');
         $company->co_code = $request->input('co_code');
+        $company->corpn = $request->input('corpn');
+        $company->state = $request->input('state');
+        $company->cap = $request->input('cap');
+        $company->lob = $request->input('lob');
+        $company->credit_code = $request->input('credit_code');
+        $company->jiguan = $request->input('jiguan');
+        $company->start = $request->input('start');
+        $company->area = $request->input('area');
+        $company->address = $request->input('address');
+        $company->fanwei = $request->input('fanwei');
+        $company->fanwei = $request->input('fanwei');
         $company->save();
         return $this->returnMessage('','ok');
     }

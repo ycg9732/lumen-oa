@@ -66,6 +66,7 @@ class EmployeeController extends Controller
         $employee->sex = $request->input('sex');
         $employee->job = $request->input('job');
         $employee->tel = $request->input('tel');
+        $employee->address = $request->input('address');
         $employee->save();
         return $this->returnMessage('','ok');
     }

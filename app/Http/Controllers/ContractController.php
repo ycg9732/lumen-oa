@@ -34,13 +34,13 @@ class ContractController extends Controller
     public function con_add(){
         $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
         if($is_have > 0){
-            $this->returnMessage('','contract exist');
+            return $this->returnMessage('','contract exist');
         }else{
             $date = $this->request->input('con_date');
             $name = $this->request->input('con_name');
             $state = $this->request->input('con_state');
             $img_name = Str::random(10).'.'.$this->request->file('con_img')->getClientOriginalExtension();
-            $img = $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
+            $img= $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
             $contract = new contract();
             $contract->con_name = $name;
             $contract->con_date = $date;

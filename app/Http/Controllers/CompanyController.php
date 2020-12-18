@@ -50,7 +50,7 @@ class CompanyController extends Controller
             $company = new company;
             $company->co_name = $request->input('co_name');
             $company->co_code = $request->input('co_code');
-//            $company->co_pid = $request->input('co_pid');
+            $company->corpn = $request->input('corpn');
 //            $company->co_parent = $request->input('co_parent');
             $company->save();
             return $this->returnMessage('','ok');

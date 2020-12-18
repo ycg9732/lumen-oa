@@ -73,6 +73,9 @@ class ContractController extends Controller
     public function con_detil(){
         $id = $this->request->input('id');
         $con_detil = contract::where('id',$id)->get();
+        foreach ($con_detil as $con){
+            $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
+        }
         return $this->returnMessage($con_detil);
     }
     /**

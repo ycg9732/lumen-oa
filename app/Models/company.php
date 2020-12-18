@@ -14,9 +14,10 @@ class company extends Model
         return $this->hasMany(get_class($this),'pid','id');
     }
     public function allchildren(){
-        return $this->children()->with('allchildren');
+        return $this->children()->with('children');
     }
+    //自关联
     public function parent(){
-        return $this->hasOne(company::class,'id','pid');
+        return $this->hasOne(get_class($this), $this->getKeyName(), 'pid');
     }
 }

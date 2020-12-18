@@ -51,12 +51,14 @@ $router->get('/co_tree','CompanyController@tree');
 //单选框接口
 $router->get('/co_select','CompanyController@co_select');
 //合同搜索
-$router->get('/con_search','ContractContraller@con_search');
+$router->get('/con_search','ContractController@con_search');
 //合同添加
-$router->get('/con_add','ContractContraller@con_add');
+$router->post('/con_add','ContractController@con_add');
 //合同修改
-$router->get('/con_edit','ContractContraller@con_edit');
+$router->get('/con_edit','ContractController@con_edit');
 //合同详情
-$router->get('/con_detil','ContractContraller@con_detil');
+$router->get('/con_detil','ContractController@con_detil');
+//合同列表
+$router->get('/con_list','ContractController@con_list');
 
 

@@ -63,6 +63,9 @@ class EmployeeController extends Controller
         $employee = employee::find($ee_id);
         $employee->ee_name = $request->input('ee_name');
         $employee->id_card = $request->input('id_card');
+        $employee->sex = $request->input('sex');
+        $employee->job = $request->input('job');
+        $employee->tel = $request->input('tel');
         $employee->save();
         return $this->returnMessage('','ok');
     }

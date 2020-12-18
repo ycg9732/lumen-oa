@@ -49,7 +49,7 @@ class DepartmentController extends Controller
         }else{
             $department = new department;
             $department->dept_name = $request->input('de_name');
-//            $department->co_code = $request->input('co_code');
+            $department->pic = $request->input('pic');
             $department->save();
             return $this->returnMessage('','ok');
         }
@@ -61,7 +61,7 @@ class DepartmentController extends Controller
         $de_id = $request->input('de_id');
         $department = department::find($de_id);
         $department->dept_name = $request->input('de_name');
-//        $department->co_code = $request->input('co_code');
+        $department->pic = $request->input('pic');
         $department->save();
         return $this->returnMessage('','ok');
     }

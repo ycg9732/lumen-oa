@@ -48,5 +48,15 @@ $router->post('/ee_add','EmployeeController@ee_add');
 $router->post('/ee_edit','EmployeeController@ee_edit');
 //tree
 $router->get('/co_tree','CompanyController@tree');
+//单选框接口
+$router->get('/co_select','CompanyController@co_select');
+//合同搜索
+$router->get('/con_search','ContractContraller@con_search');
+//合同添加
+$router->get('/con_add','ContractContraller@con_add');
+//合同修改
+$router->get('/con_edit','ContractContraller@con_edit');
+//合同详情
+$router->get('/con_detil','ContractContraller@con_detil');
 
 

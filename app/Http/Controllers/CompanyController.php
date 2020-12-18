@@ -91,6 +91,7 @@ class CompanyController extends Controller
      * 单选框接口
      */
     public function co_select(){
-
+        $select = company::get(['id','co_name']);
+        return $this->returnMessage($select);
     }
 }

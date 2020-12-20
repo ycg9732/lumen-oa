@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return '$router->app->version()';
 });
 //搜索
 $router->post('/search','CompanyController@search');
@@ -60,5 +60,8 @@ $router->get('/con_edit','ContractController@con_edit');
 $router->get('/con_detil','ContractController@con_detil');
 //合同列表
 $router->get('/con_list','ContractController@con_list');
+//断点上传
+$router->post('/resumable','ResumableController@process');
+
 
 

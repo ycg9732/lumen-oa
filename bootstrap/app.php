@@ -74,11 +74,14 @@ $app->configure('app');
 
  $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
+     App\Http\Middleware\CorsMiddleware::class
+
  ]);
 
-// $app->routeMiddleware([
+ $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+//        'cors' => App\Http\Middleware\ResumableMiddleware::class,
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +98,8 @@ $app->configure('app');
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
  $app->register(Intervention\Image\ImageServiceProvider::class);
+// $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------

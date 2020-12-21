@@ -87,4 +87,17 @@ class DepartmentController extends Controller
         $employee = department::find($id)->employee()->get(['id','ee_name','sex','job','tel','address','user_name']);
         return $this->returnMessage($employee);
     }
+
+    /**
+     * 部门添加员工
+     * @param Request $request
+     */
+    public function de_add_ee(Request $request){
+        $de_id = $request->input('de_id');
+        $ee_id = $request->input('ee_id');
+        $employee = employee::find($ee_id);
+        $employee->dept_id = $de_id;
+        $employee->save();
+        return $this->returnMessage('','ok');
+    }
 }

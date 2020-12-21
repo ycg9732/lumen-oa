@@ -70,6 +70,8 @@ $router->get('/co_delete','CompanyController@co_delete');
 $router->get('/de_delete','DepartmentController@de_delete');
 //单个部门下的员工
 $router->get('/de_per_list','DepartmentController@de_per_list');
+//部门添加员工
+$router->get('/de_add_ee','DepartmentController@de_add_ee');
 
 
 

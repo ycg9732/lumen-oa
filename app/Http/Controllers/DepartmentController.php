@@ -84,7 +84,7 @@ class DepartmentController extends Controller
      */
     public function de_per_list(Request $request){
         $id = $request->input('id');
-        $employee = department::find($id)->employee;
+        $employee = department::find($id)->employee()->get(['id','ee_name','sex','job','tel','address','user_name']);
         return $this->returnMessage($employee);
     }
 }

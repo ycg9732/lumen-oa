@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -76,11 +77,13 @@ class EmployeeController extends Controller
      */
     public function ee_delete(Request $request){
         $id = $request->input('id');
-        $num = employee::destroy($id);
-        if ($num > 0){
+        try {
+            DB::transaction(function () use ($id){
+                employee::destroy($id);
+            },2);
             return $this->returnMessage('','ok');
-        }else{
-            return $this->returnMessage('','fail');
+        }catch (\PDOException $e){
+            return $this->returnMessage('','no');
         }
     }
 }

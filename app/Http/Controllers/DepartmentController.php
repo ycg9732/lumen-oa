@@ -98,6 +98,7 @@ class DepartmentController extends Controller
         $employee = employee::find($ee_id);
         $employee->dept_id = $de_id;
         $employee->save();
+        //todo 捕获准确的操作结果
         return $this->returnMessage('','ok');
     }
 }

@@ -53,6 +53,9 @@ class EmployeeController extends Controller
             $employee->job = $request->input('job');
             $employee->tel = $request->input('tel');
             $employee->address = $request->input('address');
+
+            $employee->user_name = $request->input('user_name');
+            $employee->password = $request->input('password');
             $employee->save();
             return $this->returnMessage('','ok');
         }
@@ -69,6 +72,8 @@ class EmployeeController extends Controller
         $employee->job = $request->input('job');
         $employee->tel = $request->input('tel');
         $employee->address = $request->input('address');
+        $employee->user_name = $request->input('user_name');
+        $employee->password = $request->input('password');
         $employee->save();
         return $this->returnMessage('','ok');
     }

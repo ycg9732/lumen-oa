@@ -22,13 +22,19 @@ class EmployeeController extends Controller
      *员工列表接口
      */
     public function ee_list(Request $request){
-        $currentPage = (int)$request->input('current_page','1');
-        $perage = (int)$request->input('perpage','20');
-        $limitprame = ($currentPage -1) * $perage;
-        $ee_list = employee::skip($limitprame)->take($perage)->get();
-        $ee_count = employee::all()->count();
-        $all = ceil($ee_count/$perage);
-        return $this->returnMessage($ee_list);
+        if ($request->has('de_member')){
+            $de_member = employee::where('dept_id',null)->get(['id','ee_name']);
+            return $this->returnMessage($de_member);
+        }else{
+            $currentPage = (int)$request->input('current_page','1');
+            $perage = (int)$request->input('perpage','20');
+            $limitprame = ($currentPage -1) * $perage;
+            $ee_list = employee::skip($limitprame)->take($perage)->get();
+            $ee_count = employee::all()->count();
+            $all = ceil($ee_count/$perage);
+            return $this->returnMessage($ee_list);
+
+        }
     }
     /**
      * 员工详情

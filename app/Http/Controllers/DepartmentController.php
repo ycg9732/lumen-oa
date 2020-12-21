@@ -6,8 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\department;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\returnValueMap;
-
+use Illuminate\Support\Facades\DB;
 class DepartmentController extends Controller
 {
     /**
@@ -70,11 +69,13 @@ class DepartmentController extends Controller
      */
     public function de_delete(Request $request){
         $id = $request->input('id');
-        $num = department::destroy($id);
-        if ($num > 0){
+        try {
+            DB::transaction(function () use ($id){
+                department::destroy($id);
+            },2);
             return $this->returnMessage('','ok');
-        }else{
-            return $this->returnMessage('','fail');
+        }catch (\PDOException $e){
+            return $this->returnMessage('','no');
         }
     }
 }

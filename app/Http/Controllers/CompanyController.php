@@ -92,12 +92,14 @@ class CompanyController extends Controller
      * 删除接口
      */
     public function co_delete(Request $request){
-        $id = $request->input('id');
-        $num = company::destroy($id);
-        if ($num > 0){
+        $id = $request->input('id');try {
+            DB::transaction(function () use ($id){
+                company::destroy($id);
+                //todo 关联删除
+            },2);
             return $this->returnMessage('','ok');
-        }else{
-            return $this->returnMessage('','fail');
+        }catch (\PDOException $e){
+            return $this->returnMessage('','no');
         }
     }
     /**

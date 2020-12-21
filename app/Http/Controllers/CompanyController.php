@@ -61,7 +61,8 @@ class CompanyController extends Controller
             $company->address = $request->input('address');
             $company->fanwei = $request->input('fanwei');
             $company->parent = $request->input('parent');
-//            $company->fanwei = $request->input('fanwei');
+            $company->x = $request->input('x');
+            $company->y = $request->input('y');
             $company->save();
             return $this->returnMessage('','ok');
         }
@@ -84,7 +85,8 @@ class CompanyController extends Controller
         $company->area = $request->input('area');
         $company->address = $request->input('address');
         $company->fanwei = $request->input('fanwei');
-        $company->fanwei = $request->input('fanwei');
+        $company->x = $request->input('x');
+        $company->y = $request->input('y');
         $company->save();
         return $this->returnMessage('','ok');
     }

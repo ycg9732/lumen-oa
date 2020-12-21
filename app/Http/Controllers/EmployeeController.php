@@ -55,7 +55,7 @@ class EmployeeController extends Controller
             $employee->address = $request->input('address');
 
             $employee->user_name = $request->input('user_name');
-            $employee->password = $request->input('password');
+            $employee->password = sha1($request->input('password'));
             $employee->save();
             return $this->returnMessage('','ok');
         }
@@ -73,7 +73,7 @@ class EmployeeController extends Controller
         $employee->tel = $request->input('tel');
         $employee->address = $request->input('address');
         $employee->user_name = $request->input('user_name');
-        $employee->password = $request->input('password');
+        $employee->password = sha1($request->input('password'));
         $employee->save();
         return $this->returnMessage('','ok');
     }

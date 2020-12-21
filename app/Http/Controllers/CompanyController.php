@@ -108,9 +108,9 @@ class CompanyController extends Controller
      * 树状结构
      */
     public function tree(){
-//        $tree = company::with('children')->first();  //单树结构
-        //双树结构
-//        $tree = DB::select('select co_name ,parent,dir from company');
+//        $right_tree = company::where('is_right','1')->get();  //单树结构
+        $right_tree = company::with('children')->where('is_right','1')->first()->toArray();  //单树结构
+$tree = $this->get_tree($right_tree);
         return $this->returnMessage($tree);
     }
     /**
@@ -119,5 +119,24 @@ class CompanyController extends Controller
     public function co_select(){
         $select = company::get(['id','co_name']);
         return $this->returnMessage($select);
+    }
+
+    public function get_tree(&$right_tree){
+        $tree = $right_tree;
+        foreach ($tree as $k => $v) {
+            if (is_array($tree[$k])) {
+                $tree[$k] = $this->get_tree($tree[$k]);
+            } else {
+//            if (empty($tree[$k])) {
+                // if ( ($k == 'depth') || ($k == 'salestate') || ($k == 'initial') || empty($arr[$k])) {
+                if ($k != 'co_name'){
+                    unset($tree[$k]);
+                }else{
+                    $tree['name'] = $tree[$k];
+                    unset($tree[$k]);
+                }
+            }
+        }
+        return $tree;
     }
 }

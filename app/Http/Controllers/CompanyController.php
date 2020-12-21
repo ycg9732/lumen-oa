@@ -89,6 +89,18 @@ class CompanyController extends Controller
         return $this->returnMessage('','ok');
     }
     /**
+     * 删除接口
+     */
+    public function co_delete(Request $request){
+        $id = $request->input('id');
+        $num = company::destroy($id);
+        if ($num > 0){
+            return $this->returnMessage('','ok');
+        }else{
+            return $this->returnMessage('','fail');
+        }
+    }
+    /**
      * 树状结构
      */
     public function tree(){

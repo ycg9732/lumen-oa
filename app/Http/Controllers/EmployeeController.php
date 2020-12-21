@@ -71,4 +71,16 @@ class EmployeeController extends Controller
         $employee->save();
         return $this->returnMessage('','ok');
     }
+    /**
+     * 删除
+     */
+    public function ee_delete(Request $request){
+        $id = $request->input('id');
+        $num = employee::destroy($id);
+        if ($num > 0){
+            return $this->returnMessage('','ok');
+        }else{
+            return $this->returnMessage('','fail');
+        }
+    }
 }

@@ -62,6 +62,12 @@ $router->get('/con_detil','ContractController@con_detil');
 $router->get('/con_list','ContractController@con_list');
 //断点上传
 $router->post('/resumable','ResumableController@process');
+//员工删除
+$router->get('/ee_delete','EmployeeController@ee_delete');
+//公司删除
+$router->get('/co_delete','CompanyController@co_delete');
+//部门删除
+$router->get('/de_delete','DepartmentController@de_delete');
 
 
 

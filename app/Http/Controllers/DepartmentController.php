@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\department;
+use App\Models\employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class DepartmentController extends Controller
@@ -77,5 +78,13 @@ class DepartmentController extends Controller
         }catch (\PDOException $e){
             return $this->returnMessage('','no');
         }
+    }
+    /**
+     * 部门下的员工
+     */
+    public function de_per_list(Request $request){
+        $id = $request->input('id');
+        $employee = department::find($id)->employee;
+        return $this->returnMessage($employee);
     }
 }

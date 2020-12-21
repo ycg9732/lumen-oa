@@ -68,6 +68,8 @@ $router->get('/ee_delete','EmployeeController@ee_delete');
 $router->get('/co_delete','CompanyController@co_delete');
 //部门删除
 $router->get('/de_delete','DepartmentController@de_delete');
+//单个部门下的员工
+$router->get('/de_per_list','DepartmentController@de_per_list');
 
 
 

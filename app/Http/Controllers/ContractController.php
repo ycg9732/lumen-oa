@@ -122,4 +122,16 @@ class ContractController extends Controller
     public function con_delete(){
 
     }
+
+    /**
+     * 合同审核
+     */
+    public function con_access(){
+        $con_id = $this->request->input('con_id');
+        $state = $this->request->input('con_state');
+        $con = contract::find($con_id);
+        $con->con_state = $state;
+        $con->save();
+        return $this->returnMessage('','ok');
+    }
 }

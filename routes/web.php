@@ -86,5 +86,11 @@ $router->get('/de_tree','DepartmentController@de_tree');
 $router->get('/proj_add','ProjectController@proj_add');
 //项目列表
 $router->get('/proj_list','ProjectController@proj_list');
+//合同审核
+$router->get('/con_access','ContractController@con_access');
+//项目详情
+$router->get('/proj_detil','ProjectController@proj_detil');
+//项目编辑
+$router->get('/proj_edit','ProjectController@proj_edit');
 
 

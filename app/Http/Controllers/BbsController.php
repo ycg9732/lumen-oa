@@ -34,7 +34,11 @@ class BbsController extends Controller
     }
     public function bbs_list(){
         $co_id = $this->request->input('co_id');
-        $bbs_list = bbs::where('co_id',$co_id)->get();
-        return $this->returnMessage($bbs_list);
+        if ($co_id){
+            $bbs_list = bbs::where('co_id',$co_id)->get();
+            return $this->returnMessage($bbs_list);
+        }else{
+            return $this->returnMessage('','公司不能为空');
+        }
     }
 }

@@ -72,6 +72,8 @@ $router->get('/de_delete','DepartmentController@de_delete');
 $router->get('/de_per_list','DepartmentController@de_per_list');
 //部门添加员工
 $router->get('/de_add_ee','DepartmentController@de_add_ee');
+//公司所有部门
+$router->get('/de_per_co','CompanyController@de_per_co');
 
 
 

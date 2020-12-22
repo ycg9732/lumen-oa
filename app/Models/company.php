@@ -20,4 +20,12 @@ class company extends Model
     public function parent(){
         return $this->hasOne(get_class($this), $this->getKeyName(), 'pid');
     }
+
+    /**
+     * 所有的部门
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function department(){
+        return $this->hasMany(department::class,'co_id','id');
+    }
 }

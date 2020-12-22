@@ -139,4 +139,14 @@ $tree = $this->get_tree($right_tree);
         }
         return $tree;
     }
+
+
+    /**
+     * 每个公司的所有部门
+     */
+    public function de_per_co(Request $request){
+        $co_id = $request->input('id');
+        $de_list = company::find($co_id)->department()->get(['dept_name']);
+        return $this->returnMessage($de_list);
+    }
 }

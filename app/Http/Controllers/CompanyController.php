@@ -127,8 +127,6 @@ $tree = $this->get_tree($right_tree);
             if (is_array($tree[$k])) {
                 $tree[$k] = $this->get_tree($tree[$k]);
             } else {
-//            if (empty($tree[$k])) {
-                // if ( ($k == 'depth') || ($k == 'salestate') || ($k == 'initial') || empty($arr[$k])) {
                 if ($k != 'co_name'){
                     unset($tree[$k]);
                 }else{

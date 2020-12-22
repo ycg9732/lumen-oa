@@ -77,7 +77,7 @@ class ProjectController extends Controller
         $state = $this->request->input('proj_state');
         $sum = $this->request->input('proj_sum');
         $order = $this->request->input('proj_order');
-        $co_id = $this->request->input('co_id');
+//        $co_id = $this->request->input('co_id');
         $member = $this->request->input('proj_member');
         $has_file = $this->request->hasFile('proj_img');
         if ($has_file){
@@ -90,7 +90,7 @@ class ProjectController extends Controller
         $project->proj_sum = $sum;
         $project->proj_order = $order;
         $project->proj_img = $img_name;
-        $project->co_id = $co_id;
+//        $project->co_id = $co_id;
         $project->proj_member = $member;
         $project->save();
 

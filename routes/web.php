@@ -82,5 +82,9 @@ $router->get('/see_bbs','BbsController@see_bbs');
 $router->get('/bbs_list','BbsController@bbs_list');
 //组织关系图
 $router->get('/de_tree','DepartmentController@de_tree');
+//添加项目
+$router->get('/proj_add','ProjectController@proj_add');
+//项目列表
+$router->get('/proj_list','ProjectController@proj_list');
 
 

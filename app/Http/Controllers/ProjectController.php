@@ -1,0 +1,59 @@
+<?php
+
+
+namespace App\Http\Controllers;
+
+
+use App\Models\project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class ProjectController extends Controller
+{
+    protected $request;
+    public function __construct(Request $request){
+        $this->request = $request;
+    }
+
+    /**
+     * @return array
+     */
+    public function proj_add(){
+        $name = $this->request->input('proj_name');
+        $state = $this->request->input('proj_state');
+        $sum = $this->request->input('proj_sum');
+        $order = $this->request->input('proj_order');
+        $co_id = $this->request->input('co_id');
+        $member = $this->request->input('proj_member');
+        $has_file = $this->request->hasFile('proj_img');
+        $img_name = '';
+        if ($has_file){
+            $img_name = Str::random(10).'.'.$this->request->file('proj_img')->getClientOriginalExtension();
+            $img= $this->request->file('proj_img')->move(env('APP_STORAGE'),$img_name);
+        }
+        $project = new project();
+        $project->proj_name = $name;
+        $project->proj_state = $state;
+        $project->proj_sum = $sum;
+        $project->proj_order = $order;
+        $project->proj_img = $img_name;
+        $project->co_id = $co_id;
+        $project->proj_member = $member;
+        $project->save();
+        return $this->returnMessage('','ok');
+
+    }
+
+    /**
+     * @return array
+     */
+    public function proj_list(){
+        $co_id = $this->request->input('co_id');
+        if ($co_id){
+            $proj_list = project::where('co_id',$co_id)->get();
+            return $this->returnMessage($proj_list);
+        }
+        $proj_list = project::all();
+        return $this->returnMessage($proj_list);
+    }
+}

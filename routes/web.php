@@ -80,5 +80,7 @@ $router->get('/add_bbs','BbsController@add_bbs');
 $router->get('/see_bbs','BbsController@see_bbs');
 //公告列表
 $router->get('/bbs_list','BbsController@bbs_list');
+//组织关系图
+$router->get('/de_tree','DepartmentController@de_tree');
 
 

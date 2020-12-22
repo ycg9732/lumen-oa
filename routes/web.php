@@ -78,5 +78,7 @@ $router->get('/de_per_co','CompanyController@de_per_co');
 $router->get('/add_bbs','BbsController@add_bbs');
 //查看公告
 $router->get('/see_bbs','BbsController@see_bbs');
+//公告列表
+$router->get('/bbs_list','BbsController@bbs_list');
 
 

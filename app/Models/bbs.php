@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class bbs extends Model
 {
     protected $table = 'bbs';
+
+    public function company(){
+        return $this->belongsTo(company::class,'id','co_id');
+    }
 }

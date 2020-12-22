@@ -28,4 +28,8 @@ class company extends Model
     public function department(){
         return $this->hasMany(department::class,'co_id','id');
     }
+
+    public function bbs(){
+        return $this->hasMany(bbs::class,'co_id','id');
+    }
 }

@@ -15,9 +15,11 @@ class BbsController extends Controller
     public function add_bbs(){
         $name = $this->request->input('name');
         $content = $this->request->input('content');
+        $ower = $this->request->input('bbs_ower');
         $bbs = new bbs;
         $bbs->bbs_name = $name;
         $bbs->bbs_content = $content;
+        $bbs->bbs_ower = $ower;
         $bbs->co_id = $this->request->input('co_id');
         $bbs->save();
         return $this->returnMessage('','ok');

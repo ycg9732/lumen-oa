@@ -92,5 +92,9 @@ $router->get('/con_access','ContractController@con_access');
 $router->get('/proj_detil','ProjectController@proj_detil');
 //项目编辑
 $router->get('/proj_edit','ProjectController@proj_edit');
+//角色列表
+$router->get('/role_list','EmployeeController@role_list');
+//权限列表
+$router->get('/permission_list','EmployeeController@permission_list');
 
 

@@ -89,7 +89,9 @@ class ProjectController extends Controller
         $project->proj_state = $state;
         $project->proj_sum = $sum;
         $project->proj_order = $order;
-        $project->proj_img = $img_name;
+        if ($has_file){
+            $project->proj_img = $img_name;
+        }
 //        $project->co_id = $co_id;
         $project->proj_member = $member;
         $project->save();

@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\bbs;
 use App\Models\department;
 use App\Models\employee;
 use Illuminate\Http\Request;
@@ -101,4 +102,27 @@ class DepartmentController extends Controller
         //todo 捕获准确的操作结果
         return $this->returnMessage('','ok');
     }
+    public function de_tree(){
+        $tree = department::with('children')->first()->toArray();
+        $new_tree = $this->get_tree($tree);
+        return $this->returnMessage($new_tree);
+    }
+
+    public function get_tree(&$right_tree){
+        $tree = $right_tree;
+        foreach ($tree as $k => $v) {
+            if (is_array($tree[$k])) {
+                $tree[$k] = $this->get_tree($tree[$k]);
+            } else {
+                if ($k != 'dept_name'){
+                    unset($tree[$k]);
+                }else{
+                    $tree['label'] = $tree[$k];
+                    unset($tree[$k]);
+                }
+            }
+        }
+        return $tree;
+    }
+
 }

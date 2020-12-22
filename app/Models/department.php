@@ -17,4 +17,8 @@ class department extends Model
     public function company(){
         return $this->belongsTo(company::class,'id','co_id');
     }
+
+    public function children(){
+        return $this->hasMany(get_class($this),'pid','id');
+    }
 }

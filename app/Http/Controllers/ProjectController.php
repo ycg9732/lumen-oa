@@ -95,6 +95,6 @@ class ProjectController extends Controller
 //        $project->co_id = $co_id;
         $project->proj_member = $member;
         $project->save();
-
+        return $this->returnMessage('','ok');
     }
 }

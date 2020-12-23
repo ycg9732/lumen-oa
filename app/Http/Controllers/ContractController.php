@@ -144,12 +144,13 @@ class ContractController extends Controller
      * 为管理员的员工
      */
     public function lead_list(){
+        $co_id = $this->request->input('co_id');
         $admin_user = role::find(1)->user->toArray();
         $id = [];
         foreach ($admin_user as $k){
             $id[] = $k['id'];
         }
-        $admin_list = employee::whereIn('user_id',$id)->get(['id','ee_name']);
+        $admin_list = employee::whereIn('user_id',$id)->where('co_id',$co_id)->get(['id','ee_name']);
         return $this->returnMessage($admin_list);
     }
 }

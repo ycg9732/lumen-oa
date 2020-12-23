@@ -96,5 +96,7 @@ $router->post('/proj_edit','ProjectController@proj_edit');
 $router->get('/role_list','EmployeeController@role_list');
 //权限列表
 $router->get('/permission_list','EmployeeController@permission_list');
+//图片上传
+$router->post('/upload_img','FileController@upload_img');
 
 

@@ -34,7 +34,7 @@ class BbsController extends Controller
      */
     public function see_bbs(){
         $bbs_id = $this->request->input('id');
-        $bbs = bbs::find($bbs_id)->get();
+        $bbs = bbs::find($bbs_id);
         return $this->returnMessage($bbs);
 
     }

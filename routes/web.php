@@ -53,7 +53,7 @@ $router->get('/co_select','CompanyController@co_select');
 //合同搜索
 $router->get('/con_search','ContractController@con_search');
 //合同添加
-$router->post('/con_add','ContractController@con_add');
+$router->get('/con_add','ContractController@con_add');
 //合同修改
 $router->get('/con_edit','ContractController@con_edit');
 //合同详情

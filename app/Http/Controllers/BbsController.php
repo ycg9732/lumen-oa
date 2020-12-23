@@ -22,7 +22,7 @@ class BbsController extends Controller
         $bbs->bbs_ower = $ower;
         $bbs->co_id = $this->request->input('co_id');
         $bbs->save();
-        return $this->returnMessage('','ok');
+        return $this->returnMessage('添加成功','ok');
     }
 
     /**

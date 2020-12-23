@@ -58,6 +58,7 @@ class ContractController extends Controller
             $name = $this->request->input('con_name');
             $ower = $this->request->input('con_ower');
             $co_id = $this->request->input('co_id');
+            $con_lead = $this->request->input('con_lead');
             $state = 0;
 //            $hasfile = $this->request->hasFile('file');;
 //            if ($hasfile){
@@ -70,6 +71,7 @@ class ContractController extends Controller
             $contract->con_content = $content;
             $contract->con_state = $state;
             $contract->con_ower = $ower;
+            $contract->con_lead = $con_lead;
 //            if ($hasfile){
 //                $contract->con_img = $img_name;
 //            }

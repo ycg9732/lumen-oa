@@ -56,36 +56,42 @@ class EmployeeController extends Controller
         if ($id_card > 0){
             return 'employee exist';
         }else{
-            $employee = new employee;
-            $employee->ee_name = $request->input('ee_name');
-            $employee->id_card = $request->input('id_card');
-            $employee->sex = $request->input('sex');
-            $employee->job = $request->input('job');
-            $employee->tel = $request->input('tel');
-            $employee->address = $request->input('address');
-            $employee->user_name = $request->input('user_name');
-            $employee->password = sha1($request->input('password'));
-            $employee->save();
-            $role_id = $request->input('role_id');
-            $p_id = $request->input('p_id');
-            if ($role_id){
-                if($p_id = null){
-                    return $this->returnMessage('','没有分配权限');
-                }
-                $ee_id = $employee->id;
-                $user_role = new user_role();
-                $user_role->user_id = $ee_id;
-                $user_role->role_id = $role_id;
-                $user_role->save();
-                foreach ($p_id as $k => $v){
-                    $role_permission = new role_permission;
-                    $role_permission->p_id = $v;
-                    $role_permission->role_id = $role_id;
-                    $role_permission->save();
-                }
-            }
-            return $this->returnMessage('','ok');
-        }
+            try {
+                DB::transaction(function () use ($request){
+                    $employee = new employee;
+                    $employee->ee_name = $request->input('ee_name');
+                    $employee->id_card = $request->input('id_card');
+                    $employee->sex = $request->input('sex');
+                    $employee->job = $request->input('job');
+                    $employee->tel = $request->input('tel');
+                    $employee->address = $request->input('address');
+                    $employee->user_name = $request->input('user_name');
+                    $employee->password = sha1($request->input('password'));
+                    $employee->save();
+                    $role_id = $request->input('role_id');
+                    $p_id = $request->input('p_id');
+                    if ($role_id){
+                        if($p_id = null){
+                            return $this->returnMessage('','没有分配权限');
+                        }
+                        $ee_id = $employee->id;
+                        $user_role = new user_role();
+                        $user_role->user_id = $ee_id;
+                        $user_role->role_id = $role_id;
+                        $user_role->save();
+                        foreach ($p_id as $k => $v){
+                            $role_permission = new role_permission;
+                            $role_permission->p_id = $v;
+                            $role_permission->role_id = $role_id;
+                            $role_permission->save();
+                        }
+                    }
+                    return $this->returnMessage('','ok');
+
+                });
+            }catch (\PDOException $e){
+                return $this->returnMessage('','添加失败');
+            }}
     }
     /**
      *修改详情

@@ -103,7 +103,10 @@ class ProjectController extends Controller
      */
     public function proj_delete(){
         $id = $this->request->input('proj_id');
-        project::destroy($id);
+        $e = project::destroy($id);
+        if ($e){
         return $this->returnMessage('','ok');
+        }
+        return $this->returnMessage('','失败');
     }
 }

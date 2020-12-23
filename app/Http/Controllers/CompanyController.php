@@ -109,9 +109,27 @@ class CompanyController extends Controller
      */
     public function tree(){
 //        $right_tree = company::where('is_right','1')->get();  //单树结构
-        $right_tree = company::with('children')->where('is_right','1')->first()->toArray();  //单树结构
-$tree = $this->get_tree($right_tree);
-        return $this->returnMessage($tree);
+        $r = company::with('children')->where('is_right','1')->first();
+        $l = company::with('children')->where('is_right','2')->first();
+        if ($r or $l){
+            if ($r and $l){
+                $right_tree = $r->toArray();  //单树结构
+                $r_tree = $this->get_tree($right_tree);
+                $left_tree = $l->toArray();  //单树结构
+                $l_tree = $this->get_tree($left_tree);
+                return $this->returnMessage(['r'=>$r_tree,'l'=>$l_tree]);
+            }
+            if ($r){
+                $right_tree = $r->toArray();  //单树结构
+                $r_tree = $this->get_tree($right_tree);
+                return $this->returnMessage(['r'=>$r_tree,'l'=>'']);
+            }
+            if ($l){
+                $left_tree = $l->toArray();  //单树结构
+                $l_tree = $this->get_tree($left_tree);
+                return $this->returnMessage(['r'=>'','l'=>$l_tree]);
+            }
+        }
     }
     /**
      * 单选框接口

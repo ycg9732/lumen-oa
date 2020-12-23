@@ -70,7 +70,7 @@ class EmployeeController extends Controller
                     $employee->save();
                     $role_id = $request->input('role_id');
                     $p_id = $request->input('p_id');
-                    $new_p_id = explode(',',$p_id);
+//                    $new_p_id = explode(',',$p_id);
                     if ($role_id){
                         if($p_id = null){
 //                            return $this->returnMessage('','没有分配权限');
@@ -80,12 +80,12 @@ class EmployeeController extends Controller
                         $user_role->user_id = $ee_id;
                         $user_role->role_id = $role_id;
                         $user_role->save();
-                        foreach ($new_p_id as $k => $v){
-                            $role_permission = new role_permission;
-                            $role_permission->p_id = $v;
-                            $role_permission->role_id = $role_id;
-                            $role_permission->save();
-                        }
+//                        foreach ($new_p_id as $k => $v){
+//                            $role_permission = new role_permission;
+//                            $role_permission->p_id = $v;
+//                            $role_permission->role_id = $role_id;
+//                            $role_permission->save();
+//                        }
                     }
                     return $this->returnMessage('','ok');
 

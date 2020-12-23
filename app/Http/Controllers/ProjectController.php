@@ -26,12 +26,12 @@ class ProjectController extends Controller
         $order = $this->request->input('proj_order');
         $co_id = $this->request->input('co_id');
         $member = $this->request->input('proj_member');
-        $has_file = $this->request->hasFile('proj_img');
-        $img_name = '';
-        if ($has_file){
-            $img_name = Str::random(10).'.'.$this->request->file('proj_img')->getClientOriginalExtension();
-            $img= $this->request->file('proj_img')->move(env('APP_STORAGE'),$img_name);
-        }
+//        $has_file = $this->request->hasFile('proj_img');
+        $img_name = $this->request->input('proj_img');
+//        if ($has_file){
+//            $img_name = Str::random(10).'.'.$this->request->file('proj_img')->getClientOriginalExtension();
+//            $img= $this->request->file('proj_img')->move(env('APP_STORAGE'),$img_name);
+//        }
         $project = new project();
         $project->proj_name = $name;
         $project->proj_state = $state;
@@ -78,21 +78,22 @@ class ProjectController extends Controller
         $sum = $this->request->input('proj_sum');
         $order = $this->request->input('proj_order');
 //        $co_id = $this->request->input('co_id');
+        $img_name = $this->request->input('proj_img');
         $member = $this->request->input('proj_member');
-        $has_file = $this->request->hasFile('proj_img');
-        if ($has_file){
-            $img_name = Str::random(10).'.'.$this->request->file('proj_img')->getClientOriginalExtension();
-            $img= $this->request->file('proj_img')->move(env('APP_STORAGE'),$img_name);
-        }
+//        $has_file = $this->request->hasFile('proj_img');
+//        if ($has_file){
+//            $img_name = Str::random(10).'.'.$this->request->file('proj_img')->getClientOriginalExtension();
+//            $img= $this->request->file('proj_img')->move(env('APP_STORAGE'),$img_name);
+//        }
         $project = project::find($proj_id);
         $project->proj_name = $name;
         $project->proj_state = $state;
         $project->proj_sum = $sum;
         $project->proj_order = $order;
-        if ($has_file){
+        if ($img_name){
             $project->proj_img = $img_name;
         }
-//        $project->co_id = $co_id;
+        $project->co_id = $co_id;
         $project->proj_member = $member;
         $project->save();
         return $this->returnMessage('','ok');

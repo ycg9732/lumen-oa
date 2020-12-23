@@ -15,7 +15,7 @@ class FileController extends Controller
     }
     public function upload_img(){
         $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
-        $img= $this->request->file('file');
+        $img= $this->request->file('file')->move(env('APP_STORAGE'),$img_name);
         if ($img){
             return $this->returnMessage([$img_name,env('APP_URL') . '/img/img/'.$img_name]);
         }else{

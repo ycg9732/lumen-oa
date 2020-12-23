@@ -14,7 +14,7 @@ class FileController extends Controller
         $this->request = $request;
     }
     public function upload_img(){
-        $img_name = Str::random(10).'.'.$this->request->file('1.gif')->getClientOriginalExtension();
+        $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
         $img= $this->request->file('file');
         if ($img){
             return $this->returnMessage('',$img_name);

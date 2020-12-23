@@ -4,6 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\employee;
+use App\Models\role;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use App\Models\contract;
@@ -52,12 +55,14 @@ class ContractController extends Controller
             return $this->returnMessage('','contract exist');
         }else{
             $date = $this->request->input('con_date');
+            $content = $this->request->input('con_content');
             $name = $this->request->input('con_name');
             $state = $this->request->input('con_state');
             $img_name = Str::random(10).'.'.$this->request->file('con_img')->getClientOriginalExtension();
             $img= $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
             $contract = new contract();
             $contract->con_name = $name;
+            $contract->con_content = $content;
             $contract->con_date = $date;
             $contract->con_state = $state;
             $contract->con_img = $img_name;
@@ -133,5 +138,18 @@ class ContractController extends Controller
         $con->con_state = $state;
         $con->save();
         return $this->returnMessage('','ok');
+    }
+    /**
+     *领导列表
+     * 为管理员的员工
+     */
+    public function lead_list(){
+        $admin_user = role::find(1)->user->toArray();
+        $id = [];
+        foreach ($admin_user as $k){
+            $id[] = $k['id'];
+        }
+        $admin_list = employee::whereIn('user_id',$id)->get(['id','ee_name']);
+        return $this->returnMessage($admin_list);
     }
 }

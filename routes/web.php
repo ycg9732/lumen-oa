@@ -46,7 +46,7 @@ $router->get('/ee_detil','EmployeeController@ee_detil');
 $router->post('/ee_add','EmployeeController@ee_add');
 //修改员工详情
 $router->post('/ee_edit','EmployeeController@ee_edit');
-//tree
+//公司关系图
 $router->get('/co_tree','CompanyController@tree');
 //单选框接口
 $router->get('/co_select','CompanyController@co_select');
@@ -100,5 +100,7 @@ $router->get('/permission_list','EmployeeController@permission_list');
 $router->post('/upload_img','FileController@upload_img');
 //领导列表
 $router->get('/lead_list','ContractController@lead_list');
+//公告删除
+$router->get('/proj_delete','ProjectController@proj_delete');
 
 

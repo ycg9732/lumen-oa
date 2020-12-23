@@ -97,4 +97,13 @@ class ProjectController extends Controller
         $project->save();
         return $this->returnMessage('','ok');
     }
+
+    /**
+     * 删除
+     */
+    public function proj_delete(){
+        $id = $this->request->input('proj_id');
+        project::destroy($id);
+        return $this->returnMessage('','ok');
+    }
 }

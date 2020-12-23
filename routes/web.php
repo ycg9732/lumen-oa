@@ -75,7 +75,7 @@ $router->get('/de_add_ee','DepartmentController@de_add_ee');
 //公司所有部门
 $router->get('/de_per_co','CompanyController@de_per_co');
 //添加公告
-$router->get('/add_bbs','BbsController@add_bbs');
+$router->post('/add_bbs','BbsController@add_bbs');
 //查看公告
 $router->get('/see_bbs','BbsController@see_bbs');
 //公告列表

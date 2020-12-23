@@ -17,7 +17,7 @@ class FileController extends Controller
         $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
         $img= $this->request->file('file');
         if ($img){
-            return $this->returnMessage('',$img_name);
+            return $this->returnMessage([$img_name,env('APP_URL') . '/img/img/'.$img_name]);
         }else{
             return $this->returnMessage('','上传失败');
         }

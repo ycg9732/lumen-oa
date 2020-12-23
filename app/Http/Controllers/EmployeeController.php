@@ -73,7 +73,7 @@ class EmployeeController extends Controller
                     $new_p_id = explode(',',$p_id);
                     if ($role_id){
                         if($p_id = null){
-                            return $this->returnMessage('','没有分配权限');
+//                            return $this->returnMessage('','没有分配权限');
                         }
                         $ee_id = $employee->id;
                         $user_role = new user_role();

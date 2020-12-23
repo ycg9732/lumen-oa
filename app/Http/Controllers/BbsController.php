@@ -14,7 +14,7 @@ class BbsController extends Controller
     }
     public function add_bbs(){
         $name = $this->request->input('name');
-        $num = bbs::where('proj_name',$name)->count();
+        $num = bbs::where('bbs_name',$name)->count();
         if ($num > 0){
             return $this->returnMessage('','公告已经存在');
         }

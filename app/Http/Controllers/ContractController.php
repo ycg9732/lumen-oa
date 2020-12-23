@@ -54,29 +54,27 @@ class ContractController extends Controller
         if($is_have > 0){
             return $this->returnMessage('','contract exist');
         }else{
-            $date = $this->request->input('con_date');
             $content = $this->request->input('con_content');
             $name = $this->request->input('con_name');
             $ower = $this->request->input('con_ower');
             $state = 0;
-            $hasfile = $this->request->hasFile('con_img');;
-            if ($hasfile){
-                $img_name = Str::random(10).'.'.$this->request->file('con_img')->getClientOriginalExtension();
-                $img= $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
-
-            }
+//            $hasfile = $this->request->hasFile('file');;
+//            if ($hasfile){
+//                $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
+//                $img= $this->request->file('file')->move(env('APP_STORAGE'),$img_name);
+//
+//            }
             $contract = new contract();
             $contract->con_name = $name;
             $contract->con_content = $content;
-//            $contract->con_date = $date;
             $contract->con_state = $state;
             $contract->con_ower = $ower;
-            if ($hasfile){
-                $contract->con_img = $img_name;
-            }
+//            if ($hasfile){
+//                $contract->con_img = $img_name;
+//            }
             $contract->co_id = $this->request->input('co_id');
             $contract->save();
-            return $this->returnMessage('','success');
+            return $this->returnMessage('','ok');
 
         }
     }
@@ -88,7 +86,7 @@ class ContractController extends Controller
 //todo 图片删除问题
         $company = contract::find($id);
         $company->con_name = $this->request->input('con_name');
-//        $company->con_date = $this->request->input('con_date');
+        $company->con_img = $this->request->input('con_img');
         $company->con_state = $this->request->input('con_state');
         $company->con_content = $this->request->input('con_content');
         $company->con_lead = $this->request->input('con_lead');

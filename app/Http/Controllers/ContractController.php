@@ -57,14 +57,17 @@ class ContractController extends Controller
             $date = $this->request->input('con_date');
             $content = $this->request->input('con_content');
             $name = $this->request->input('con_name');
+            $ower = $this->request->input('con_ower');
             $state = 0;
             $img_name = Str::random(10).'.'.$this->request->file('con_img')->getClientOriginalExtension();
             $img= $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
             $contract = new contract();
             $contract->con_name = $name;
             $contract->con_content = $content;
-            $contract->con_date = $date;
+//            $contract->con_date = $date;
             $contract->con_state = $state;
+            $contract->con_ower = $ower;
+
             $contract->con_img = $img_name;
             $contract->co_id = $this->request->input('co_id');
 
@@ -81,10 +84,12 @@ class ContractController extends Controller
 //todo 图片删除问题
         $company = contract::find($id);
         $company->con_name = $this->request->input('con_name');
-        $company->con_date = $this->request->input('con_date');
+//        $company->con_date = $this->request->input('con_date');
         $company->con_state = $this->request->input('con_state');
         $company->con_content = $this->request->input('con_content');
         $company->con_lead = $this->request->input('con_lead');
+        $company->con_ower = $this->request->input('con_ower');
+
         $company->save();
         return $this->returnMessage('','ok');
     }

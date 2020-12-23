@@ -59,6 +59,7 @@ class ContractController extends Controller
             $ower = $this->request->input('con_ower');
             $co_id = $this->request->input('co_id');
             $con_lead = $this->request->input('con_lead');
+            $img_name = $this->request->input('con_img');
             $state = 0;
 //            $hasfile = $this->request->hasFile('file');;
 //            if ($hasfile){
@@ -72,9 +73,9 @@ class ContractController extends Controller
             $contract->con_state = $state;
             $contract->con_ower = $ower;
             $contract->con_lead = $con_lead;
-//            if ($hasfile){
-//                $contract->con_img = $img_name;
-//            }
+            if ($img_name){
+                $contract->con_img = $img_name;
+            }
             $contract->co_id = $co_id;
             $contract->save();
             return $this->returnMessage('','ok');
@@ -131,8 +132,7 @@ class ContractController extends Controller
         return $this->returnMessage($con_list);
         }else{
         return $this->returnMessage('','请选择公司和状态');
-    }
-    }
+    }}
     /**
      * 删除
      */

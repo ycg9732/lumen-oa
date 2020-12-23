@@ -57,7 +57,7 @@ class ContractController extends Controller
             $date = $this->request->input('con_date');
             $content = $this->request->input('con_content');
             $name = $this->request->input('con_name');
-            $state = $this->request->input('con_state');
+            $state = 0;
             $img_name = Str::random(10).'.'.$this->request->file('con_img')->getClientOriginalExtension();
             $img= $this->request->file('con_img')->move(env('APP_STORAGE'),$img_name);
             $contract = new contract();
@@ -83,6 +83,8 @@ class ContractController extends Controller
         $company->con_name = $this->request->input('con_name');
         $company->con_date = $this->request->input('con_date');
         $company->con_state = $this->request->input('con_state');
+        $company->con_content = $this->request->input('con_content');
+        $company->con_lead = $this->request->input('con_lead');
         $company->save();
         return $this->returnMessage('','ok');
     }

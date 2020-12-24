@@ -119,7 +119,7 @@ class ContractController extends Controller
     public function con_list(){
         $co_id = $this->request->input('co_id');
         $con_state = $this->request->input('con_state');
-    if (true){
+    if ($co_id != null and $con_state != null){
         //获取到当前currentpage 和perpage 每页多少条
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
@@ -131,7 +131,7 @@ class ContractController extends Controller
         foreach ($con_list as $con) {
             $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
         }
-        return $this->returnMessage([$co_id,$con_state]);
+        return $this->returnMessage($con_list);
         }else{
         return $this->returnMessage([$co_id,$con_state],'请选择公司和状态');
     }

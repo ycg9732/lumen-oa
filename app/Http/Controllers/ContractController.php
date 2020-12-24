@@ -76,7 +76,7 @@ class ContractController extends Controller
             if ($img_name){
                 $contract->con_img = $img_name;
             }
-            $contract->co_id = $co_id;
+            $contract->con_id = $co_id;
             $e = $contract->save();
             if ($e){
                 return $this->returnMessage('','ok');

@@ -60,10 +60,7 @@ class ContractController extends Controller
             $contract->con_state = $d['con_state'];
             $contract->con_ower = $d['bbs_ower'];
             $contract->con_lead = $d['con_lead'];
-//            if ($img_name){
-                $contract->con_img = $img;
-//            }
-//            $contract->co_id = $co_id;
+            $contract->con_img = $img;
             $contract->save();
             return $this->returnMessage('','ok');
 
@@ -112,7 +109,12 @@ class ContractController extends Controller
         $con_count = contract::all()->count();
         $all = ceil($con_count/$perage);
         foreach ($con_list as $con) {
-            $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
+            $img = explode(',',$con['con_img']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/' .$iv;
+            }
+            $con['con_img'] =  $img_arr;
         }
         return $this->returnMessage($con_list);
         }else{

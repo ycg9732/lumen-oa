@@ -52,7 +52,7 @@ class ContractController extends Controller
      */
     public function con_add(){
         $d = $this->request->getContent();
-        $d = json_decode($d);
+//        $d = json_decode($d);
         Log::info($d);
         return 2;
 //        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();

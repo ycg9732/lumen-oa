@@ -50,6 +50,7 @@ class ContractController extends Controller
      * add
      */
     public function con_add(){
+        return $this->request->toArray();
 //        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
 //        if(false){
 //            return $this->returnMessage('','contract exist');
@@ -113,8 +114,6 @@ class ContractController extends Controller
      *list
      */
     public function con_list(){
-        $d = $this->request->toArray();
-        return $d;
         $co_id = $this->request->input('co_id');
         $con_state = $this->request->input('con_state');
     if ($co_id && $con_state){

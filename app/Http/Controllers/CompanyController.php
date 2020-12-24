@@ -162,7 +162,7 @@ class CompanyController extends Controller
      */
     public function de_per_co(Request $request){
         $co_id = $request->input('id');
-        $de_list = company::find($co_id)->department()->get(['dept_name']);
+        $de_list = company::find($co_id)->department()->get(['dept_name','id']);
         return $this->returnMessage($de_list);
     }
 }

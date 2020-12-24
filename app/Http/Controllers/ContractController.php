@@ -51,7 +51,7 @@ class ContractController extends Controller
      * add
      */
     public function con_add(){
-        Log::info($_POST["co_id"]);
+        Log::info($this->request);
         return 2;
 //        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
 //        if(false){

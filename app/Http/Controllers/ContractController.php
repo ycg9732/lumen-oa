@@ -68,18 +68,18 @@ class ContractController extends Controller
 //                $img= $this->request->file('file')->move(env('APP_STORAGE'),$img_name);
 //
 //            }
-            $contract = new contract();
-            $contract->con_name = $name;
-            $contract->con_content = $content;
-            $contract->con_state = $state;
-            $contract->con_ower = $ower;
-            $contract->con_lead = $con_lead;
-            if ($img_name){
-                $contract->con_img = $img_name;
-            }
-            $contract->co_id = $co_id;
-            $e = $contract->save();
-                return $this->returnMessage('','ok');
+//            $contract = new contract();
+//            $contract->con_name = $name;
+//            $contract->con_content = $content;
+//            $contract->con_state = $state;
+//            $contract->con_ower = $ower;
+//            $contract->con_lead = $con_lead;
+//            if ($img_name){
+//                $contract->con_img = $img_name;
+//            }
+//            $contract->co_id = $co_id;
+//            $contract->save();
+//            return $this->returnMessage('','ok');
 
 //        }
     }

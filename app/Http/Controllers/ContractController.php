@@ -52,18 +52,18 @@ class ContractController extends Controller
      */
     public function con_add(){
         $d = $this->request->getContent();
-//        $d = json_decode($d);
-        return var_dump($d);
+        $d = json_decode($d);
+//        return $d->con_content;
 //        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
 //        if(false){
 //            return $this->returnMessage('','contract exist');
 //        }else{
-            $content = $this->request->input('con_content');
-            $name = $this->request->input('con_name');
-            $ower = $this->request->input('con_ower');
-            $co_id = $this->request->input('co_id');
-            $con_lead = $this->request->input('con_lead');
-            $img_name = $this->request->input('con_img');
+            $content = $d->con_content;
+            $name = $d->con_name;
+//            $ower = $d->con_ower;
+//            $co_id = $d->co_id;
+            $con_lead = $d->con_lead;
+            $img_name = $d->con_img;
             $state = 0;
 //            $hasfile = $this->request->hasFile('file');;
 //            if ($hasfile){
@@ -75,12 +75,12 @@ class ContractController extends Controller
             $contract->con_name = $name;
             $contract->con_content = $content;
             $contract->con_state = $state;
-            $contract->con_ower = $ower;
+//            $contract->con_ower = $ower;
             $contract->con_lead = $con_lead;
             if ($img_name){
                 $contract->con_img = $img_name;
             }
-            $contract->co_id = $co_id;
+//            $contract->co_id = $co_id;
             $contract->save();
             return $this->returnMessage('','ok');
 

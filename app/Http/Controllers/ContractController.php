@@ -51,7 +51,7 @@ class ContractController extends Controller
      */
     public function con_add(){
         $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
-        if($is_have > 0){
+        if(false){
             return $this->returnMessage('','contract exist');
         }else{
             $content = $this->request->input('con_content');
@@ -77,9 +77,10 @@ class ContractController extends Controller
                 $contract->con_img = $img_name;
             }
             $contract->co_id = $co_id;
-            $contract->save();
-            return $this->returnMessage('','ok');
-
+            $e = $contract->save();
+            if ($e){
+                return $this->returnMessage('','ok');
+            }
         }
     }
     /**

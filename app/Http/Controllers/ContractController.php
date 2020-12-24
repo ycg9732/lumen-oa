@@ -61,7 +61,7 @@ class ContractController extends Controller
             $con_lead = $this->request->input('con_lead');
             $img_name = $this->request->input('con_img');
             $state = 0;
-            return $co_id;
+            return $this->returnMessage($co_id);
 //            $hasfile = $this->request->hasFile('file');;
 //            if ($hasfile){
 //                $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();

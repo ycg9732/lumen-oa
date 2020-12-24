@@ -113,7 +113,8 @@ class ContractController extends Controller
      *list
      */
     public function con_list(){
-        return $this->request->toArray();
+        $d = $this->request->toArray();
+        return $d;
         $co_id = $this->request->input('co_id');
         $con_state = $this->request->input('con_state');
     if ($co_id && $con_state){

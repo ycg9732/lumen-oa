@@ -50,7 +50,7 @@ class ContractController extends Controller
      * add
      */
     public function con_add(){
-        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
+//        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
 //        if(false){
 //            return $this->returnMessage('','contract exist');
 //        }else{
@@ -113,6 +113,7 @@ class ContractController extends Controller
      *list
      */
     public function con_list(){
+        return $this->request->toArray();
         $co_id = $this->request->input('co_id');
         $con_state = $this->request->input('con_state');
     if ($co_id && $con_state){
@@ -124,7 +125,6 @@ class ContractController extends Controller
 //        $con_list = contract::where('con_state',$con_state)->where('co_id',$co_id)->get();
         $con_count = contract::all()->count();
         $all = ceil($con_count/$perage);
-
         foreach ($con_list as $con) {
             $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
         }

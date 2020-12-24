@@ -51,9 +51,9 @@ class ContractController extends Controller
      */
     public function con_add(){
         $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
-        if(false){
-            return $this->returnMessage('','contract exist');
-        }else{
+//        if(false){
+//            return $this->returnMessage('','contract exist');
+//        }else{
             $content = $this->request->input('con_content');
             $name = $this->request->input('con_name');
             $ower = $this->request->input('con_ower');
@@ -81,7 +81,7 @@ class ContractController extends Controller
             if ($e){
                 return $this->returnMessage('','ok');
             }
-        }
+//        }
     }
     /**
      * edit

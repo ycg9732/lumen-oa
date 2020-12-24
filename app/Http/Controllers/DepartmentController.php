@@ -51,6 +51,7 @@ class DepartmentController extends Controller
             $department = new department;
             $department->dept_name = $request->input('de_name');
             $department->pic = $request->input('pic');
+            $department->co_id = $request->input('co_id');
             $department->save();
             return $this->returnMessage('','ok');
         }

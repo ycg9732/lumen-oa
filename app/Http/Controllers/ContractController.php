@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\role;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use App\Models\contract;
@@ -50,7 +51,8 @@ class ContractController extends Controller
      * add
      */
     public function con_add(){
-        return $this->request;
+        Log::info($this->request);
+        return  'fi';
 //        $is_have = contract::where('con_name',$this->request->input('con_name'))->count();
 //        if(false){
 //            return $this->returnMessage('','contract exist');

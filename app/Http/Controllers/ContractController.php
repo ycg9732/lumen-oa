@@ -131,9 +131,9 @@ class ContractController extends Controller
         foreach ($con_list as $con) {
             $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
         }
-        return $this->returnMessage($con_list);
+        return $this->returnMessage([$co_id,$con_state]);
         }else{
-        return $this->returnMessage('','请选择公司和状态');
+        return $this->returnMessage([$co_id,$con_state],'请选择公司和状态');
     }
     }
     /**

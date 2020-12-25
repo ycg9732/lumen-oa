@@ -23,9 +23,9 @@ class RoleController extends Controller
         $name = $this->request->input('role_name');
         $p_id = $this->request->input('p_id');
 //        $has_name = ;
-//        if (){
-//
-//        }
+        if (!$p_id){
+            return $this->returnMessage('','请选择角色的权限');
+        }
         try {
             $role = new role();
             $role->role_name = $name;

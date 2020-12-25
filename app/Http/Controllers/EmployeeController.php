@@ -126,8 +126,14 @@ class EmployeeController extends Controller
     /**
      * 权限列表
      */
-    public function permission_list(){
+    public function permission_list(Request $request){
         $p = permission::all();
+        $role_id = $request->input('role_id');
+//        return $role_id;
+        if ($role_id){
+            $r_p = role::find($role_id)->permission;
+            return $this->returnMessage($r_p);
+        }
         return $this->returnMessage($p);
     }
 }

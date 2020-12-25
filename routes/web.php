@@ -102,5 +102,7 @@ $router->post('/upload_img','FileController@upload_img');
 $router->get('/lead_list','ContractController@lead_list');
 //公告删除
 $router->get('/proj_delete','ProjectController@proj_delete');
+//添加角色
+$router->get('/role_add','RoleController@role_add');
 
 

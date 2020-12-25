@@ -87,11 +87,19 @@ class ContractController extends Controller
      */
     public function con_detil(){
         $id = $this->request->input('id');
-        $con_detil = contract::where('id',$id)->get();
-        foreach ($con_detil as $con){
-            $con['con_img'] = env('APP_URL') . '/img/img/' . $con['con_img'];
+        $con_detil = contract::where('id',$id)->get()->toArray();
+        if ($con_detil[0]['con_img'] != null){
+            $img = explode(',',$con_detil[0]['con_img']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/' .$iv;
+            }
+            $con_detil[0]['con_img'] =  $img_arr;
+            return $this->returnMessage($con_detil);
+        }else{
+            return $this->returnMessage($con_detil);
+
         }
-        return $this->returnMessage($con_detil);
     }
     /**
      *list

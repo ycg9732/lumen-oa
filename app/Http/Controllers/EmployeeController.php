@@ -53,9 +53,9 @@ class EmployeeController extends Controller
      * 添加员工
      */
     public function ee_add(Request $request){
-        $id_card = employee::where('id_card',$request->input('id_card'))->count();
+        $user_name = employee::where('user_name',$request->input('user_name'))->count();
         //todo 判断员工唯一性的根据
-        if (1 > 2){
+        if ($user_name > 0){
             return 'employee exist';
         }else{
             try {

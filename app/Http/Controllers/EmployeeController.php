@@ -46,7 +46,11 @@ class EmployeeController extends Controller
      */
     public function ee_detil(Request $request){
         $ee_id = $request->input('ee_id');
-        $ee_info = employee::where('id',$ee_id)->get();
+        $ee_info = employee::where('id',$ee_id)->get()->toArray();
+        $co_name = employee::find($ee_id)->company->co_name;
+        $dept_name = employee::find($ee_id)->department->dept_name;
+        $ee_info[0]['co_id'] = $co_name;
+        $ee_info[0]['dept_id'] = $dept_name;
         return $this->returnMessage($ee_info);
     }
     /**

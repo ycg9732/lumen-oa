@@ -8,7 +8,7 @@ use App\Models\permission;
 use App\Models\role;
 use App\Models\role_permission;
 use Illuminate\Http\Request;
-
+//todo  用户角色权限全部待优化
 class RoleController extends Controller
 {
     protected $request;
@@ -57,12 +57,6 @@ class RoleController extends Controller
     }
 
     /**
-     * 角色绑定权限
-     */
-    public function role_add_permission(){
-
-    }
-    /**
      * 角色更改权限
      */
     public function role_change_permission(){
@@ -72,6 +66,19 @@ class RoleController extends Controller
      * 删除角色
      */
     public function role_delete(){
+        $role_id = $this->request->input('role_id');
+        try {
+            role::destroy($role_id);
+            $s = role_permission::where('role_id',$role_id)->get();
+            $t = [];
+            foreach ($s as $k => $v){
+                $t[] = $v['id'];
+            }
+            role_permission::destroy($t);
+            return $this->returnMessage('','ok');
+        }catch (\PDOException $e){
+            return $this->returnMessage('',$e);
+        }
 
     }
 }

@@ -104,5 +104,7 @@ $router->get('/lead_list','ContractController@lead_list');
 $router->get('/proj_delete','ProjectController@proj_delete');
 //添加角色
 $router->get('/role_add','RoleController@role_add');
+//删除角色
+$router->get('/role_delete','RoleController@role_delete');
 
 

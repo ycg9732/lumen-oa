@@ -60,6 +60,7 @@ class ContractController extends Controller
             $contract->con_state = $d['con_state'];
             $contract->con_ower = $d['bbs_ower'];
             $contract->con_lead = $d['con_lead'];
+            $contract->co_id = $d['co_id'];
             $contract->con_img = $img;
             $contract->save();
             return $this->returnMessage('','ok');

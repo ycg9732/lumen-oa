@@ -106,5 +106,7 @@ $router->get('/proj_delete','ProjectController@proj_delete');
 $router->get('/role_add','RoleController@role_add');
 //删除角色
 $router->get('/role_delete','RoleController@role_delete');
+//角色权限修改
+$router->get('/role_change_permission','RoleController@role_change_permission');
 
 

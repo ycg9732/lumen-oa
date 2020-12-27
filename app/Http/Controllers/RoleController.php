@@ -60,7 +60,11 @@ class RoleController extends Controller
      * 角色更改权限
      */
     public function role_change_permission(){
-
+        $role_id = $this->request->input('role_id');
+//        $permission = permission::findMany([1,2,3]);
+        $role = role::find($role_id);
+        $role->permission()->sync([2,3]);
+        return $this->returnMessage();
     }
     /**
      * 删除角色

@@ -108,5 +108,7 @@ $router->get('/role_add','RoleController@role_add');
 $router->get('/role_delete','RoleController@role_delete');
 //角色权限修改
 $router->get('/role_change_permission','RoleController@role_change_permission');
+//添加权限
+$router->get('/permission_add','RoleController@permission_add');
 
 

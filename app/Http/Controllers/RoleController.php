@@ -8,7 +8,6 @@ use App\Models\permission;
 use App\Models\role;
 use App\Models\role_permission;
 use Illuminate\Http\Request;
-//todo  用户角色权限全部待优化
 class RoleController extends Controller
 {
     protected $request;
@@ -50,10 +49,14 @@ class RoleController extends Controller
      * 添加权限
      */
     public function permission_add(){
-        $p_name = $this->request->input('p_name');
-        $p = new permission();
+        $p_name = $this->request->input('p_name');$p = new permission();
+        $is_have = permission::where('p_name',$p_name)->count();
+        if ($is_have > 0){
+            return $this->returnMessage('','权限已经存在');
+        }
         $p->p_name = $p_name;
         $p->save();
+        return $this->returnMessage('','ok');
     }
 
     /**

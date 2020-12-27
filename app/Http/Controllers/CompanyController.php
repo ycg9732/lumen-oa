@@ -139,6 +139,11 @@ class CompanyController extends Controller
         return $this->returnMessage($select);
     }
 
+    /**
+     * 递归
+     * @param $right_tree
+     * @return mixed
+     */
     public function get_tree(&$right_tree){
         $tree = $right_tree;
         foreach ($tree as $k => $v) {

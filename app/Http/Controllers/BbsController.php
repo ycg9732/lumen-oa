@@ -12,6 +12,10 @@ class BbsController extends Controller
     public function __construct(Request $request){
         $this->request = $request;
     }
+
+    /**
+     * @return array
+     */
     public function add_bbs(){
         $name = $this->request->input('name');
         $num = bbs::where('bbs_name',$name)->count();

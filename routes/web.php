@@ -110,5 +110,7 @@ $router->get('/role_delete','RoleController@role_delete');
 $router->get('/role_change_permission','RoleController@role_change_permission');
 //添加权限
 $router->get('/permission_add','RoleController@permission_add');
+//合同所属公司
+$router->get('/con_company','ContractController@con_company');
 
 

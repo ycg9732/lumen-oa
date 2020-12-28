@@ -162,4 +162,10 @@ class ContractController extends Controller
         $admin_list = employee::whereIn('user_id',$id)->where('co_id',$co_id)->get(['id','ee_name']);
         return $this->returnMessage($admin_list);
     }
+    //合同所属的公司
+    public function con_company(){
+        $con_id = $this->request->input('con_id');
+        $company = contract::find($con_id)->company()->get(['id','co_name']);
+        return $this->returnMessage($company);
+    }
 }

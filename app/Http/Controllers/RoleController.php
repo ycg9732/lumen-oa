@@ -8,6 +8,8 @@ use App\Models\permission;
 use App\Models\role;
 use App\Models\role_permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class RoleController extends Controller
 {
     protected $request;
@@ -65,8 +67,10 @@ class RoleController extends Controller
     public function role_change_permission(){
         $role_id = $this->request->input('role_id');
 //        $permission = permission::findMany([1,2,3]);
+        $id = $this->request->input('p_id');
+        $p_id = explode(',',$id);
         $role = role::find($role_id);
-        $role->permission()->sync([2,3]);
+        $role->permission()->sync($p_id);
         return $this->returnMessage();
     }
     /**
@@ -75,13 +79,15 @@ class RoleController extends Controller
     public function role_delete(){
         $role_id = $this->request->input('role_id');
         try {
-            role::destroy($role_id);
-            $s = role_permission::where('role_id',$role_id)->get();
-            $t = [];
-            foreach ($s as $k => $v){
-                $t[] = $v['id'];
-            }
-            role_permission::destroy($t);
+            DB::transaction(function () use ($role_id){
+                role::destroy($role_id);
+                $s = role_permission::where('role_id',$role_id)->get();
+                $t = [];
+                foreach ($s as $k => $v){
+                    $t[] = $v['id'];
+                }
+                role_permission::destroy($t);
+            });
             return $this->returnMessage('','ok');
         }catch (\PDOException $e){
             return $this->returnMessage('',$e);

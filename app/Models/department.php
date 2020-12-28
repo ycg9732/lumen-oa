@@ -15,7 +15,7 @@ class department extends Model
     }
 
     public function company(){
-        return $this->belongsTo(company::class,'id','co_id');
+        return $this->belongsTo(company::class,'co_id','id');
     }
 
     public function children(){

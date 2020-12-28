@@ -32,4 +32,17 @@ class company extends Model
     public function bbs(){
         return $this->hasMany(bbs::class,'co_id','id');
     }
+
+    /**
+     * 公司所有的合同
+     */
+    public function contract(){
+        return $this->hasMany(contract::class,'co_id','id');
+    }
+    /**
+     * 公司所有的项目
+     */
+    public function project(){
+        return $this->hasMany(project::class,'co_id','id');
+    }
 }

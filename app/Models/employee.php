@@ -14,7 +14,7 @@ class employee extends Model
         return $this->belongsTo(department::class,'dept_id','id');
     }
     public function user(){
-        return $this->belongsTo(User::class,'id','user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function company(){
         return $this->hasOne(company::class,'id','co_id');

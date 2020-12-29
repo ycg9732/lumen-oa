@@ -24,7 +24,6 @@ class FileController extends Controller
     }
 
     public function supplier_img(){
-        return phpinfo();
         $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
         $img= $this->request->file('file')->move(env('APP_STORAGE').'supplier',$img_name);
         if ($img){

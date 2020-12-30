@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
@@ -32,4 +33,5 @@ class FileController extends Controller
             return $this->returnMessage('','上传失败');
         }
     }
+
 }

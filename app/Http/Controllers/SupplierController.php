@@ -42,6 +42,7 @@ class SupplierController extends Controller
             $green_cert = $this->request->input('green_cert');
             $green_time = $this->request->input('green_time');
             $business_cert = $this->request->input('business_cert');
+            $co_id = $this->request->input('co_id');
 
             $supplier = new supplier();
             //todo
@@ -67,6 +68,7 @@ class SupplierController extends Controller
             $supplier->green_cert = $green_cert;
             $supplier->green_time = $green_time;
             $supplier->business_cert = $business_cert;
+            $supplier->co_id = $co_id;
             $supplier->save();
             return $this->returnMessage('','ok');
 

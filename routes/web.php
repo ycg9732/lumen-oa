@@ -120,5 +120,7 @@ $router->get('/excel','FileController@excel');
 $router->get('/supplier_add','SupplierController@supplier_add');
 //客户添加
 $router->get('/customer_add','CustomerController@customer_add');
+//添加账号
+$router->get('/account_add','AccountController@account_add');
 
 

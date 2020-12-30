@@ -78,7 +78,75 @@ class SupplierController extends Controller
     /**
      *供应商详情
      */
-    public function supplier_detile(){
+    public function supplier_detil(){
+        $id = $this->request->input('sup_id');
+        $sup = supplier::find($id);
+        if ($sup['business_cert'] != null){
+            $sup['business_cert'] = env('APP_URL') . '/img/img/supplier/' .$sup['business_cert'];
+        }
+        if ($sup['zoon_cert'] != null){
+            $img = explode(',',$sup['zoon_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['zoon_cert'] =  $img_arr;
+        }
+        if ($sup['food_cert'] != null){
+            $img = explode(',',$sup['food_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['food_cert'] =  $img_arr;
+        }
+        if ($sup['sell_cert'] != null){
+
+            $img = explode(',',$sup['sell_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['sell_cert'] =  $img_arr;
+
+        }
+        if ($sup['youji_food'] != null){
+
+            $img = explode(',',$sup['youji_food']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['youji_food'] =  $img_arr;
+        }
+        if ($sup['geo_cert'] != null){
+
+            $img = explode(',',$sup['geo_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['geo_cert'] =  $img_arr;
+        }
+        if ($sup['health_cert'] != null){
+
+            $img = explode(',',$sup['health_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['health_cert'] =  $img_arr;
+        }
+        if ($sup['green_cert'] != null){
+
+            $img = explode(',',$sup['green_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['green_cert'] =  $img_arr;
+        }
+        return $this->returnMessage($sup);
 
     }
 
@@ -106,5 +174,12 @@ class SupplierController extends Controller
             $sup['number'] = supplier::find($sup['id'])->goods()->count();
         }
         return $this->returnMessage($supplier_list);
+    }
+
+    /**
+     * 删除
+     */
+    public function supplier_delete(){
+
     }
 }

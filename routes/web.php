@@ -124,5 +124,7 @@ $router->get('/customer_add','CustomerController@customer_add');
 $router->get('/account_add','AccountController@account_add');
 //供应商列表
 $router->get('/supplier_list','SupplierController@supplier_list');
+//供应商详情
+$router->get('/supplier_detil','SupplierController@supplier_detil');
 
 

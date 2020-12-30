@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\employee;
 use App\Models\supplier;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
@@ -43,6 +44,8 @@ class SupplierController extends Controller
             $business_cert = $this->request->input('business_cert');
 
             $supplier = new supplier();
+            //todo
+            $supplier->user_id = 1;
             $supplier->su_name = $name;
             $supplier->start_time = $start_time;
             $supplier->code = $code;
@@ -86,5 +89,22 @@ class SupplierController extends Controller
     //todo 待优化
     public function supplier_edit(){
 
+    }
+
+    /**
+     * 供应商列表
+     */
+    public function supplier_list(){
+        $currentPage = (int)$this->request->input('current_page','1');
+        $perage = (int)$this->request->input('perpage','20');
+        $limitprame = ($currentPage -1) * $perage;
+        $supplier_list = supplier::skip($limitprame)->take($perage)->get(['su_name','level','user_id','created_at','id']);
+        $su_count = supplier::all()->count();
+        $all = ceil($su_count/$perage);
+        foreach ($supplier_list as $sup){
+            $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
+            $sup['number'] = supplier::find($sup['id'])->goods()->count();
+        }
+        return $this->returnMessage($supplier_list);
     }
 }

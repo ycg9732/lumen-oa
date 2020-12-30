@@ -25,6 +25,7 @@ class AccountController extends Controller
             $reg = $this->request->input('reg_person');
             $tel = $this->request->input('tel');
             $mark = $this->request->input('remark');
+            $platform = $this->request->input('platform');
 
             $acc = new account();
             $acc->url = $url;
@@ -33,6 +34,7 @@ class AccountController extends Controller
             $acc->reg_person = $reg;
             $acc->tel = $tel;
             $acc->remark = $mark;
+            $acc->platform = $platform;
             $acc->save();
             return $this->returnMessage('','ok');
         }catch (\PDOException $E){
@@ -47,6 +49,7 @@ class AccountController extends Controller
         $supplier_list = account::skip($limitprame)->take($perage)->get(['url','user_name','password','platform','reg_person']);
         $su_count = account::all()->count();
         $all = ceil($su_count/$perage);
+        //todo 密码是否根据权限加密显示
         return $this->returnMessage($supplier_list);
     }
 }

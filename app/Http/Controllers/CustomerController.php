@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\customer;
+use App\Models\employee;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -46,5 +47,23 @@ class CustomerController extends Controller
      */
     public function customer_detil(){
 
+    }
+
+    /**
+     * 客户列表
+     */
+    public function customer_list(){
+
+        $currentPage = (int)$this->request->input('current_page','1');
+        $perage = (int)$this->request->input('perpage','20');
+        $limitprame = ($currentPage -1) * $perage;
+        $customer_list = customer::skip($limitprame)->take($perage)->get(['com_name','user_id','created_at','charge_man']);
+        $su_count = customer::all()->count();
+        $all = ceil($su_count/$perage);
+        foreach ($customer_list as $sup){
+            $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
+//            $sup['number'] = supplier::find($sup['id'])->goods()->count();
+        }
+        return $this->returnMessage($customer_list);
     }
 }

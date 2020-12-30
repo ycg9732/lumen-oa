@@ -128,5 +128,7 @@ $router->get('/supplier_list','SupplierController@supplier_list');
 $router->get('/supplier_detil','SupplierController@supplier_detil');
 //客户列表
 $router->get('/customer_list','CustomerController@customer_list');
+//账号列表
+$router->get('/account_list','AccountController@account_list');
 
 

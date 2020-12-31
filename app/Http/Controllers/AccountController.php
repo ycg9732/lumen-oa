@@ -67,7 +67,7 @@ class AccountController extends Controller
             $acc->reg_person = $this->request->input('reg_person');
             $acc->tel = $this->request->input('tel');
             $acc->remark = $this->request->input('remark');
-            $acc->platform = $this->request->input('platform');
+//            $acc->platform = $this->request->input('platform');
 
             $acc->save();
             return $this->returnMessage();

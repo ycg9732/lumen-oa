@@ -46,7 +46,7 @@ class AccountController extends Controller
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $supplier_list = account::skip($limitprame)->take($perage)->get(['url','user_name','password','platform','reg_person']);
+        $supplier_list = account::skip($limitprame)->take($perage)->get(['url','user_name','password','platform','reg_person','id']);
         $su_count = account::all()->count();
         $all = ceil($su_count/$perage);
         //todo 密码是否根据权限加密显示

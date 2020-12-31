@@ -7,7 +7,9 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\supplier;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
+use ZipArchive;
 
 class SupplierController extends Controller
 {
@@ -211,6 +213,25 @@ class SupplierController extends Controller
      * excel导出
      */
     public function supplier_excel(){
-
+        $sup_arr = [
+            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期'],
+        ];
+        $sup = supplier::get(['su_name','start_time','code','exp'])->toArray();
+        foreach ($sup as $k => $v){
+            $sup_arr[] = array_values($v);
+        }
+//        $export = new ExcelController($sup_arr);
+//        $bool = Excel::store($export, 'test1.xlsx');
+        $path = "D:\project\manageCompanyService\storage\app\test.xlsx";
+        $filename = "test.zip";
+        $zip = new ZipArchive();
+        $re = $zip->open($filename,\ZipArchive::CREATE);   //打开压缩包
+        $re1 = $zip->addFile($path,basename($path));   //向压缩包中添加文件
+        $zip->close();
+return $this->returnMessage($re1);
+        if (!$bool){
+            $this->returnMessage('','导出失败');
+        }
+        return $this->returnMessage();
     }
 }

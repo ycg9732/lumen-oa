@@ -61,9 +61,13 @@ class CustomerController extends Controller
         $su_count = customer::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($customer_list as $sup){
-            //todo 默认李四
-            $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
-//            $sup['number'] = supplier::find($sup['id'])->goods()->count();
+            $sup['created'] = substr($sup['created_at'],0,10);
+            unset($sup['created_at']);
+            if ($sup['user_id'] != null){
+                $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
+            }else{
+                $sup['user'] = null;
+            }
         }
         return $this->returnMessage($customer_list);
     }

@@ -43,6 +43,8 @@ class SupplierController extends Controller
             $green_time = $this->request->input('green_time');
             $business_cert = $this->request->input('business_cert');
             $co_id = $this->request->input('co_id');
+            $fangyi = $this->request->input('fangyi_cert');
+            $fangyi_timr = $this->request->input('fangyi_time');
 
             $supplier = new supplier();
             //todo 获取用户的id
@@ -69,6 +71,9 @@ class SupplierController extends Controller
             $supplier->green_time = $green_time;
             $supplier->business_cert = $business_cert;
             $supplier->co_id = $co_id;
+            $supplier->fangyi_cert = $fangyi;
+            $supplier->fangyi_time = $fangyi_timr;
+
             $supplier->save();
             return $this->returnMessage('','ok');
 
@@ -150,6 +155,15 @@ class SupplierController extends Controller
             }
             $sup['green_cert'] =  $img_arr;
         }
+        if ($sup['fangyi_cert'] != null){
+
+            $img = explode(',',$sup['fangyi_cert']);
+            $img_arr = [];
+            foreach ($img as $ik => $iv){
+                $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
+            }
+            $sup['fangyi_cert'] =  $img_arr;
+        }
         return $this->returnMessage($sup);
 
     }
@@ -190,6 +204,13 @@ class SupplierController extends Controller
      * 删除
      */
     public function supplier_delete(){
+
+    }
+
+    /**
+     * excel导出
+     */
+    public function supplier_excel(){
 
     }
 }

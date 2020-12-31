@@ -46,7 +46,13 @@ class CustomerController extends Controller
      *客户详情
      */
     public function customer_detil(){
-
+        try {
+            $id = $this->request->input('customer_id');
+            $cus = customer::where('id',$id)->get(['com_name','leg_person','leg_tel','charge_man','charge_tel','from']);
+            return $this->returnMessage($cus);
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**
@@ -70,5 +76,17 @@ class CustomerController extends Controller
             }
         }
         return $this->returnMessage($customer_list);
+    }
+
+    /**
+     * 供应商删除s
+     */
+    public function customer_delete(){
+        try {
+
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 }

@@ -226,9 +226,9 @@ class SupplierController extends Controller
         $filename = "test.zip";
         $zip = new ZipArchive();
         $re = $zip->open($filename,\ZipArchive::CREATE);   //打开压缩包
-        $re1 = $zip->addFile($path,basename($path));   //向压缩包中添加文件
+//        $re1 = $zip->addFile($path,basename($path));   //向压缩包中添加文件
         $zip->close();
-return $this->returnMessage($re1);
+return $this->returnMessage($re);
         if (!$bool){
             $this->returnMessage('','导出失败');
         }

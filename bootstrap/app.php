@@ -98,6 +98,7 @@ $app->configure('app');
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
  $app->register(Intervention\Image\ImageServiceProvider::class);
+ $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 // $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
 

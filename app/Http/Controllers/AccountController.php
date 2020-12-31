@@ -52,4 +52,27 @@ class AccountController extends Controller
         //todo 密码是否根据权限加密显示
         return $this->returnMessage($supplier_list);
     }
+
+    /**
+     * 账号库编辑
+     */
+    public function account_edit(){
+        $id = $this->request->input('account_id');
+        try {
+
+            $acc = account::find($id);
+            $acc->url = $this->request->input('url');
+            $acc->user_name = $this->request->input('user_name');
+            $acc->password = $this->request->input('password');
+            $acc->reg_person = $this->request->input('reg_person');
+            $acc->tel = $this->request->input('tel');
+            $acc->remark = $this->request->input('remark');
+            $acc->platform = $this->request->input('platform');
+
+            $acc->save();
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
+    }
 }

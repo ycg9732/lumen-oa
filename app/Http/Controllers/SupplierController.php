@@ -45,7 +45,7 @@ class SupplierController extends Controller
             $co_id = $this->request->input('co_id');
 
             $supplier = new supplier();
-            //todo
+            //todo 获取用户的id
             $supplier->user_id = 1;
             $supplier->su_name = $name;
             $supplier->start_time = $start_time;
@@ -82,7 +82,9 @@ class SupplierController extends Controller
      */
     public function supplier_detil(){
         $id = $this->request->input('sup_id');
-        $sup = supplier::find($id);
+        $sup = supplier::find($id)->toArray();
+        $sup['created_at'] = substr($sup['created_at'],0,10);
+        unset($sup['updated_at']);
         if ($sup['business_cert'] != null){
             $sup['business_cert'] = env('APP_URL') . '/img/img/supplier/' .$sup['business_cert'];
         }
@@ -172,8 +174,14 @@ class SupplierController extends Controller
         $su_count = supplier::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($supplier_list as $sup){
-            $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
+            if ($sup['user_id'] != null){
+                $sup['user'] = employee::where('user_id',$sup['user_id'])->value('ee_name');
+            }else{
+                $sup['user'] = null;
+            }
             $sup['number'] = supplier::find($sup['id'])->goods()->count();
+            $sup['created'] = substr($sup['created_at'],0,10);
+            unset($sup['created_at']);
         }
         return $this->returnMessage($supplier_list);
     }

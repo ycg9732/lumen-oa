@@ -114,10 +114,10 @@ $router->get('/permission_add','RoleController@permission_add');
 $router->get('/con_company','ContractController@con_company');
 //供应商图片上传
 $router->post('/supplier_img','FileController@supplier_img');
-//excel导出
+//excel导出测试
 $router->get('/excel','FileController@excel');
 //供应商添加
-$router->get('/supplier_add','SupplierController@supplier_add');
+$router->post('/supplier_add','SupplierController@supplier_add');
 //客户添加
 $router->get('/customer_add','CustomerController@customer_add');
 //添加账号
@@ -126,6 +126,8 @@ $router->get('/account_add','AccountController@account_add');
 $router->get('/supplier_list','SupplierController@supplier_list');
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');
+//供应商导出excel
+$router->get('/supplier_excel','SupplierController@supplier_excel');
 //客户列表
 $router->get('/customer_list','CustomerController@customer_list');
 //账号列表

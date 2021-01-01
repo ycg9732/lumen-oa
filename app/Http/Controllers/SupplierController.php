@@ -9,6 +9,7 @@ use App\Models\supplier;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use ZipArchive;
 
 class SupplierController extends Controller
@@ -214,21 +215,28 @@ class SupplierController extends Controller
      */
     public function supplier_excel(){
         $sup_arr = [
-            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期'],
+            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','测试图片'],
         ];
         $sup = supplier::get(['su_name','start_time','code','exp'])->toArray();
         foreach ($sup as $k => $v){
             $sup_arr[] = array_values($v);
         }
-//        $export = new ExcelController($sup_arr);
-//        $bool = Excel::store($export, 'test1.xlsx');
-        $path = "D:\project\manageCompanyService\storage\app\test.xlsx";
-        $filename = "test.zip";
-        $zip = new ZipArchive();
-        $re = $zip->open($filename,\ZipArchive::CREATE);   //打开压缩包
-//        $re1 = $zip->addFile($path,basename($path));   //向压缩包中添加文件
-        $zip->close();
-return $this->returnMessage($re);
+        $img = supplier::get(['zoon_cert'])->toArray();
+        $i = 2;
+        $drawings = [];
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['zoon_cert']);
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath('D:\project\manageCompanyService\storage\img\\'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('E'.$i);
+            $drawings[] = ${$i};
+            $i += 1;
+        }
+        $export = new ExcelController($sup_arr,$drawings);
+        $bool = Excel::store($export, 'test8.xlsx');
         if (!$bool){
             $this->returnMessage('','导出失败');
         }

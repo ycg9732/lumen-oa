@@ -6,14 +6,19 @@ namespace App\Http\Controllers;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\BaseDrawing;
 
-class ExcelController implements FromArray,WithColumnFormatting,WithColumnWidths
+class ExcelController implements FromArray,WithColumnFormatting,WithColumnWidths,WithDrawings
 {
     protected $arr;
-    public function __construct(array $arr)
+    protected $drawings;
+    public function __construct(array $arr,$drawings)
     {
         $this->arr= $arr;
+        $this->drawings = $drawings;
     }
     public function array(): array
     {
@@ -32,10 +37,15 @@ class ExcelController implements FromArray,WithColumnFormatting,WithColumnWidths
     public function columnWidths(): array
     {
         return [
-          'A'=>'50',
-          'B'=>'50',
-          'C'=>'50',
-          'D'=>'50',
+          'A'=>'15',
+          'B'=>'15',
+          'C'=>'15',
+          'D'=>'15',
         ];
+    }
+
+    public function drawings()
+    {
+        return $this->drawings;
     }
 }

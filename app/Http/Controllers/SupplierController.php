@@ -103,6 +103,7 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['zoon_cert'] =  $img_arr;
+            $sup['zoon_cert']['name'] ='zoon_cert';
         }
         if ($sup['food_cert'] != null){
             $img = explode(',',$sup['food_cert']);
@@ -111,6 +112,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['food_cert'] =  $img_arr;
+
+            $sup['food_cert']['name'] ='food_cert';
         }
         if ($sup['sell_cert'] != null){
 
@@ -121,6 +124,7 @@ class SupplierController extends Controller
             }
             $sup['sell_cert'] =  $img_arr;
 
+            $sup['sell_cert']['name'] ='sell_cert';
         }
         if ($sup['youji_food'] != null){
 
@@ -130,6 +134,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['youji_food'] =  $img_arr;
+
+            $sup['youji_food']['name'] ='youji_food';
         }
         if ($sup['geo_cert'] != null){
 
@@ -139,6 +145,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['geo_cert'] =  $img_arr;
+
+            $sup['geo_cert']['name'] ='geo_cert';
         }
         if ($sup['health_cert'] != null){
 
@@ -148,6 +156,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['health_cert'] =  $img_arr;
+
+            $sup['health_cert']['name'] ='health_cert';
         }
         if ($sup['green_cert'] != null){
 
@@ -157,6 +167,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['green_cert'] =  $img_arr;
+
+            $sup['green_cert']['name'] ='green_cert';
         }
         if ($sup['fangyi_cert'] != null){
 
@@ -166,6 +178,8 @@ class SupplierController extends Controller
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
             $sup['fangyi_cert'] =  $img_arr;
+
+            $sup['fangyi_cert']['name'] ='fangyi_cert';
         }
         return $this->returnMessage($sup);
 
@@ -173,9 +187,7 @@ class SupplierController extends Controller
 
     /**
      *供应商编辑
-     *
      */
-    //todo 待优化
     public function supplier_edit(){
 
     }

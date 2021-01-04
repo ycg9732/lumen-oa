@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -31,6 +33,37 @@ class FileController extends Controller
             return $this->returnMessage([$img_name,env('APP_URL') . '/img/img/supplier'.$img_name]);
         }else{
             return $this->returnMessage('','上传失败');
+        }
+    }
+
+    /**
+     * 供应商图片删除
+     * @return array
+     */
+    public function delete_img(){
+        $id = $this->request->input('su_id');
+        $img_cert = $this->request->input('img_cert');
+        $name = $this->request->input('img_name');
+        $path = env('APP_STORAGE').'supplier\\'.$name;
+        $bool = unlink($path);
+        if (true){
+            $img = supplier::where('id',$id)->value($img_cert);
+            $leg = strlen($name);
+            $count=strpos($img,$name);
+            if ($count == 0){
+                $str = substr_replace($img,"",$count,$leg+1);
+                $re = supplier::find($id);
+                $re->$img_cert = $str;
+                $re->save();
+            }else{
+                $str1 = substr_replace($img,"",$count-1,$leg+1);;
+                $re1 = supplier::find($id);
+                $re1->$img_cert = $str1;
+                $re1->save();
+            }
+            return $this->returnMessage();
+        }else{
+            return $this->returnMessage('','fail');
         }
     }
 

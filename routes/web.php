@@ -98,6 +98,8 @@ $router->get('/role_list','EmployeeController@role_list');
 $router->get('/permission_list','EmployeeController@permission_list');
 //图片上传
 $router->post('/upload_img','FileController@upload_img');
+//供应商图片删除
+$router->get('/delete_img','FileController@delete_img');
 //领导列表
 $router->get('/lead_list','ContractController@lead_list');
 //公告删除

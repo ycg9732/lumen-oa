@@ -75,4 +75,17 @@ class AccountController extends Controller
             return $this->returnMessage($e->getMessage());
         }
     }
+
+    /**
+     *账号库删除
+     */
+    public function account_delete(){
+        $id = $this->request->input('account_id');
+        try {
+            account::destroy($id);
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
+    }
 }

@@ -122,6 +122,8 @@ $router->post('/supplier_add','SupplierController@supplier_add');
 $router->get('/customer_add','CustomerController@customer_add');
 //添加账号
 $router->get('/account_add','AccountController@account_add');
+//账号库删除
+$router->get('/account_delete','AccountController@account_delete');
 //账号库修改
 $router->get('/account_edit','AccountController@account_edit');
 //供应商列表

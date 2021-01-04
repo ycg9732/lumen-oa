@@ -236,10 +236,6 @@ class SupplierController extends Controller
             $i += 1;
         }
         $export = new ExcelController($sup_arr,$drawings);
-        $bool = Excel::store($export, 'test10.xlsx');
-        if (!$bool){
-            return $this->returnMessage('','导出失败');
-        }
-        return response()->download('D:\project\manageCompanyService\storage\app\test10.xlsx');
+        return Excel::download($export, 'supplier.xlsx');
     }
 }

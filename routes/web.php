@@ -122,6 +122,8 @@ $router->get('/excel','FileController@excel');
 $router->post('/supplier_add','SupplierController@supplier_add');
 //客户添加
 $router->get('/customer_add','CustomerController@customer_add');
+//客户删除
+$router->get('/customer_delete','CustomerController@customer_delete');
 //添加账号
 $router->get('/account_add','AccountController@account_add');
 //账号库删除
@@ -134,6 +136,8 @@ $router->get('/supplier_list','SupplierController@supplier_list');
 $router->get('/supplier_detil','SupplierController@supplier_detil');
 //供应商导出excel
 $router->get('/supplier_excel','SupplierController@supplier_excel');
+//供应商删除
+$router->get('/supplier_delete','SupplierController@supplier_delete');
 //客户列表
 $router->get('/customer_list','CustomerController@customer_list');
 //账号列表

@@ -219,7 +219,13 @@ class SupplierController extends Controller
      * 删除
      */
     public function supplier_delete(){
-
+        $id = $this->request->input('id');
+        try {
+            supplier::destroy($id);
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**
@@ -227,13 +233,13 @@ class SupplierController extends Controller
      */
     public function supplier_excel(){
         $sup_arr = [
-            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','测试图片'],
+            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','经营许可证','动物检验检疫证明','食品生产经营许可证','销售授权书','有机食品证明','农产品地理标志','无公害农产品认领书','绿色食品认证证书','动物防疫合格证'],
         ];
         $sup = supplier::get(['su_name','start_time','code','exp'])->toArray();
         foreach ($sup as $k => $v){
             $sup_arr[] = array_values($v);
         }
-        $img = supplier::get(['zoon_cert'])->toArray();
+        $img = supplier::get(['business_cert','zoon_cert','food_cert','sell_cert','youji_food','geo_cert','health_cert','green_cert','fangyi_cert'])->toArray();
         $i = 2;
         $drawings = [];
         foreach ($img as $k => $v){

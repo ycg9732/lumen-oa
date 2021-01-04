@@ -81,8 +81,9 @@ class CustomerController extends Controller
      * 供应商删除s
      */
     public function customer_delete(){
+        $id = $this->request->input('id');
         try {
-
+            customer::destroy($id);
             return $this->returnMessage();
         }catch (\PDOException $e){
             return $this->returnMessage($e->getMessage());

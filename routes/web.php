@@ -118,7 +118,10 @@ $router->get('/con_company','ContractController@con_company');
 //$router->post('/supplier_img',['middleware'=>'cors',function() use($router){
 //        $router->post('/supplier_img','FileController@supplier_img');
 //}]);
-$router->post('/supplier_img','FileController@supplier_img');
+\Illuminate\Support\Facades\Route::middleware(['cors'])->group(function (){
+    \Illuminate\Support\Facades\Route::post('/supplier_img','FileController@supplier_img');
+});
+//$router->post('/supplier_img','FileController@supplier_img');
 //excel导出测试
 $router->get('/excel','FileController@excel');
 //供应商添加

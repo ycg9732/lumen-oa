@@ -230,10 +230,13 @@ class SupplierController extends Controller
 
     /**
      * excel导出
+     * 图片文件不能重复
+     * 取相关图片类的第一个图片文件展示
      */
+    //todo  每个图片类别放到一个sheet中
     public function supplier_excel(){
         $sup_arr = [
-            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','经营许可证','动物检验检疫证明','食品生产经营许可证','销售授权书','有机食品证明','农产品地理标志','无公害农产品认领书','绿色食品认证证书','动物防疫合格证'],
+            ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','动物检验检疫证明','食品生产经营许可证','销售授权书','有机食品证明','农产品地理标志','无公害农产品认领书','绿色食品认证证书','动物防疫合格证','经营许可证'],
         ];
         $sup = supplier::get(['su_name','start_time','code','exp'])->toArray();
         foreach ($sup as $k => $v){
@@ -244,15 +247,129 @@ class SupplierController extends Controller
         $drawings = [];
         foreach ($img as $k => $v){
             $img_name = explode(',',$v['zoon_cert']);
+            if (empty($img_name[0])) break;
             $$i = new Drawing();
             $$i->setName('Logo');
             $$i->setDescription('This is my logo');
-            $$i->setPath('D:\project\manageCompanyService\storage\img\\'.$img_name[0]);
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
             $$i->setHeight(50);
             $$i->setCoordinates('E'.$i);
             $drawings[] = ${$i};
             $i += 1;
         }
+        $i1 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['food_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('F'.$i1);
+            $drawings[] = ${$i};
+            $i1 += 1;
+        }
+            $i2 = 2;
+            foreach ($img as $k => $v){
+                $img_name = explode(',',$v['sell_cert']);
+                if (empty($img_name[0])) break;
+                $$i = new Drawing();
+                $$i->setName('Logo');
+                $$i->setDescription('This is my logo');
+                $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+                $$i->setHeight(50);
+                $$i->setCoordinates('G'.$i2);
+                $drawings[] = ${$i};
+                $i2 += 1;
+            }
+
+        $i3 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['youji_food']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('H'.$i3);
+            $drawings[] = ${$i};
+            $i3 += 1;
+        }
+
+        $i4 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['geo_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('I'.$i4);
+            $drawings[] = ${$i};
+            $i4 += 1;
+        }
+
+        $i5 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['health_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('J'.$i5);
+            $drawings[] = ${$i};
+            $i5 += 1;
+        }
+
+        $i6 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['green_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('K'.$i6);
+            $drawings[] = ${$i};
+            $i6 += 1;
+        }
+
+
+        $i7 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['fangyi_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('L'.$i7);
+            $drawings[] = ${$i};
+            $i7 += 1;
+        }
+
+
+        $i8 = 2;
+        foreach ($img as $k => $v){
+            $img_name = explode(',',$v['business_cert']);
+            if (empty($img_name[0])) break;
+            $$i = new Drawing();
+            $$i->setName('Logo');
+            $$i->setDescription('This is my logo');
+            $$i->setPath(env('APP_STORAGE').'supplier/'.$img_name[0]);
+            $$i->setHeight(50);
+            $$i->setCoordinates('M'.$i8);
+            $drawings[] = ${$i};
+            $i8 += 1;
+        }
+
         $export = new ExcelController($sup_arr,$drawings);
         return Excel::download($export, 'supplier.xlsx');
     }

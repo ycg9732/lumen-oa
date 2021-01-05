@@ -115,10 +115,10 @@ $router->get('/permission_add','RoleController@permission_add');
 //合同所属公司
 $router->get('/con_company','ContractController@con_company');
 //供应商图片上传
-//$router->post('/supplier_img',['middleware'=>'cors',function() use($router){
-//        $router->post('/supplier_img','FileController@supplier_img');
-//}]);
-$router->post('/supplier_img','FileController@supplier_img');
+$router->post('/supplier_img',['middleware'=>'cors',function() use($router){
+        $router->post('/supplier_img','FileController@supplier_img');
+}]);
+//$router->post('/supplier_img','FileController@supplier_img');
 //excel导出测试
 $router->get('/excel','FileController@excel');
 //供应商添加

@@ -37,6 +37,19 @@ class FileController extends Controller
     }
 
     /**
+     * @return array
+     * 商品图片上传
+     */
+    public function goods_img(){
+        $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
+        $img= $this->request->file('file')->move(env('APP_STORAGE').'goods',$img_name);
+        if ($img){
+            return $this->returnMessage([$img_name,env('APP_URL') . '/img/img/goods'.$img_name]);
+        }else{
+            return $this->returnMessage('','上传失败');
+        }
+    }
+    /**
      * 供应商图片删除
      * @return array
      */

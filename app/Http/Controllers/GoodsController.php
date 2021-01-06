@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\category;
+use App\Models\employee;
 use App\Models\goods;
 use App\Models\goods_cert;
 use App\Models\goods_img;
+use App\Models\supplier;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,9 +97,10 @@ class GoodsController extends Controller
         $goods_list = goods::skip($limitprame)->take($perage)->get(['title','price','created_at','user_id','id','su_id'])->toArray();
         $su_count = goods::all()->count();
         $all = ceil($su_count/$perage);
-//        foreach ($goods_list as $k => $v){
-//            $goods_list[$k][] = ;
-//        }
+        foreach ($goods_list as $k => $v){
+            $goods_list[$k]['supplier'] = supplier::where('id',$v['su_id'])->value('su_name');
+            $goods_list[$k]['user'] = employee::where('user_id',$v['user_id'])->value('ee_name');
+        }
         return $this->returnMessage($goods_list);
     }
 

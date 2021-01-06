@@ -99,6 +99,7 @@ class SupplierController extends Controller
             $sup['business_cert'] = [];
             $sup['business_cert']['img'] = env('APP_URL') . '/img/img/supplier/' .$name;
             $sup['business_cert']['name'] = $name;
+            $sup['business_cert']['cert'] = 'business_cert';
         }
         if ($sup['zoon_cert'] != null){
             $img = explode(',',$sup['zoon_cert']);

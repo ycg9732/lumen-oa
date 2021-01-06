@@ -13,8 +13,6 @@ class CorsMiddleware {
         if ($request->isMethod('OPTIONS')){
             return response('ok', 200, $headers);
         }
-
-
         $response = $next($request);
         if ($response instanceof $SymfonyResopnse) {
             foreach ($headers as $key => $value) {
@@ -26,7 +24,6 @@ class CorsMiddleware {
         $response->header('Access-Control-Allow-Headers', $request->header('Access-Control-Request-Headers'));
         $response->header('Access-Control-Allow-Origin', '*');
         }
-
         return $response;
     }
 

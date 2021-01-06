@@ -21,7 +21,7 @@ class GoodsController extends Controller
     /**
      * 商品添加
      */
-    //todo 接收数据待优化
+    //todo 接收数据待优化  获取操作用户id
     public function goods_add(){
         $req = [];
         $req['title'] = $this->request->input('title');
@@ -39,6 +39,7 @@ class GoodsController extends Controller
         $req['prod_code'] = $this->request->input('prod_code');
         $req['good_img'] = $this->request->input('good_img');
         $req['good_cert'] = $this->request->input('good_cert');
+        $req['self_life'] = $this->request->input('self_life');
         try {
             DB::transaction(function () use ($req){
                 $good = new goods();
@@ -55,6 +56,7 @@ class GoodsController extends Controller
                 $good->net_weight = $req['net_weight'];
                 $good->price = $req['price'];
                 $good->prod_code = $req['prod_code'];
+                $good->self_life = $req['self_life'];
                 $good->save();
                 $good_id = $good->id;
                 $img = explode(',',$req['good_img']);
@@ -86,7 +88,16 @@ class GoodsController extends Controller
      * 商品列表
      */
     public function goods_list(){
-
+        $currentPage = (int)$this->request->input('current_page','1');
+        $perage = (int)$this->request->input('perpage','20');
+        $limitprame = ($currentPage -1) * $perage;
+        $goods_list = goods::skip($limitprame)->take($perage)->get(['title','price','created_at','user_id','id','su_id'])->toArray();
+        $su_count = goods::all()->count();
+        $all = ceil($su_count/$perage);
+//        foreach ($goods_list as $k => $v){
+//            $goods_list[$k][] = ;
+//        }
+        return $this->returnMessage($goods_list);
     }
 
     /**

@@ -138,7 +138,23 @@ class GoodsController extends Controller
      * 商品详情
      */
     public function goods_detail(){
-
+        $id = $this->request->input('good_id');
+        $good_info = goods::where('id',$id)->first()->toArray();
+            $good_info['supplier'] = supplier::where('id',$good_info['su_id'])->value('su_name');
+            $good_info['category'] = category::where('id',$good_info['ca_id'])->value('cat_name');
+            $good_info['img'] = [];
+            $img = goods_img::where('good_id',$id)->get(['good_img'])->toArray();
+            foreach ($img as $k => $v){
+                $img[$k] = env('APP_STORAGE').'goods/'.$v['good_img'];
+            }
+            $good_info['img'] = $img;
+            $good_info['cert'] = [];
+            $cert = goods_cert::where('good_id',$id)->get(['good_cert'])->toArray();
+            foreach ($cert as $k => $v){
+                $cert[$k] = env('APP_STORAGE').'goods/'.$v['good_cert'];
+            }
+            $good_info['cert'] = $cert;
+        return $this->returnMessage($good_info);
     }
     /**
      * 商品选择分类

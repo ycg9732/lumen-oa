@@ -93,7 +93,23 @@ class GoodsController extends Controller
      * 商品删除
      */
     public function goods_delete(){
-
+        try {
+            $id = $this->request->input('good_id');
+            DB::transaction(function () use ($id){
+                goods::destroy($id);
+                $img = goods_img::where('good_id',$id);
+                if (!empty($img)){
+                    $img->delete();
+                }
+                $cert = goods_cert::where('good_id',$id);
+                if (!empty($cert)){
+                    $cert->delete();
+                }
+                });
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**

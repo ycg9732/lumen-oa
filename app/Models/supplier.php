@@ -11,6 +11,6 @@ class supplier extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo(User::class,'user_id','id');
     }
     public function goods(){
-        return $this->hasMany(goods::class,'sup_id','id');
+        return $this->hasMany(goods::class,'su_id','id');
     }
 }

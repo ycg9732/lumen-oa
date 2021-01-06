@@ -52,6 +52,7 @@ class AccountController extends Controller
         $all = ceil($su_count/$perage);
         //todo 密码是否根据权限加密显示
         $result['all'] = $all;
+        $result['num'] = $su_count;
         $result['list'] = $supplier_list;
         return $this->returnMessage($result);
     }

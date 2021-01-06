@@ -12,6 +12,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use ZipArchive;
 
+//todo 供应商证书到期提醒
 class SupplierController extends Controller
 {
     protected $request;
@@ -233,16 +234,17 @@ class SupplierController extends Controller
      * 图片文件不能重复
      * 取相关图片类的第一个图片文件展示
      */
-    //todo  每个图片类别放到一个sheet中
+    //todo  需要优化存储图片的时候  每个图片类别 第一个图片强制为证书正面照
     public function supplier_excel(){
+        $su_id = $this->request->input('su_id');
         $sup_arr = [
             ['供应商名称','成立日期','统一社会信用代码','营业执照有效期','动物检验检疫证明','食品生产经营许可证','销售授权书','有机食品证明','农产品地理标志','无公害农产品认领书','绿色食品认证证书','动物防疫合格证','经营许可证'],
         ];
-        $sup = supplier::get(['su_name','start_time','code','exp'])->toArray();
+        $sup = supplier::where('id',$su_id)->get(['su_name','start_time','code','exp'])->toArray();
         foreach ($sup as $k => $v){
             $sup_arr[] = array_values($v);
         }
-        $img = supplier::get(['business_cert','zoon_cert','food_cert','sell_cert','youji_food','geo_cert','health_cert','green_cert','fangyi_cert'])->toArray();
+        $img = supplier::where('id',$su_id)->get(['business_cert','zoon_cert','food_cert','sell_cert','youji_food','geo_cert','health_cert','green_cert','fangyi_cert'])->toArray();
         $i = 2;
         $drawings = [];
         foreach ($img as $k => $v){
@@ -372,5 +374,23 @@ class SupplierController extends Controller
 
         $export = new ExcelController($sup_arr,$drawings);
         return Excel::download($export, 'supplier.xlsx');
+    }
+
+    public function supplier_img_edit(){
+        $id = $this->request->input('su_id');
+        $img_name = $this->request->input('img_name');
+        $img_cert = $this->request->input('img_cert');
+
+    }
+    /**
+     * 供应商选择接口
+     */
+    public function supplier_select(){
+        try {
+            $su = supplier::get(['id','su_name']);
+            return $this->returnMessage($su);
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 }

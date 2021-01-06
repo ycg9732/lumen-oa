@@ -103,8 +103,9 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['zoon_cert'] =  $img_arr;
-            $sup['zoon_cert']['name'] ='zoon_cert';
+            $sup['zoon_cert'] = [];
+            $sup['zoon_cert']['img'] = $img_arr;
+            $sup['zoon_cert']['name'] = 'zoon_cert';
         }
         if ($sup['food_cert'] != null){
             $img = explode(',',$sup['food_cert']);
@@ -112,8 +113,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['food_cert'] =  $img_arr;
-
+            $sup['food_cert'] = [];
+            $sup['food_cert']['img'] =  $img_arr;
             $sup['food_cert']['name'] ='food_cert';
         }
         if ($sup['sell_cert'] != null){
@@ -123,7 +124,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['sell_cert'] =  $img_arr;
+            $sup['sell_cert'] = [];
+            $sup['sell_cert']['img'] =  $img_arr;
 
             $sup['sell_cert']['name'] ='sell_cert';
         }
@@ -134,7 +136,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['youji_food'] =  $img_arr;
+            $sup['youji_food'] = [];
+            $sup['youji_food']['img'] =  $img_arr;
 
             $sup['youji_food']['name'] ='youji_food';
         }
@@ -145,7 +148,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['geo_cert'] =  $img_arr;
+            $sup['geo_cert'] = [];
+            $sup['geo_cert']['img'] =  $img_arr;
 
             $sup['geo_cert']['name'] ='geo_cert';
         }
@@ -156,7 +160,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['health_cert'] =  $img_arr;
+            $sup['health_cert'] = [];
+            $sup['health_cert']['img'] =  $img_arr;
 
             $sup['health_cert']['name'] ='health_cert';
         }
@@ -167,7 +172,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['green_cert'] =  $img_arr;
+            $sup['green_cert'] = [];
+            $sup['green_cert']['img'] =  $img_arr;
 
             $sup['green_cert']['name'] ='green_cert';
         }
@@ -178,7 +184,8 @@ class SupplierController extends Controller
             foreach ($img as $ik => $iv){
                 $img_arr[] = env('APP_URL') . '/img/img/supplier/' .$iv;
             }
-            $sup['fangyi_cert'] =  $img_arr;
+            $sup['fangyi_cert'] = [];
+            $sup['fangyi_cert']['img'] =  $img_arr;
 
             $sup['fangyi_cert']['name'] ='fangyi_cert';
         }

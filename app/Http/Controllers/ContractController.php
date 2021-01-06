@@ -134,7 +134,13 @@ class ContractController extends Controller
      * 删除
      */
     public function con_delete(){
-
+        $id = $this->request->input('con_id');
+        try {
+            contract::destroy($id);
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**

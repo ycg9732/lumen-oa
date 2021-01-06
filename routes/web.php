@@ -88,6 +88,8 @@ $router->get('/proj_add','ProjectController@proj_add');
 $router->get('/proj_list','ProjectController@proj_list');
 //合同审核
 $router->get('/con_access','ContractController@con_access');
+//合同删除
+$router->get('/con_delete','ContractController@con_delete');
 //项目详情
 $router->get('/proj_detil','ProjectController@proj_detil');
 //项目编辑
@@ -120,6 +122,8 @@ $router->post('/supplier_img','FileController@supplier_img');
 $router->get('/excel','FileController@excel');
 //供应商添加
 $router->post('/supplier_add','SupplierController@supplier_add');
+//供应商图片修改
+$router->get('/supplier_img_edit','SupplierController@supplier_img_edit');
 //客户添加
 $router->get('/customer_add','CustomerController@customer_add');
 //客户删除
@@ -138,11 +142,26 @@ $router->get('/supplier_detil','SupplierController@supplier_detil');
 $router->get('/supplier_excel','SupplierController@supplier_excel');
 //供应商删除
 $router->get('/supplier_delete','SupplierController@supplier_delete');
+//供应商单选
+$router->get('/supplier_select','SupplierController@supplier_select');
 //客户列表
 $router->get('/customer_list','CustomerController@customer_list');
 //账号列表
 $router->get('/account_list','AccountController@account_list');
 //客户详情
 $router->get('/customer_detil','CustomerController@customer_detil');
+//商品添加
+$router->get('/goods_add','GoodsController@goods_add');
+//商品列表
+$router->get('/goods_list','GoodsController@goods_list');
+//商品删除
+$router->get('/goods_delete','GoodsController@goods_delete');
+//商品更改
+$router->get('/goods_edit','GoodsController@goods_edit');
+//商品详情
+$router->get('/goods_detail','GoodsController@goods_detail');
+//商品选择分类
+$router->get('/cat_select','GoodsController@cat_select');
+
 
 

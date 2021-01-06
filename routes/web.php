@@ -166,6 +166,8 @@ $router->get('/goods_detail','GoodsController@goods_detail');
 $router->get('/cat_select','GoodsController@cat_select');
 //菜单
 $router->get('/menu','MenuController@menu');
+//登录
+$router->get('/login','UserController@login');
 
 
 

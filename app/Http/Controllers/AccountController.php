@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\account;
+use App\Models\supplier;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -46,11 +47,13 @@ class AccountController extends Controller
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $supplier_list = account::skip($limitprame)->take($perage)->get(['url','user_name','password','platform','reg_person','id']);
+        $supplier_list = account::skip($limitprame)->take($perage)->get(['url','user_name','password','platform','reg_person','id'])->toArray();
         $su_count = account::all()->count();
         $all = ceil($su_count/$perage);
         //todo 密码是否根据权限加密显示
-        return $this->returnMessage($supplier_list);
+        $result['all'] = $all;
+        $result['list'] = $supplier_list;
+        return $this->returnMessage($result);
     }
 
     /**

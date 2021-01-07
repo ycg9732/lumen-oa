@@ -78,7 +78,7 @@ $app->configure('app');
  ]);
 
  $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
+     'auth' => App\Http\Middleware\Authenticate::class,
 //        'cors' => App\Http\Middleware\CorsMiddleware::class,
  ]);
 
@@ -94,7 +94,7 @@ $app->configure('app');
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
  $app->register(Intervention\Image\ImageServiceProvider::class);
  $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);

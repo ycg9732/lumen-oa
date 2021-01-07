@@ -137,7 +137,11 @@ $router->get('/account_delete','AccountController@account_delete');
 //账号库修改
 $router->get('/account_edit','AccountController@account_edit');
 //供应商列表
-$router->get('/supplier_list','SupplierController@supplier_list');
+$router->group(['middleware' => 'auth'],function () use ($router){
+
+    $router->get('/supplier_list','SupplierController@supplier_list');
+
+});
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');
 //供应商导出excel

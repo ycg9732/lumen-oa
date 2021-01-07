@@ -14,7 +14,7 @@ class MenuController extends Controller
 //            ['title'=>'仓储管理','path'=>'/storage','icon'=>'dashboard'],
 //            ['title'=>'物流管理','path'=>'/distribution','icon'=>'dashboard'],
 //            ['title'=>'追踪管理','path'=>'/trace','icon'=>'dashboard'],
-            ['title'=>'资料管理','path'=>'/resource','icon'=>'dashboard'],
+            ['title'=>'资料管理','path'=>'/supplier','icon'=>'dashboard'],
 //            ['title'=>'采购管理','path'=>'/purchase','icon'=>'dashboard'],
 //            ['title'=>'销售管理','path'=>'/marker','icon'=>'dashboard'],
         ];

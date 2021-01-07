@@ -205,13 +205,13 @@ class GoodsController extends Controller
             $good_info['img'] = [];
             $img = goods_img::where('good_id',$id)->get(['good_img'])->toArray();
             foreach ($img as $k => $v){
-                $img[$k] = env('APP_URL').'img/img/goods/'.$v['good_img'];
+                $img[$k] = env('APP_URL').'/img/img/goods/'.$v['good_img'];
             }
             $good_info['img'] = $img;
             $good_info['cert'] = [];
             $cert = goods_cert::where('good_id',$id)->get(['good_cert'])->toArray();
             foreach ($cert as $k => $v){
-                $cert[$k] = env('APP_URL').'img/img/goods/'.$v['good_cert'];
+                $cert[$k] = env('APP_URL').'/img/img/goods/'.$v['good_cert'];
             }
             $good_info['cert'] = $cert;
         return $this->returnMessage($good_info);
@@ -229,9 +229,10 @@ class GoodsController extends Controller
     }
 
     /**
-     *商品导出
+     * by you
      * @return array
      */
+    //todo 商品导出
     public function goods_excel(){
         return $this->returnMessage();
     }

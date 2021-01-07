@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\goods_cert;
 use App\Models\goods_img;
 use App\Models\supplier;
 use Illuminate\Http\Request;
@@ -27,6 +28,10 @@ class FileController extends Controller
         }
     }
 
+    /**
+     * @return array
+     * 供应商图片上传
+     */
     public function supplier_img(){
         $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
         $img= $this->request->file('file')->move(env('APP_STORAGE').'supplier',$img_name);

@@ -12,6 +12,7 @@ use App\Models\goods_img;
 use App\Models\supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GoodsController extends Controller
@@ -24,7 +25,6 @@ class GoodsController extends Controller
     /**
      * 商品添加
      */
-    //todo 接收数据待优化  获取操作用户id
     public function goods_add(){
         $req = [];
         $req['title'] = $this->request->input('title');
@@ -60,6 +60,7 @@ class GoodsController extends Controller
                 $good->price = $req['price'];
                 $good->prod_code = $req['prod_code'];
                 $good->self_life = $req['self_life'];
+//    todo            $good->user_id = Auth::id();
                 $good->save();
                 $good_id = $good->id;
                 $img = explode(',',$req['good_img']);
@@ -131,7 +132,65 @@ class GoodsController extends Controller
      * 商品更改
      */
     public function goods_edit(){
-
+        $req = [];
+        $req['good_id'] = $this->request->input('good_id');
+        $req['title'] = $this->request->input('title');
+        $req['su_id'] = $this->request->input('su_id');
+        $req['good_code'] = $this->request->input('good_code');
+        $req['maozhong'] = $this->request->input('maozhong');
+        $req['length'] = $this->request->input('length');
+        $req['width'] = $this->request->input('width');
+        $req['height'] = $this->request->input('height');
+        $req['from'] = $this->request->input('from');
+        $req['ca_id'] = $this->request->input('ca_id');
+        $req['biaozhun'] = $this->request->input('biaozhun');
+        $req['net_weight'] = $this->request->input('net_weight');
+        $req['price'] = $this->request->input('price');
+        $req['prod_code'] = $this->request->input('prod_code');
+        $req['good_img'] = $this->request->input('good_img');
+        $req['good_cert'] = $this->request->input('good_cert');
+        $req['self_life'] = $this->request->input('self_life');
+        try {
+            DB::transaction(function () use ($req){
+                $good = goods::find($req['good_id']);
+                $good->title = $req['title'];
+                $good->su_id = $req['su_id'];
+                $good->good_code = $req['good_code'];
+                $good->maozhong = $req['maozhong'];
+                $good->length = $req['length'];
+                $good->width = $req['width'];
+                $good->height = $req['height'];
+                $good->from = $req['from'];
+                $good->ca_id = $req['ca_id'];
+                $good->biaozhun = $req['biaozhun'];
+                $good->net_weight = $req['net_weight'];
+                $good->price = $req['price'];
+                $good->prod_code = $req['prod_code'];
+                $good->self_life = $req['self_life'];
+                $good->save();
+                $img = explode(',',$req['good_img']);
+                if (!empty($img[0])){
+                    foreach ($img as $k => $v){
+                        $good_img = new goods_img();
+                        $good_img->good_id = $req['good_id'];
+                        $good_img->good_img = $v;
+                        $good_img->save();
+                    }
+                }
+                $cert = explode(',',$req['good_cert']);
+                if (!empty($cert[0])){
+                    foreach ($cert as $k => $v){
+                        $good_cert = new goods_cert();
+                        $good_cert->good_id = $req['good_id'];
+                        $good_cert->good_cert = $v;
+                        $good_cert->save();
+                    }
+                }
+            });
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**

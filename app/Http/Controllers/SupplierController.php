@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\employee;
 use App\Models\supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
@@ -51,7 +52,7 @@ class SupplierController extends Controller
             $fangyi_timr = $this->request->input('fangyi_time');
 
             $supplier = new supplier();
-            //todo 获取用户的id
+//      todo      $supplier->user_id = Auth::id();
             $supplier->user_id = 1;
             $supplier->su_name = $name;
             $supplier->start_time = $start_time;

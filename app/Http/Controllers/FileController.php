@@ -58,7 +58,11 @@ class FileController extends Controller
         $img_cert = $this->request->input('img_cert');
         $name = $this->request->input('img_name');
         $path = env('APP_STORAGE').'supplier/'.$name;
-        $bool = unlink($path);
+        try {
+            $bool = unlink($path);
+        }catch (\Exception $e){
+         return $this->returnMessage($e->getMessage());
+        }
         if ($bool){
             $img = supplier::where('id',$id)->value($img_cert);
             $leg = strlen($name);

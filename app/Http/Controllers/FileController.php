@@ -59,7 +59,7 @@ class FileController extends Controller
         $name = $this->request->input('img_name');
         $path = env('APP_STORAGE').'supplier/'.$name;
         $bool = unlink($path);
-        if (true){
+        if ($bool){
             $img = supplier::where('id',$id)->value($img_cert);
             $leg = strlen($name);
             $count=strpos($img,$name);
@@ -76,7 +76,7 @@ class FileController extends Controller
             }
             return $this->returnMessage();
         }else{
-            return $this->returnMessage('','fail');
+            return $this->returnMessage('','图片删除失败');
         }
     }
 

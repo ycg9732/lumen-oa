@@ -129,7 +129,8 @@ class GoodsController extends Controller
     }
 
     /**
-     * 商品更改
+     * 商品删除
+     * @return array
      */
     public function goods_edit(){
         $req = [];

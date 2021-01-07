@@ -12,7 +12,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+//todo 路由分组待优化
 $router->get('/', function () use ($router) {
     return '$router->app->version()';
 });
@@ -120,6 +120,8 @@ $router->get('/con_company','ContractController@con_company');
 $router->post('/supplier_img','FileController@supplier_img');
 //商品图片上传
 $router->post('/goods_img','FileController@goods_img');
+//商品图片删除
+$router->get('/goods_img_delete','FileController@goods_img_delete');
 //excel导出测试
 $router->get('/excel','FileController@excel');
 //供应商添加
@@ -136,7 +138,7 @@ $router->get('/account_add','AccountController@account_add');
 $router->get('/account_delete','AccountController@account_delete');
 //账号库修改
 $router->get('/account_edit','AccountController@account_edit');
-//供应商列表
+//供应商列表 增加登录认证
 $router->group(['middleware' => 'auth'],function () use ($router){
 
     $router->get('/supplier_list','SupplierController@supplier_list');

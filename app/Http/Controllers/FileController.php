@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\goods_img;
 use App\Models\supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +83,41 @@ class FileController extends Controller
         }else{
             return $this->returnMessage('','图片删除失败');
         }
+    }
+
+    /**
+     * 商品图片删除
+     */
+    public function goods_img_delete(){
+        $good_id = $this->request->input('good_id');
+        if ($this->request->has('img_name')){
+            try {
+                unlink(env('APP_STORAGE').'goods/'.$this->request->input('img_name'));
+            }catch (\Exception $e){
+                return $this->returnMessage($e->getMessage());
+            }
+            try {
+                $img = goods_img::where('good_id',$good_id)->where('good_img',$this->request->input('img_name'));
+                $img->delete();
+            }catch (\PDOException $e){
+                return $this->returnMessage($e->getMessage());
+            }
+        }
+        if ($this->request->has('cert_name')){
+            try {
+                unlink(env('APP_STORAGE').'goods/'.$this->request->input('cert_name'));
+            }catch (\Exception $e){
+                return $this->returnMessage($e->getMessage());
+            }
+            try {
+                $img1 = goods_cert::where('good_id',$good_id)->where('good_cert',$this->request->input('cert_name'));
+                $img1->delete();
+            }catch (\PDOException $e){
+                return $this->returnMessage($e->getMessage());
+            }
+
+        }
+        return $this->returnMessage();
     }
 
 }

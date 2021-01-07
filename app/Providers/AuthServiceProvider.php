@@ -33,8 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->header('Authorization')) {
                 return User::where('api_token', $request->header('Authorization'))->first();
-            }else{}
-            return response('未登录','401');
+            }
         });
     }
 }

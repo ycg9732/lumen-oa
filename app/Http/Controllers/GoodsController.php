@@ -129,7 +129,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * 商品删除
+     * 商品修改
      * @return array
      */
     public function goods_edit(){

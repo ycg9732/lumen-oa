@@ -88,6 +88,31 @@ class ArchivesController extends Controller
      * 员工档案修改
      */
     public function arch_edit(){
+        try {
+            $id = $this->request->input('id');
+            $name = $this->request->input('name');
+            $sex = $this->request->input('sex');
+            $edu = $this->request->input('edu');
+            $school = $this->request->input('school');
+            $job = $this->request->input('job');
+            $tel = $this->request->input('tel');
+            $join_date = $this->request->input('join_date');
+            $img = $this->request->input('img');
+            $arch = archives::find($id);
+            $arch->name = $name;
+            $arch->sex = $sex;
+            $arch->edu = $edu;
+            $arch->school = $school;
+            $arch->job = $job;
+            $arch->tel = $tel;
+            $arch->img = $img;
+            $arch->join_date = $join_date;
+            $arch->user_id = employee::where('ee_name',$name)->value('user_id');
+            $arch->save();
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
 
     }
 

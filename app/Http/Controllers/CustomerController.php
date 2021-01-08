@@ -89,4 +89,35 @@ class CustomerController extends Controller
             return $this->returnMessage($e->getMessage());
         }
     }
+
+    /**
+     * by you
+     * 客户修改
+     */
+    //todo 客户修改
+    public function customer_edit(){
+        try {
+            $id = $this->request->input('id');
+            $name = $this->request->input('com_name');
+            $faren = $this->request->input('leg_person');
+            $tell = $this->request->input('leg_tel');
+            $charge_man = $this->request->input('charge_man');
+            $charge_tel = $this->request->input('charge_tel');
+            $from = $this->request->input('from');
+
+            $cus = customer::find($id);
+            $cus->com_name = $name;
+            $cus->leg_person = $faren;
+            $cus->leg_tel = $tell;
+            $cus->charge_man = $charge_man;
+            $cus->charge_tel = $charge_tel;
+            $cus->from = $from;
+
+            $cus->save();
+            return $this->returnMessage('','ok');
+        }catch (\PDOException $E){
+            return $this->returnMessage('',$E->getMessage());
+        }
+    }
+
 }

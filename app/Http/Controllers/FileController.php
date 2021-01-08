@@ -125,4 +125,19 @@ class FileController extends Controller
         return $this->returnMessage();
     }
 
+    /**
+     * by you
+     * 员工档案图片上传
+     */
+    public function arch_img_add(){
+        $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
+        $img= $this->request->file('file')->move(env('APP_STORAGE').'arch',$img_name);
+        if ($img){
+            return $this->returnMessage([$img_name,env('APP_URL') . '/img/img/arch'.$img_name]);
+        }else{
+            return $this->returnMessage('','上传失败');
+        }
+
+    }
+
 }

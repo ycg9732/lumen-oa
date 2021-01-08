@@ -120,6 +120,8 @@ $router->get('/con_company','ContractController@con_company');
 $router->post('/supplier_img','FileController@supplier_img');
 //商品图片上传
 $router->post('/goods_img','FileController@goods_img');
+//员工档案图片上传
+$router->post('/arch_img_add','FileController@arch_img_add');
 //商品图片删除
 $router->get('/goods_img_delete','FileController@goods_img_delete');
 //excel导出测试
@@ -174,6 +176,16 @@ $router->get('/cat_select','GoodsController@cat_select');
 $router->get('/menu','MenuController@menu');
 //登录
 $router->get('/login','UserController@login');
+//员工档案添加
+$router->get('/arch_add','ArchivesController@arch_add');
+//员工档案删除
+$router->get('/arch_delete','ArchivesController@arch_delete');
+//员工档案详情
+$router->get('/arch_detail','ArchivesController@arch_detail');
+//员工档案列表
+$router->get('/arch_list','ArchivesController@arch_list');
+//员工档案修改
+$router->get('/arch_edit','ArchivesController@arch_edit');
 
 
 

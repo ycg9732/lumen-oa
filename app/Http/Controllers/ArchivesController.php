@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\archives;
 use App\Models\employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 use function Sodium\library_version_major;
 
@@ -96,8 +97,11 @@ class ArchivesController extends Controller
      */
     public function arch_detail(){
         $id = $this->request->input('id');
-        $arch = archives::find($id)->toArray();
-
+        $arch = archives::find($id)->get(['name','sex','edu','school','job','tel','id','user_id','join_date'])->first()->toArray();
+        $user = User::find($arch['user_id']);
+        $arch['user_name'] = $user->value('name');
+        $arch['password'] = $user->value('password');
+        return $this->returnMessage($arch);
     }
 
 }

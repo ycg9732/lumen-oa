@@ -34,6 +34,7 @@ class ArchivesController extends Controller
             $job = $this->request->input('job');
             $tel = $this->request->input('tel');
             $join_date = $this->request->input('join_date');
+            $img = $this->request->input('img');
             $arch = new archives();
             $arch->name = $name;
             $arch->sex = $sex;
@@ -41,6 +42,7 @@ class ArchivesController extends Controller
             $arch->school = $school;
             $arch->job = $job;
             $arch->tel = $tel;
+            $arch->img = $img;
             $arch->join_date = $join_date;
             $arch->user_id = employee::where('ee_name',$name)->value('user_id');
             $arch->save();

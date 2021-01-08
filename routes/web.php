@@ -134,6 +134,8 @@ $router->get('/supplier_img_edit','SupplierController@supplier_img_edit');
 $router->get('/customer_add','CustomerController@customer_add');
 //客户删除
 $router->get('/customer_delete','CustomerController@customer_delete');
+//客户修改
+$router->get('/customer_edit','CustomerController@customer_edit');
 //添加账号
 $router->get('/account_add','AccountController@account_add');
 //账号库删除

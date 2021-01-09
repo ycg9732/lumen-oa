@@ -23,7 +23,7 @@ class DepartmentController extends Controller
      *组织架构列表接口
      */
     public function de_list(Request $request){
-        //todo 分页
+        //todo 分页  根据公司（co_id）分类
         $currentPage = (int)$request->input('current_page','1');
         $perage = (int)$request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;

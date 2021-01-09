@@ -6,6 +6,11 @@ namespace App\Http\Controllers;
 
 class MenuController extends Controller
 {
+    /**
+     * by you
+     * @return array
+     */
+    //todo 待写入数据库menu
     public function menu(){
         $res = [
             ['title'=>'企业管理','path'=>'/company','icon'=>'dashboard'],

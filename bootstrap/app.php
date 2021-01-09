@@ -23,7 +23,7 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
- $app->withFacades();
+ $app->withFacades(true,['Illuminate\Support\Facades\Notification' => 'Notification',]);
 
  $app->withEloquent();
 
@@ -97,6 +97,7 @@ $app->configure('app');
  $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
  $app->register(Intervention\Image\ImageServiceProvider::class);
+ $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
  $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 // $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 

@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
 //        $date = supplier::get(['id',su_name','exp','zoon_time','food_time','sell_time','youji_time','geo_time','health_time','green_time']);
             $date = supplier::get(['su_name','exp','id','updated_at']);
             foreach ($date as $k => $v){
-                $have = $user->Notifications->where('data',$v['data'])->count();
-                if (!empty($v['exp']) and strtotime($v['exp']) <= time() and $have < 0){
+//                $have = $user->Notifications->where('data',$v['data'])->count();
+                if (!empty($v['exp']) and strtotime($v['exp']) <= time()){
                     $data = ['id' => $v['id'],'name' => $v['su_name'],'msg' => '营业执照到期','updated_at' => $v['updated_at']];
                     $user->notify(new notification($data));
                 }

@@ -40,6 +40,6 @@ class Kernel extends ConsoleKernel
                     $user->notify(new notification($data));
                 }
             }
-        })->dailyAt('1:00');
+        })->everyMinute();
     }
 }

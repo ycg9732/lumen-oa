@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function login(Request $request){
         if($request->has('name') && $request->has('password')){
-            $user = User::where('name', '=', $request->input('name'))->where('password', '=', $request->input('password'))->first();
+            $user = User::where('name', '=', $request->input('name'))->where('password', '=', sha1($this->salt.$request->input('password')))->first();
             $ee_name = $user->employer->ee_name;
             $img = archives::where('user_id',$user['id'])->value('img');
             if($user){
@@ -67,7 +67,19 @@ class UserController extends Controller
 //        $num = $user->Notifications->where('data',['id' => 1,'name' => 'sa','msg' => '营业执照到期'])->count();
         return $this->returnMessage('$num');
     }
-    public function user_info(){
 
+    /**
+     * by you
+     * 用户修改密码
+     */
+    public function user_info(){
+        $user_id = Auth::id();
+        $old_password = $this->request->input('old');
+        $new_password = $this->request->input('new');
+//        if (){
+//
+//        }else{
+//            return $this->returnMessage('','密码错误,请重新填写');
+//        }
     }
 }

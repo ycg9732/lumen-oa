@@ -26,6 +26,7 @@ class ArchivesController extends Controller
      * by you
      * 员工档案添加
      */
+    //todo 防止重复添加
     public function arch_add(){
         try {
             $name = $this->request->input('name');

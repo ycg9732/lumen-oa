@@ -154,6 +154,8 @@ $router->get('/supplier_detil','SupplierController@supplier_detil');
 $router->get('/supplier_excel','SupplierController@supplier_excel');
 //供应商删除
 $router->get('/supplier_delete','SupplierController@supplier_delete');
+//供应商证书日期检查
+//$router->get('/date_check','SupplierController@date_check');
 //供应商单选
 $router->get('/supplier_select','SupplierController@supplier_select');
 //客户列表
@@ -188,6 +190,12 @@ $router->get('/arch_detail','ArchivesController@arch_detail');
 $router->get('/arch_list','ArchivesController@arch_list');
 //员工档案修改
 $router->get('/arch_edit','ArchivesController@arch_edit');
+//消息通知
+$router->get('/read','UserController@read');
+//消息列表
+$router->get('/massage_list','UserController@massage_list');
+//员工档案图片删除
+$router->get('/arch_img_delete','FileController@arch_img_delete');
 
 
 

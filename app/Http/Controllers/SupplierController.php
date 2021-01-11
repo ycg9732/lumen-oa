@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\employee;
 use App\Models\supplier;
+use App\Models\User;
+use App\Notifications\notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -242,11 +244,11 @@ class SupplierController extends Controller
     }
 
     /**
-     * excel导出
+     * laravel-excel3导出
      * 图片文件不能重复
      * 取相关图片类的第一个图片文件展示
      */
-    //todo  需要优化存储图片的时候  每个图片类别 第一个图片强制为证书正面照
+    //todo  需要优化存储图片的时候  每个图片类别 第一个图片强制为证书正面照  或者要求只上传一个图片
     public function supplier_excel(){
         $su_id = $this->request->input('su_id');
         $sup_arr = [
@@ -405,4 +407,5 @@ class SupplierController extends Controller
             return $this->returnMessage($e->getMessage());
         }
     }
+
 }

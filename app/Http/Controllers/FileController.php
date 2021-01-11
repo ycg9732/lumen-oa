@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\archives;
 use App\Models\goods_cert;
 use App\Models\goods_img;
 use App\Models\supplier;
@@ -138,6 +139,22 @@ class FileController extends Controller
             return $this->returnMessage('','上传失败');
         }
 
+    }
+
+    /**
+     * by you
+     * 员工档案图片删除
+     */
+    public function arch_img_delete(){
+        $id = $this->request->input('id');
+        try {
+            $arch = archives::find($id);
+            $arch->img = null;
+            $arch->save();
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
 }

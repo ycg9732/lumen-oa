@@ -4,12 +4,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\archives;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
-
     private $salt;
     private $request;
     public function __construct(Request $request)
@@ -23,16 +25,49 @@ class UserController extends Controller
     public function login(Request $request){
         if($request->has('name') && $request->has('password')){
             $user = User::where('name', '=', $request->input('name'))->where('password', '=', $request->input('password'))->first();
+            $ee_name = $user->employer->ee_name;
+            $img = archives::where('user_id',$user['id'])->value('img');
             if($user){
                 $token = md5(uniqid(microtime(true),true));
                 $user->api_token = $token;
                 $user->save();
-                return $this->returnMessage(['token'=>$user->api_token],"登录成功");
+                return $this->returnMessage(['token'=>$user->api_token,'name'=>$ee_name,'img'=>env('APP_URL').'/img/img/arch/'.$img],"登录成功");
             }else{
                 return $this->returnMessage('','用户名或密码不正确,登录失败');
             }
         }else{
             return $this->returnMessage('','登录信息不完整,请输入用户名和密码');
         }
+    }
+
+    /**
+     * by you
+     * 消息详情
+     */
+    public function read(){
+////        $id = Auth::id();
+        $user = User::find(3);
+//        $unread_data = $user->unreadNotifications;
+//        $all_data = $user->Notifications;
+//        $datetime = new \DateTime;
+//        $datetime->format('Y-m-d H:i:s');
+////标记已读
+//        $user->unreadNotifications()->update(['read_at' => $datetime]);
+//        return $this->returnMessage(['unread'=>$unread_data,'all'=>$all_data]);
+
+//        $num = $user->Notifications->where('data','[json_encode(['id' => 1,'name' => 'sa','msg' => 'hhhh']]')->count();
+        return $this->returnMessage(['id' => 1,'name' => 'sa','msg' => 'hhhh']);
+    }
+
+    /**
+     * by you
+     * 消息列表
+     */
+    public function massage_list(){
+//        $num = $user->Notifications->where('data',['id' => 1,'name' => 'sa','msg' => '营业执照到期'])->count();
+        return $this->returnMessage('$num');
+    }
+    public function user_info(){
+
     }
 }

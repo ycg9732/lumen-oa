@@ -70,7 +70,7 @@ class ProjectController extends Controller
             if (!empty($proj['proj_img'])){
                 $img = explode(',',$proj['proj_img']);
                 foreach ($img as $k1){
-                    $proj['img'][] = env('APP_URL').'img/img/'.$k1;
+                    $proj['img'][] = env('APP_URL').'/img/img/'.$k1;
                 }
             }
         return $this->returnMessage($proj);

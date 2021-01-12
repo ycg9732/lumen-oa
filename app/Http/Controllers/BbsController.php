@@ -28,8 +28,6 @@ class BbsController extends Controller
         $content = $this->request->input('content');
         $ower = $this->request->input('bbs_ower');
         $co_id = $this->request->input('co_id');
-        return var_dump($co_id);
-
         try {
             DB::transaction(function ()use ($name,$content,$ower,$co_id){
                 $bbs = new bbs;
@@ -38,11 +36,11 @@ class BbsController extends Controller
                 $bbs->bbs_ower = $ower;
                 $bbs->save();
                 $bbs_id = $bbs->id;
-                $new_co_id = str_replace('[','',$co_id);
-                $l_co_id = str_replace(']','',$new_co_id);
-                $co_ids = explode(',',$l_co_id);
+//                $new_co_id = str_replace('[','',$co_id);
+//                $l_co_id = str_replace(']','',$new_co_id);
+//                $co_ids = explode(',',$l_co_id);
                 //插入多对多关联表
-                foreach ($co_ids as $v){
+                foreach ($co_id as $v){
                     $bbs_co = new bbs_company();
                     $bbs_co->bbs_id = $bbs_id;
                     $bbs_co->co_id = $v;

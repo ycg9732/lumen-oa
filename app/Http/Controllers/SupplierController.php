@@ -233,6 +233,7 @@ class SupplierController extends Controller
     /**
      * 删除
      */
+    //todo 图片删除问题
     public function supplier_delete(){
         $id = $this->request->input('id');
         $ids = explode(',',$id);

@@ -123,8 +123,8 @@ class ArchivesController extends Controller
      */
     public function arch_detail(){
         $id = $this->request->input('id');
-        $arch = archives::find($id)->get(['name','sex','edu','school','job','tel','id','user_id','join_date'])->first()->toArray();
-        $user = User::find($arch['user_id']);
+        $arch = archives::where('id',$id)->get(['name','sex','edu','school','job','tel','id','user_id','join_date'])->first()->toArray();
+        $user = User::where('id',($arch['user_id']));
         $arch['user_name'] = $user->value('name');
         $arch['password'] = $user->value('password');
         return $this->returnMessage($arch);

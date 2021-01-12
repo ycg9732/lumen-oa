@@ -176,6 +176,8 @@ $router->get('/goods_edit','GoodsController@goods_edit');
 $router->get('/goods_detail','GoodsController@goods_detail');
 //商品选择分类
 $router->get('/cat_select','GoodsController@cat_select');
+//商品搜索
+$router->get('/goods_search','GoodsController@goods_search');
 //菜单
 $router->get('/menu','MenuController@menu');
 //登录

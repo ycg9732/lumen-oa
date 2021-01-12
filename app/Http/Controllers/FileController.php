@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\archives;
 use App\Models\goods_cert;
 use App\Models\goods_img;
+use App\Models\project;
 use App\Models\supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -155,6 +156,31 @@ class FileController extends Controller
         }catch (\PDOException $e){
             return $this->returnMessage($e->getMessage());
         }
+    }
+
+    /**
+     * by you
+     * 项目管理图片删除
+     */
+    public function proj_img_delete(){
+        $img_name = $this->request->input('img_name');
+        $id = $this->request->input('id');
+        $img = project::where('id',$id)->value('proj_img');
+        $leg = strlen($img_name);
+        $count=strpos($img,$img_name);
+        if ($count == 0){
+            $str = substr_replace($img,"",$count,$leg+1);
+            $re = project::find($id);
+            $re->proj_img = $str;
+            $re->save();
+        }else{
+            $str1 = substr_replace($img,"",$count-1,$leg+1);;
+            $re1 = project::find($id);
+            $re1->proj_img = $str1;
+            $re1->save();
+        }
+        return $this->returnMessage();
+
     }
 
 }

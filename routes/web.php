@@ -130,6 +130,8 @@ $router->post('/goods_img','FileController@goods_img');
 $router->post('/arch_img_add','FileController@arch_img_add');
 //商品图片删除
 $router->get('/goods_img_delete','FileController@goods_img_delete');
+//项目图片删除
+$router->get('/proj_img_delete','FileController@proj_img_delete');
 //excel导出测试
 $router->get('/excel','FileController@excel');
 //供应商添加

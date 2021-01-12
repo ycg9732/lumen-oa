@@ -235,8 +235,9 @@ class SupplierController extends Controller
      */
     public function supplier_delete(){
         $id = $this->request->input('id');
+        $ids = explode(',',$id);
         try {
-            supplier::destroy($id);
+            supplier::destroy($ids);
             return $this->returnMessage();
         }catch (\PDOException $e){
             return $this->returnMessage($e->getMessage());

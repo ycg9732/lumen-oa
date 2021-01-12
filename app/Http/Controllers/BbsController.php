@@ -60,6 +60,7 @@ class BbsController extends Controller
         return $this->returnMessage($bbs);
 
     }
+    //todo bbs列表需要修改
     public function bbs_list(){
         $co_id = $this->request->input('co_id');
         if ($co_id){
@@ -67,6 +68,20 @@ class BbsController extends Controller
             return $this->returnMessage($bbs_list);
         }else{
             return $this->returnMessage('','公司不能为空');
+        }
+    }
+
+    /**
+     * by you
+     * 公告删除
+     */
+    public function bbs_delete(){
+        $id = $this->request->input('id');
+        try {
+            bbs::destroy($id);
+            return $this->returnMessage();
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
         }
     }
 }

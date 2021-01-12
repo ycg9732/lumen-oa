@@ -80,6 +80,8 @@ $router->post('/add_bbs','BbsController@add_bbs');
 $router->get('/see_bbs','BbsController@see_bbs');
 //公告列表
 $router->get('/bbs_list','BbsController@bbs_list');
+//公告删除
+$router->get('/bbs_delete','BbsController@bbs_delete');
 //组织关系图
 $router->get('/de_tree','DepartmentController@de_tree');
 //添加项目
@@ -104,7 +106,7 @@ $router->post('/upload_img','FileController@upload_img');
 $router->get('/delete_img','FileController@delete_img');
 //领导列表
 $router->get('/lead_list','ContractController@lead_list');
-//公告删除
+//项目删除
 $router->get('/proj_delete','ProjectController@proj_delete');
 //添加角色
 $router->get('/role_add','RoleController@role_add');

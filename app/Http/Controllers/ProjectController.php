@@ -66,7 +66,13 @@ class ProjectController extends Controller
      */
     public function proj_detil(){
         $proj_id = $this->request->input('proj_id');
-        $proj = project::find($proj_id);
+        $proj = project::find($proj_id)->where('id',$proj_id)->first()->toArray();
+            if (!empty($proj['proj_img'])){
+                $img = explode(',',$proj['proj_img']);
+                foreach ($img as $k1){
+                    $proj['img'][] = env('APP_URL').'img/img/'.$k1;
+                }
+            }
         return $this->returnMessage($proj);
     }
 

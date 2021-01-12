@@ -28,6 +28,8 @@ class BbsController extends Controller
         $content = $this->request->input('content');
         $ower = $this->request->input('bbs_ower');
         $co_id = $this->request->input('co_id');
+        return $co_id;
+
         try {
             DB::transaction(function ()use ($name,$content,$ower,$co_id){
                 $bbs = new bbs;

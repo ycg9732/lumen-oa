@@ -29,6 +29,14 @@ class ArchivesController extends Controller
     public function arch_add(){
         try {
             $name = $this->request->input('name');
+            $has = archives::where('name',$name)->first();
+            if ($has){
+                return $this->returnMessage('','员工档案已经存在');
+            }
+            $has_ee = employee::where('ee_name',$name)->value('user_id');
+            if (!$has_ee){
+                return $this->returnMessage('','，没有匹配到改员工的信息');
+            }
             $sex = $this->request->input('sex');
             $edu = $this->request->input('edu');
             $school = $this->request->input('school');

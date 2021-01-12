@@ -59,11 +59,12 @@ class ArchivesController extends Controller
      * 员工档案列表
      */
     public function arch_list(){
-
+        $co_id = $this->request->input('co_id');
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $arch_list = archives::skip($limitprame)->take($perage)->get()->toArray();
+        $user_id = employee::where('co_id',$co_id)->pluck('user_id');
+        $arch_list = archives::skip($limitprame)->take($perage)->whereIn('user_id',$user_id)->get()->toArray();
         $su_count = archives::all()->count();
         $all = ceil($su_count/$perage);
         return $this->returnMessage($arch_list);

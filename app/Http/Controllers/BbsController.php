@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\bbs;
 use App\Models\bbs_company;
+use App\Models\company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,11 +61,17 @@ class BbsController extends Controller
         return $this->returnMessage($bbs);
 
     }
-    //todo bbs列表需要修改
+
+    /**
+     * by you
+     * @return array
+     * 列表
+     */
     public function bbs_list(){
         $co_id = $this->request->input('co_id');
         if ($co_id){
-            $bbs_list = bbs::where('co_id',$co_id)->get();
+            $company = company::find($co_id);
+            $bbs_list = $company->bbs;
             return $this->returnMessage($bbs_list);
         }else{
             return $this->returnMessage('','公司不能为空');

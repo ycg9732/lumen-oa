@@ -74,6 +74,10 @@ class EmployeeController extends Controller
                     $employee->ee_name = $request->input('ee_name');
                     $employee->co_id = $request->input('co_id');
                     $employee->dept_id = $request->input('dept_id');
+                    $employee->ee_name = $request->input('ee_name');
+                    $employee->job = $request->input('job');
+                    $employee->sex = $request->input('sex');
+                    $employee->tel = $request->input('tel');
                     $employee->user_id = $user_id;
                     $employee->save();
                     $role_id = $request->input('role_id');

@@ -23,13 +23,15 @@ class RoleController extends Controller
     public function role_add(){
         $name = $this->request->input('role_name');
         $p_id = $this->request->input('p_id');
+        $describe = $this->request->input('describe');
         if (!$p_id){
             return $this->returnMessage('','请选择角色的权限');
         }
         try {
-            DB::transaction(function ()use ($name,$p_id){
+            DB::transaction(function ()use ($name,$p_id,$describe){
                 $role = new role();
                 $role->role_name = $name;
+                $role->describe = $describe;
                 $role->save();
                 $role_id = $role->id;
                 if ($p_id){
@@ -94,5 +96,23 @@ class RoleController extends Controller
             return $this->returnMessage('',$e);
         }
 
+    }
+
+    /**
+     * by you
+     * 角色信息编辑
+     */
+    public function role_info_edit(){
+
+    }
+
+    /**
+     * by you
+     * 角色信息详情
+     */
+    public function role_info_detail(){
+        $id = $this->request->input('id');
+        $info = role::find($id);
+        return $this->returnMessage($info);
     }
 }

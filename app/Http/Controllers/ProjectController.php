@@ -20,6 +20,9 @@ class ProjectController extends Controller
      */
     public function proj_add(){
         //todo 检测是否重复 待做
+        if (empty($this->request->input('co_id'))){
+            return $this->returnMessage('','请选择项目所属公司');
+        }
         $name = $this->request->input('proj_name');
         $state = $this->request->input('proj_state');
         $sum = $this->request->input('proj_sum');

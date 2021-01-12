@@ -30,7 +30,7 @@ class company extends Model
     }
 
     public function bbs(){
-        return $this->hasMany(bbs::class,'co_id','id');
+        return $this->belongsToMany(bbs::class,'bbs_company','co_id','bbs_id');
     }
 
     /**

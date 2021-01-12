@@ -243,7 +243,7 @@ class GoodsController extends Controller
      */
     public function goods_search(Request $request){
         $name = $request->input('good_name');
-        $co_list = goods::where('co_name','like','%'.$name.'%')->get();
+        $co_list = goods::where('title','like','%'.$name.'%')->get();
         return $this->returnMessage($co_list);
 
     }

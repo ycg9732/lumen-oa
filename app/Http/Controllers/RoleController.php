@@ -124,4 +124,20 @@ class RoleController extends Controller
         $info = role::find($id);
         return $this->returnMessage($info);
     }
+
+    /**
+     * by you
+     * 角色所有的权限
+     */
+    public function role_permission(){
+        $role_id = $this->request->input('role_id');
+        $role = role::find($role_id);
+        $permission = $role->permission;
+        $result = [];
+        foreach ($permission as $k => $v){
+            $result[$k]['id'] = $v['id'];
+            $result[$k]['p_name'] = $v['p_name'];
+        }
+        return $this->returnMessage($result);
+    }
 }

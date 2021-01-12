@@ -110,6 +110,8 @@ $router->get('/lead_list','ContractController@lead_list');
 $router->get('/proj_delete','ProjectController@proj_delete');
 //添加角色
 $router->get('/role_add','RoleController@role_add');
+//角色所有的权限
+$router->get('/role_permission','RoleController@role_permission');
 //角色详情
 $router->get('/role_info_detail','RoleController@role_info_detail');
 //角色编辑

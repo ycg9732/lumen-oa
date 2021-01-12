@@ -59,10 +59,11 @@ class CustomerController extends Controller
      * 客户列表
      */
     public function customer_list(){
+        $co_id = $this->request->input('co_id');
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $customer_list = customer::skip($limitprame)->take($perage)->get(['com_name','user_id','created_at','charge_man','id']);
+        $customer_list = customer::skip($limitprame)->take($perage)->where('co_id',$co_id)->get(['com_name','user_id','created_at','charge_man','id']);
         $su_count = customer::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($customer_list as $sup){

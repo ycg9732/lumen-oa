@@ -110,14 +110,14 @@ class GoodsController extends Controller
      */
     public function goods_delete(){
         try {
-            $id = $this->request->input('good_id');
+            $id = explode(',',$this->request->input('good_id'));
             DB::transaction(function () use ($id){
                 goods::destroy($id);
-                $img = goods_img::where('good_id',$id);
+                $img = goods_img::whereIn('good_id',$id);
                 if (!empty($img)){
                     $img->delete();
                 }
-                $cert = goods_cert::where('good_id',$id);
+                $cert = goods_cert::whereIn('good_id',$id);
                 if (!empty($cert)){
                     $cert->delete();
                 }

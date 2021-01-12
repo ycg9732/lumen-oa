@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 
 
 use App\Models\employee;
+use App\Models\permission;
 use App\Models\role;
+use App\Models\role_permission;
 use App\Models\User;
+use App\Models\user_role;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -156,11 +159,17 @@ class ContractController extends Controller
     }
     /**
      *领导列表
-     * 为管理员的员工
+     * 拥有审批合同权限的员工
      */
     public function lead_list(){
+        $permission_id = permission::where('p_name','合同审批')->value('id');
+        if(empty($permission_id)){
+            return $this->returnMessage('','系统没有添加“合同审批”权限');
+        }
+        $role_id = role_permission::where('p_id',$permission_id)->pluck('role_id');
+        $user_id = user_role::whereIn('role_id',$role_id)->pluck('user_id');
         $co_id = $this->request->input('co_id');
-        $admin_user = role::find(1)->user->toArray();
+        $admin_user = User::findMany($user_id)->toArray();
         $id = [];
         foreach ($admin_user as $k){
             $id[] = $k['id'];

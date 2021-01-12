@@ -22,10 +22,6 @@ class BbsController extends Controller
     //todo 新建消息类型 添加成功后需要生成相应的用户消息
     public function add_bbs(){
         $name = $this->request->input('name');
-        $num = bbs::where('bbs_name',$name)->count();
-        if ($num > 0){
-            return $this->returnMessage('','名称相同：公告已经存在');
-        }
         $content = $this->request->input('content');
         $ower = $this->request->input('bbs_ower');
         $co_id = $this->request->input('co_id');

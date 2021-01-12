@@ -50,7 +50,9 @@ class DepartmentController extends Controller
         }else{
             $department = new department;
             $department->dept_name = $request->input('de_name');
-            $department->pid = $request->input('pid');
+            if (!empty($request->input('pid'))){
+                $department->pid = $request->input('pid');
+            }
             $department->co_id = $request->input('co_id');
             $department->save();
             return $this->returnMessage('','ok');

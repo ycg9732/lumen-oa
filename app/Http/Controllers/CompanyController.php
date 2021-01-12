@@ -45,8 +45,8 @@ class CompanyController extends Controller
     public function co_add(Request $request){
         $code = company::where('co_code',$request->input('co_code'))->count();
         if ($code > 0){
-            return 'company exist';
-        }else{
+            return $this->returnMessage('','company exist');
+        }else {
             $company = new company;
             $company->co_name = $request->input('co_name');
             $company->co_code = $request->input('co_code');
@@ -94,7 +94,8 @@ class CompanyController extends Controller
      * 删除接口
      */
     public function co_delete(Request $request){
-        $id = $request->input('id');try {
+        $id = $request->input('id');
+        try {
             DB::transaction(function () use ($id){
                 company::destroy($id);
                 //todo 关联删除

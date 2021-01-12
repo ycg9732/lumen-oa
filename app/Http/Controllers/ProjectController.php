@@ -81,12 +81,11 @@ class ProjectController extends Controller
      */
     public function proj_edit(){
         $proj_id = $this->request->input('proj_id');
-
         $name = $this->request->input('proj_name');
         $state = $this->request->input('proj_state');
         $sum = $this->request->input('proj_sum');
         $order = $this->request->input('proj_order');
-//        $co_id = $this->request->input('co_id');
+        $co_id = $this->request->input('co_id');
         $img_name = $this->request->input('proj_img');
         $member = $this->request->input('proj_member');
 //        $has_file = $this->request->hasFile('proj_img');

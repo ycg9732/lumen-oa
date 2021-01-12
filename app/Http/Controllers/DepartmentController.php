@@ -75,6 +75,8 @@ class DepartmentController extends Controller
         try {
             DB::transaction(function () use ($id){
                 department::destroy($id);
+                employee::where('dept_id',$id)
+                ->update(['dept_id' => null]);
             },2);
             return $this->returnMessage('','ok');
         }catch (\PDOException $e){

@@ -23,11 +23,11 @@ class DepartmentController extends Controller
      *组织架构列表接口
      */
     public function de_list(Request $request){
-        //todo 分页  根据公司（co_id）分类
+        $co_id = $request->input('co_id');
         $currentPage = (int)$request->input('current_page','1');
         $perage = (int)$request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $de_list = department::skip($limitprame)->take($perage)->get();
+        $de_list = department::skip($limitprame)->where('co_id',$co_id)->take($perage)->get();
         $de_count = department::all()->count();
         $all = ceil($de_count/$perage);
         return $this->returnMessage($de_list);

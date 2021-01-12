@@ -36,9 +36,6 @@ class BbsController extends Controller
                 $bbs->bbs_ower = $ower;
                 $bbs->save();
                 $bbs_id = $bbs->id;
-//                $new_co_id = str_replace('[','',$co_id);
-//                $l_co_id = str_replace(']','',$new_co_id);
-//                $co_ids = explode(',',$l_co_id);
                 //插入多对多关联表
                 foreach ($co_id as $v){
                     $bbs_co = new bbs_company();

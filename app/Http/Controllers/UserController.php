@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\archives;
+use App\Models\company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +27,14 @@ class UserController extends Controller
         if($request->has('name') && $request->has('password')){
             $user = User::where('name', '=', $request->input('name'))->where('password', '=', sha1($this->salt.$request->input('password')))->first();
             $ee_name = $user->employer->ee_name;
+            $co_id = $user->employer->co_id;
+            $co_name = company::where('id',$co_id)->value('co_name');
             $img = archives::where('user_id',$user['id'])->value('img');
             if($user){
                 $token = md5(uniqid(microtime(true),true));
                 $user->api_token = $token;
                 $user->save();
-                return $this->returnMessage(['token'=>$user->api_token,'name'=>$ee_name,'img'=>env('APP_URL').'/img/img/arch/'.$img],"登录成功");
+                return $this->returnMessage(['token'=>$user->api_token,'name'=>$ee_name,'img'=>env('APP_URL').'/img/img/arch/'.$img,'company' => $co_name],"登录成功");
             }else{
                 return $this->returnMessage('','用户名或密码不正确,登录失败');
             }

@@ -101,18 +101,36 @@ class EmployeeController extends Controller
      *修改详情
      */
     public function ee_edit(Request $request){
-        $ee_id = $request->input('ee_id');
-        $employee = employee::find($ee_id);
-        $employee->ee_name = $request->input('ee_name');
-        $employee->id_card = $request->input('id_card');
-        $employee->sex = $request->input('sex');
-        $employee->job = $request->input('job');
-        $employee->tel = $request->input('tel');
-        $employee->address = $request->input('address');
-        $employee->user_name = $request->input('user_name');
-        $employee->password = sha1($request->input('password'));
-        $employee->save();
-        return $this->returnMessage('','ok');
+        try {
+            DB::transaction(function () use ($request){
+                $ee_id = $request->input('ee_id');
+                $employee = employee::find($ee_id);
+                $employee->ee_name = $request->input('ee_name');
+                $employee->sex = $request->input('sex');
+                $employee->job = $request->input('job');
+                $employee->tel = $request->input('tel');
+                $employee->address = $request->input('address');
+                $employee->save();
+                $user_name = $request->input('user_name');
+                $password = $request->input('password');
+                $role_id = $request->input('role_id');
+                //修改用户名密码
+                if (!empty($user_name) or !empty($password)){
+                    $user = User::find($employee->first()->value('user_id'));
+                    $user->name = $user_name;
+                    $user->password = sha1('userloginregister'.$password);
+                    $user->save();
+                }
+                //修改角色
+                if (!empty($role_id)){
+                    $ids = explode(',',$role_id);
+                    $user->role()->sync($ids);
+                }
+            },2);
+            return $this->returnMessage('','ok');
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
     /**
      * 删除

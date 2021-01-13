@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\menu;
 use App\Models\permission;
 use App\Models\role;
 use App\Models\role_permission;
@@ -131,27 +132,32 @@ class RoleController extends Controller
      */
     public function role_permission(){
         $role_id = $this->request->input('role_id');
-        $role = role::find($role_id);
-        $has_permission = $role->permission;
-        $has = [];
-        $has_id = [];
-        foreach ($has_permission as $k => $v){
-            $has[$k]['id'] = $v['id'];
-            $has_id[] = $v['id'];
-            $has[$k]['p_name'] = $v['p_name'];
-            $p = permission::find($v['id']);
-            $has[$k]['menu'] = $p->menu->menu_name;
+        $menu = menu::all();
+        $re = [];
+        foreach ($menu as $k => $v){
+            $re[$v['menu_name']] = [];
+            $role = role::find($role_id);
+            $has_permission = $role->permission->where('menu_id',$k);
+            $has = [];
+            $has_id = [];
+            foreach ($has_permission as $k1 => $v1){
+                $has[$k1]['id'] = $v1['id'];
+                $has_id[] = $v1['id'];
+                $has[$k1]['p_name'] = $v1['p_name'];
+//                $p = permission::find($v['id']);
+//                $has[$k]['menu'] = $p->menu->menu_name;
+            }
+            $without_p = permission::where('menu_id',$k)->whereNotIn('id',$has_id)->get();
+            $without = [];
+            foreach ($without_p as $k2 => $v2){
+                $without[$k2]['id'] = $v2['id'];
+                $without[$k2]['p_name'] = $v2['p_name'];
+//                $p = permission::find($v['id']);
+//                $without[$k]['menu'] = $p->menu->menu_name;
+            }
+            $re[$v['menu_name']]['has'] = $has;
+            $re[$v['menu_name']]['without'] = $without;
         }
-        $without_p = permission::whereNotIn('id',$has_id)->get();
-        $without = [];
-        foreach ($without_p as $k => $v){
-            $without[$k]['id'] = $v['id'];
-            $without[$k]['p_name'] = $v['p_name'];
-            $p = permission::find($v['id']);
-            $without[$k]['menu'] = $p->menu->menu_name;
-        }
-        $re['has'] = $has;
-        $re['without'] = $without;
         return $this->returnMessage($re);
     }
 

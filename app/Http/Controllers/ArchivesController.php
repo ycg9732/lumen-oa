@@ -142,8 +142,12 @@ class ArchivesController extends Controller
      * 供前台模糊查询
      */
     public function all_name(){
-        $name = employee::all()->pluck('ee_name');
-        return $this->returnMessage($name);
+        $name = employee::all()->pluck('ee_name')->toArray();
+        $re = [];
+        foreach ($name as $k => $v){
+            $re[] = ['value'=> $v];
+        }
+        return $this->returnMessage($re);
     }
 
 }

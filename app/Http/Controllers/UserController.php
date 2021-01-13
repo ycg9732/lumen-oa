@@ -26,11 +26,11 @@ class UserController extends Controller
     public function login(Request $request){
         if($request->has('name') && $request->has('password')){
             $user = User::where('name', '=', $request->input('name'))->where('password', '=', sha1($this->salt.$request->input('password')))->first();
-            $ee_name = $user->employer->ee_name;
-            $co_id = $user->employer->co_id;
-            $co_name = company::where('id',$co_id)->value('co_name');
-            $img = archives::where('user_id',$user['id'])->value('img');
             if($user){
+                $ee_name = $user->employer->ee_name;
+                $co_id = $user->employer->co_id;
+                $co_name = company::where('id',$co_id)->value('co_name');
+                $img = archives::where('user_id',$user['id'])->value('img');
                 $token = md5(uniqid(microtime(true),true));
                 $user->api_token = $token;
                 $user->save();

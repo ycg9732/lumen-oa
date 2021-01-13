@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -53,9 +54,28 @@ class ProjectController extends Controller
      */
     public function proj_list(){
         $co_id = $this->request->input('co_id');
+        $date = $this->request->input('date');
         if ($co_id){
-            $proj_list = project::where('co_id',$co_id)->get();
-            return $this->returnMessage($proj_list);
+            switch ($date){
+                case 0:
+                    $start = Carbon::now()->startOfDay();
+                    $end = Carbon::now()->endOfDay();
+                    $proj_list = project::where('co_id',$co_id)->whereBetween('created_at',[$start,$end])->get();
+                    return $this->returnMessage($proj_list);
+                case 1:
+                    $start = Carbon::now()->startOfMonth();
+                    $end = Carbon::now()->endOfMonth();
+                    $proj_list = project::where('co_id',$co_id)->whereBetween('created_at',[$start,$end])->get();
+                    return $this->returnMessage($proj_list);
+                case 2:
+                    $start = Carbon::now()->startOfYear();
+                    $end = Carbon::now()->endOfYear();
+                    $proj_list = project::where('co_id',$co_id)->whereBetween('created_at',[$start,$end])->get();
+                    return $this->returnMessage($proj_list);
+                default:
+                    $proj_list = project::where('co_id',$co_id)->get();
+                    return $this->returnMessage($proj_list);
+            }
         }
         $proj_list = project::all();
         return $this->returnMessage($proj_list);

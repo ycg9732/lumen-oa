@@ -127,17 +127,40 @@ class RoleController extends Controller
 
     /**
      * by you
-     * 角色所有的权限
+     * 角色界面权限数据
      */
     public function role_permission(){
         $role_id = $this->request->input('role_id');
         $role = role::find($role_id);
-        $permission = $role->permission;
-        $result = [];
-        foreach ($permission as $k => $v){
-            $result[$k]['id'] = $v['id'];
-            $result[$k]['p_name'] = $v['p_name'];
+        $has_permission = $role->permission;
+        $has = [];
+        $has_id = [];
+        foreach ($has_permission as $k => $v){
+            $has[$k]['id'] = $v['id'];
+            $has_id[] = $v['id'];
+            $has[$k]['p_name'] = $v['p_name'];
+            $p = permission::find($v['id']);
+            $has[$k]['menu'] = $p->menu->menu_name;
         }
-        return $this->returnMessage($result);
+        $without_p = permission::whereNotIn('id',$has_id)->get();
+        $without = [];
+        foreach ($without_p as $k => $v){
+            $without[$k]['id'] = $v['id'];
+            $without[$k]['p_name'] = $v['p_name'];
+            $p = permission::find($v['id']);
+            $without[$k]['menu'] = $p->menu->menu_name;
+        }
+        $re['has'] = $has;
+        $re['without'] = $without;
+        return $this->returnMessage($re);
+    }
+
+    /**
+     * by you
+     * 系统所有的权限
+     */
+    public function all_permission(){
+        $p = permission::get(['id','p_name']);
+        return $this->returnMessage($p);
     }
 }

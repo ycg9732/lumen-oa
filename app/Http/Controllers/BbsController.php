@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\bbs;
 use App\Models\bbs_company;
 use App\Models\company;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -65,10 +66,32 @@ class BbsController extends Controller
      */
     public function bbs_list(){
         $co_id = $this->request->input('co_id');
+        $date = $this->request->input('date');
         if ($co_id){
-            $company = company::find($co_id);
-            $bbs_list = $company->bbs;
-            return $this->returnMessage($bbs_list);
+            switch ($date){
+                case 0:
+                    $start = Carbon::now()->startOfDay();
+                    $end = Carbon::now()->endOfDay();
+                    $company = company::find($co_id);
+                    $bbs_list = $company->bbs->whereBetween('created_at',[$start,$end]);
+                    return $this->returnMessage($bbs_list);
+                case 1:
+                    $start = Carbon::now()->startOfMonth();
+                    $end = Carbon::now()->endOfMonth();
+                    $company = company::find($co_id);
+                    $bbs_list = $company->bbs->whereBetween('created_at',[$start,$end]);
+                    return $this->returnMessage($bbs_list);
+                case 3:
+                    $start = Carbon::now()->startOfYear();
+                    $end = Carbon::now()->endOfYear();
+                    $company = company::find($co_id);
+                    $bbs_list = $company->bbs->whereBetween('created_at',[$start,$end]);
+                    return $this->returnMessage($bbs_list);
+                default:
+                    $company = company::find($co_id);
+                    $bbs_list = $company->bbs;
+                    return $this->returnMessage($bbs_list);
+            }
         }else{
             return $this->returnMessage('','公司不能为空');
         }

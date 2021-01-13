@@ -25,7 +25,6 @@ class ArchivesController extends Controller
      * by you
      * 员工档案添加
      */
-    //todo 防止重复添加
     public function arch_add(){
         try {
             $name = $this->request->input('name');
@@ -136,6 +135,15 @@ class ArchivesController extends Controller
         $arch['user_name'] = $user->value('name');
         $arch['password'] = $user->value('password');
         return $this->returnMessage($arch);
+    }
+
+    /**
+     * by you
+     * 供前台模糊查询
+     */
+    public function all_name(){
+        $name = employee::all()->pluck('ee_name');
+        return $this->returnMessage($name);
     }
 
 }

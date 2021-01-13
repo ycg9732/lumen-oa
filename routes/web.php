@@ -194,6 +194,8 @@ $router->get('/menu','MenuController@menu');
 $router->get('/login','UserController@login');
 //员工档案添加
 $router->get('/arch_add','ArchivesController@arch_add');
+//员工姓名库
+$router->get('/all_name','ArchivesController@all_name');
 //员工档案删除
 $router->get('/arch_delete','ArchivesController@arch_delete');
 //员工档案详情

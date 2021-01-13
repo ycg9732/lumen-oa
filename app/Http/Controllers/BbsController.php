@@ -68,11 +68,6 @@ class BbsController extends Controller
         $co_id = $this->request->input('co_id');
         $date = $this->request->input('date');
         if ($co_id){
-            if (!$date){
-                $company = company::find($co_id);
-                $bbs_list = $company->bbs;
-                return $this->returnMessage($bbs_list);
-            }
             switch ($date){
                 case 0:
                     $start = Carbon::now()->startOfDay();

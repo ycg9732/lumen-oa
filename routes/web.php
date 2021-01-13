@@ -118,6 +118,8 @@ $router->get('/role_info_detail','RoleController@role_info_detail');
 $router->get('/role_info_edit','RoleController@role_info_edit');
 //删除角色
 $router->get('/role_delete','RoleController@role_delete');
+//系统所有的权限
+$router->get('/all_permission','RoleController@all_permission');
 //角色权限修改
 $router->get('/role_change_permission','RoleController@role_change_permission');
 //添加权限

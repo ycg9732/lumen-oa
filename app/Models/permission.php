@@ -12,4 +12,8 @@ class permission extends \Illuminate\Database\Eloquent\Model
         return $this->belongsToMany(role::class,'role_permission','p_id','role_id');
     }
 
+    public function menu(){
+        return $this->belongsTo(menu::class,'menu_id','id');
+    }
+
 }

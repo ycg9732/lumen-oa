@@ -165,7 +165,10 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->get('/con_access','ContractController@con_access');
     //商品添加
     $router->get('/goods_add','GoodsController@goods_add');
-
+    //消息通知
+    $router->get('/read','UserController@read');
+    //消息数量
+    $router->get('/message_num','UserController@message_num');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');
@@ -211,10 +214,6 @@ $router->get('/arch_detail','ArchivesController@arch_detail');
 $router->get('/arch_list','ArchivesController@arch_list');
 //员工档案修改
 $router->get('/arch_edit','ArchivesController@arch_edit');
-//消息通知
-$router->get('/read','UserController@read');
-//消息列表
-$router->get('/massage_list','UserController@massage_list');
 //员工档案图片删除
 $router->get('/arch_img_delete','FileController@arch_img_delete');
 

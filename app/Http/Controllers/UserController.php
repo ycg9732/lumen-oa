@@ -50,15 +50,15 @@ class UserController extends Controller
      * 消息详情
      */
     public function read(){
-////        $id = Auth::id();
+//        $id = Auth::id();
         $user = User::find(3);
-//        $unread_data = $user->unreadNotifications;
-//        $all_data = $user->Notifications;
-//        $datetime = new \DateTime;
-//        $datetime->format('Y-m-d H:i:s');
-////标记已读
-//        $user->unreadNotifications()->update(['read_at' => $datetime]);
-//        return $this->returnMessage(['unread'=>$unread_data,'all'=>$all_data]);
+        $unread_data = $user->unreadNotifications;
+        $all_data = $user->Notifications;
+        $datetime = new \DateTime;
+        $datetime->format('Y-m-d H:i:s');
+//标记已读
+        $user->unreadNotifications()->update(['read_at' => $datetime]);
+        return $this->returnMessage(['unread'=>$unread_data,'all'=>$all_data]);
 
 //        $num = $user->Notifications->where('data','[json_encode(['id' => 1,'name' => 'sa','msg' => 'hhhh']]')->count();
         return $this->returnMessage(['id' => 1,'name' => 'sa','msg' => 'hhhh']);
@@ -66,11 +66,20 @@ class UserController extends Controller
 
     /**
      * by you
-     * 消息列表
+     * 用户未读消息总数
      */
-    public function massage_list(){
-//        $num = $user->Notifications->where('data',['id' => 1,'name' => 'sa','msg' => '营业执照到期'])->count();
-        return $this->returnMessage('$num');
+    public function message_num(){
+        $user = Auth::user();
+        $num = $user->unreadNotifications->count();
+        return $this->returnMessage($num);
+    }
+
+    /**
+     * by you
+     * 标记消息为已读
+     */
+    public function mark_message(){
+
     }
 
     /**

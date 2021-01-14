@@ -9,6 +9,7 @@ use App\Models\company;
 use App\Models\department;
 use App\Models\employee;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,8 +59,8 @@ class UserController extends Controller
             foreach ($msg as $k => $v){
                 $re[] = $v['data'];
             }
-//
-            $user->unreadNotifications()->update(['read_at' => now()]);
+//   标记为已读
+            $user->unreadNotifications()->update(['read_at' => Carbon::now()]);
             return $this->returnMessage($re);
         }elseif($read == 1){
             $msg = $user->readNotifications;

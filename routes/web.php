@@ -159,7 +159,7 @@ $router->get('/supplier_list','SupplierController@supplier_list');
 
 $router->group(['middleware' => 'auth'],function () use ($router){
 //修改密码
-$router->get('/change_password','UserController@change_password');
+$router->post('/change_password','UserController@change_password');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');

@@ -157,6 +157,7 @@ $router->get('/account_edit','AccountController@account_edit');
 //供应商列表 增加登录认证
 $router->get('/supplier_list','SupplierController@supplier_list');
 
+//需要认证的路由分组
 $router->group(['middleware' => 'auth'],function () use ($router){
 //修改密码
 $router->post('/change_password','UserController@change_password');

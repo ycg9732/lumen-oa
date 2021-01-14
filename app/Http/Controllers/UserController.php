@@ -77,12 +77,12 @@ class UserController extends Controller
      */
     public function change_password(){
         $user_id = Auth::id();
-        $user = User::find($user_id);
         $old_password = sha1($this->salt.$this->request->input('old'));
-        $new_password = sha1($this->request->input('new'));
-        $password = $user->value('password');
-        if ($old_password = $password){
+        $new_password = sha1($this->salt.$this->request->input('new'));
+        $password = User::where('id',$user_id)->value('password');
+        if ($old_password == $password){
             try {
+                $user = User::find($user_id);
                 $user->password = $new_password;
                 $user->save();
                 return $this->returnMessage();

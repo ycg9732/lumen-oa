@@ -32,7 +32,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->header('token')) {
-                //todo token认证待优化
                 return User::where('api_token', $request->header('token'))->first();
             }
         });

@@ -50,18 +50,32 @@ class UserController extends Controller
      * 消息详情
      */
     public function read(){
-//        $id = Auth::id();
-        $user = User::find(3);
-        $unread_data = $user->unreadNotifications;
-        $all_data = $user->Notifications;
-        $datetime = new \DateTime;
-        $datetime->format('Y-m-d H:i:s');
-//标记已读
-        $user->unreadNotifications()->update(['read_at' => $datetime]);
-        return $this->returnMessage(['unread'=>$unread_data,'all'=>$all_data]);
-
-//        $num = $user->Notifications->where('data','[json_encode(['id' => 1,'name' => 'sa','msg' => 'hhhh']]')->count();
-        return $this->returnMessage(['id' => 1,'name' => 'sa','msg' => 'hhhh']);
+        $read = $this->request->input('if_read');
+        $user = Auth::user();
+        if($read == 0){
+            $msg = $user->unreadNotifications;
+            $re = [];
+            foreach ($msg as $k => $v){
+                $re[] = $v['data'];
+            }
+//
+            $user->unreadNotifications()->update(['read_at' => now()]);
+            return $this->returnMessage($re);
+        }elseif($read == 1){
+            $msg = $user->readNotifications;
+            $re = [];
+            foreach ($msg as $k => $v){
+                $re[$k] = $v['data'];
+            }
+            return $this->returnMessage($re);
+        }else{
+            $msg = $user->notifications;
+            $re = [];
+            foreach ($msg as $k => $v){
+                $re[] = $v['data'];
+            }
+            return $this->returnMessage($re);
+        }
     }
 
     /**

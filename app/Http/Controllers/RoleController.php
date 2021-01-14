@@ -75,6 +75,9 @@ class RoleController extends Controller
         $p_id = explode(',',$id);
         $role = role::find($role_id);
         $role->permission()->sync($p_id);
+        $role->role_name = $this->request->input('role_name');
+        $role->describe = $this->request->input('describe');
+        $role->save();
         return $this->returnMessage();
     }
     /**

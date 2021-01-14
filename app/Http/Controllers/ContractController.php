@@ -150,7 +150,6 @@ class ContractController extends Controller
 
     /**
      * 合同审核
-     *需要加认证
      * 只有改合同的审批领导可以操作
      */
     public function con_access(){

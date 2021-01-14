@@ -60,7 +60,7 @@ class GoodsController extends Controller
                 $good->price = $req['price'];
                 $good->prod_code = $req['prod_code'];
                 $good->self_life = $req['self_life'];
-//    todo            $good->user_id = Auth::id();
+                $good->user_id = Auth::id();
                 $good->save();
                 $good_id = $good->id;
                 $img = explode(',',$req['good_img']);

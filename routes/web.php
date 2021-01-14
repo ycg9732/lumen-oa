@@ -157,10 +157,13 @@ $router->get('/supplier_list','SupplierController@supplier_list');
 
 //需要认证的路由分组
 $router->group(['middleware' => 'auth'],function () use ($router){
-//修改密码
-$router->post('/change_password','UserController@change_password');
-//合同审核
+    //修改密码
+    $router->post('/change_password','UserController@change_password');
+    //合同审核
     $router->get('/con_access','ContractController@con_access');
+    //商品添加
+    $router->get('/goods_add','GoodsController@goods_add');
+
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');
@@ -178,8 +181,6 @@ $router->get('/customer_list','CustomerController@customer_list');
 $router->get('/account_list','AccountController@account_list');
 //客户详情
 $router->get('/customer_detil','CustomerController@customer_detil');
-//商品添加
-$router->get('/goods_add','GoodsController@goods_add');
 //商品列表
 $router->get('/goods_list','GoodsController@goods_list');
 //商品删除

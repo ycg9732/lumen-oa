@@ -70,7 +70,6 @@ class RoleController extends Controller
      */
     public function role_change_permission(){
         $role_id = $this->request->input('role_id');
-//        $permission = permission::findMany([1,2,3]);
         $id = $this->request->input('p_id');
         $p_id = explode(',',$id);
         try {
@@ -104,23 +103,6 @@ class RoleController extends Controller
             return $this->returnMessage('',$e);
         }
 
-    }
-
-    /**
-     * by you
-     * 角色信息编辑
-     */
-    public function role_info_edit(){
-        $id = $this->request->input('id');
-        try {
-            $role = role::find($id);
-            $role->role_name = $this->request->input('role_name');
-            $role->describe = $this->request->input('describe');
-            $role->save();
-            return $this->returnMessage();
-        }catch (\PDOException $e){
-            return $this->returnMessage($e->getMessage());
-        }
     }
 
     /**

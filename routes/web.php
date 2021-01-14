@@ -112,8 +112,6 @@ $router->get('/role_add','RoleController@role_add');
 $router->get('/role_permission','RoleController@role_permission');
 //角色详情
 $router->get('/role_info_detail','RoleController@role_info_detail');
-//角色编辑
-$router->get('/role_info_edit','RoleController@role_info_edit');
 //删除角色
 $router->get('/role_delete','RoleController@role_delete');
 //系统所有的权限

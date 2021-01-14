@@ -46,18 +46,22 @@ class EmployeeController extends Controller
      * 员工详情
      */
     public function ee_detil(Request $request){
-        $ee_id = $request->input('ee_id');
-        $ee_info = employee::where('id',$ee_id)->get()->toArray();
-        $co_name = employee::find($ee_id)->company->co_name;
-        $dept_name = employee::find($ee_id)->department->dept_name;
-        $ee = employee::find($ee_id);
-        $user = User::find(($ee_info[0]['user_id']));
-        $ee_info[0]['co_name'] = $co_name;
-        $ee_info[0]['dept_name'] = $dept_name;
-        $ee_info[0]['user_name'] = $ee->user->name;
-        $ee_info[0]['password'] = $ee->user->password;
-        $ee_info[0]['role'] = $user->role->first()->value('role_name');
-        return $this->returnMessage($ee_info);
+        try {
+            $ee_id = $request->input('ee_id');
+            $ee_info = employee::where('id',$ee_id)->get()->toArray();
+            $co_name = employee::find($ee_id)->company->co_name;
+            $dept_name = employee::find($ee_id)->department->dept_name;
+            $ee = employee::find($ee_id);
+            $user = User::find(($ee_info[0]['user_id']));
+            $ee_info[0]['co_name'] = $co_name;
+            $ee_info[0]['dept_name'] = $dept_name;
+            $ee_info[0]['user_name'] = $ee->user->name;
+            $ee_info[0]['password'] = $ee->user->password;
+            $ee_info[0]['role'] = $user->role->first()->value('role_name');
+            return $this->returnMessage($ee_info);
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
     /**
      * 添加员工

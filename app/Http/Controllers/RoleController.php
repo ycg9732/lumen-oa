@@ -140,7 +140,7 @@ class RoleController extends Controller
             $has_permission = $role->permission->where('menu_id',$v['id']);
             $has = [];
             $has_id = [];
-            $i = 0;
+            $i = 0;//注意 多对多关联 查询的集合下标不是0开始的
             foreach ($has_permission as $k1 => $v1){
                 $has[$i]['id'] = $v1['id'];
                 $has_id[] = $v1['id'];

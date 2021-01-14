@@ -44,9 +44,9 @@ class DepartmentController extends Controller
      * 添加组织架构
      */
     public function de_add(Request $request){
-        $name = department::where('dept_name',$request->input('de_name'))->count();
+        $name = department::where('dept_name',$request->input('de_name'))->where('co_id',$request->input('co_id'))->count();
         if ($name > 0){
-            return 'department exist';
+            return $this->returnMessage('','department exist');
         }else{
             $department = new department;
             $department->dept_name = $request->input('de_name');

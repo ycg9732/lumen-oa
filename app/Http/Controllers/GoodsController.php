@@ -90,12 +90,14 @@ class GoodsController extends Controller
 
     /**
      * 商品列表
+     * 2021-1-14 添加商品筛选功能
      */
     public function goods_list(){
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
-        $goods_list = goods::skip($limitprame)->take($perage)->get(['title','price','created_at','user_id','id','su_id'])->toArray();
+        $name = $this->request->input('good_name');
+        $goods_list = goods::skip($limitprame)->take($perage)->where('title','like','%'.$name.'%')->get(['title','price','created_at','user_id','id','su_id'])->toArray();
         $su_count = goods::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($goods_list as $k => $v){
@@ -240,6 +242,7 @@ class GoodsController extends Controller
     /**
      * by you
      * 商品搜索
+     * 弃用
      */
     public function goods_search(Request $request){
         $name = $request->input('good_name');

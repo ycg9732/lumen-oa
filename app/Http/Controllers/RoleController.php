@@ -135,7 +135,7 @@ class RoleController extends Controller
         $menu = menu::all();
         $re = [];
         foreach ($menu as $k => $v){
-            $re[$v['menu_name']] = [];
+            $re[$k] = [];
             $role = role::find($role_id);
             $has_permission = $role->permission->where('menu_id',$k);
             $has = [];
@@ -155,8 +155,9 @@ class RoleController extends Controller
 //                $p = permission::find($v['id']);
 //                $without[$k]['menu'] = $p->menu->menu_name;
             }
-            $re[$v['menu_name']]['has'] = $has;
-            $re[$v['menu_name']]['without'] = $without;
+            $re[$k]['has'] = $has;
+            $re[$k]['without'] = $without;
+            $re[$k]['name'] = $v['menu_name'];
         }
         return $this->returnMessage($re);
     }

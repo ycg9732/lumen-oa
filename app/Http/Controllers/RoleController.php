@@ -141,19 +141,15 @@ class RoleController extends Controller
             $has = [];
             $has_id = [];
             foreach ($has_permission as $k1 => $v1){
-                $has[$k1]['id'] = $v1['id'];
+                $has[$k1-1]['id'] = $v1['id'];
                 $has_id[] = $v1['id'];
-                $has[$k1]['p_name'] = $v1['p_name'];
-//                $p = permission::find($v['id']);
-//                $has[$k]['menu'] = $p->menu->menu_name;
+                $has[$k1-1]['p_name'] = $v1['p_name'];
             }
             $without_p = permission::where('menu_id',$v['id'])->whereNotIn('id',$has_id)->get();
             $without = [];
             foreach ($without_p as $k2 => $v2){
                 $without[$k2]['id'] = $v2['id'];
                 $without[$k2]['p_name'] = $v2['p_name'];
-//                $p = permission::find($v['id']);
-//                $without[$k]['menu'] = $p->menu->menu_name;
             }
             $re[$k]['has'] = $has;
             $re[$k]['without'] = $without;

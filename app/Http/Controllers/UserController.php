@@ -75,14 +75,22 @@ class UserController extends Controller
      * by you
      * 用户修改密码
      */
-    public function user_info(){
-        $user_id = Auth::id();
-        $old_password = $this->request->input('old');
-        $new_password = $this->request->input('new');
-//        if (){
-//
-//        }else{
-//            return $this->returnMessage('','密码错误,请重新填写');
-//        }
+    public function change_password(){
+        $user_id = 3;
+        $user = User::find($user_id);
+        $old_password = sha1($this->salt.$this->request->input('old'));
+        $new_password = sha1($this->request->input('new'));
+        $password = $user->value('password');
+        if ($old_password = $password){
+            try {
+                $user->password = $new_password;
+                $user->save();
+                return $this->returnMessage();
+            }catch (\PDOException $e){
+                return $this->returnMessage($e->getMessage());
+            }
+        }else{
+            return $this->returnMessage('','密码确认错误,请重新填写');
+        }
     }
 }

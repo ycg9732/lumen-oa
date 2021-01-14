@@ -10,6 +10,7 @@ use App\Models\role;
 use App\Models\role_permission;
 use App\Models\User;
 use App\Models\user_role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
  * Class ContractController
  * @package App\Http\Controllers
  */
+//todo 选中合同审批人的同事需要生成对应员工的消息
 class ContractController extends Controller
 {
     protected $request;
@@ -148,11 +150,18 @@ class ContractController extends Controller
 
     /**
      * 合同审核
+     *需要加认证
+     * 只有改合同的审批领导可以操作
      */
     public function con_access(){
         $con_id = $this->request->input('con_id');
         $state = $this->request->input('con_state');
         $con = contract::find($con_id);
+        $con_lead_id = $con->con_lead;
+        $user_id = Auth::id();
+        if ($user_id != $con_lead_id){
+            return $this->returnMessage('','对不起，没有权限');
+        }
         $con->con_state = $state;
         $con->save();
         return $this->returnMessage('','ok');

@@ -88,8 +88,6 @@ $router->get('/de_tree','DepartmentController@de_tree');
 $router->get('/proj_add','ProjectController@proj_add');
 //项目列表
 $router->get('/proj_list','ProjectController@proj_list');
-//合同审核
-$router->get('/con_access','ContractController@con_access');
 //合同删除
 $router->get('/con_delete','ContractController@con_delete');
 //项目详情
@@ -161,6 +159,8 @@ $router->get('/supplier_list','SupplierController@supplier_list');
 $router->group(['middleware' => 'auth'],function () use ($router){
 //修改密码
 $router->post('/change_password','UserController@change_password');
+//合同审核
+    $router->get('/con_access','ContractController@con_access');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');

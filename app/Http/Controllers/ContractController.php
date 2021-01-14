@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
  * Class ContractController
  * @package App\Http\Controllers
  */
-//todo 选中合同审批人的同事需要生成对应员工的消息
+//todo 选中合同审批人的同时需要生成对应员工的消息
 class ContractController extends Controller
 {
     protected $request;

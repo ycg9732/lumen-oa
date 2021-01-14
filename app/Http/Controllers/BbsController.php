@@ -20,7 +20,7 @@ class BbsController extends Controller
     /**
      * @return array
      */
-    //todo 新建消息类型 添加成功后需要生成相应的用户消息
+    //todo 是否？ 添加成功后需要生成相应的用户消息
     public function add_bbs(){
         $name = $this->request->input('name');
         $content = $this->request->input('content');

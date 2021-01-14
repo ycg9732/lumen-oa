@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\archives;
 use App\Models\company;
+use App\Models\department;
+use App\Models\employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,5 +95,19 @@ class UserController extends Controller
         }else{
             return $this->returnMessage('','密码确认错误,请重新填写');
         }
+    }
+
+    /**
+     * by you
+     * 用户信息
+     */
+    public function user_info(){
+        $user_id = Auth::id();
+        $employer = employee::where('user_id',$user_id)->get()->toArray();
+        foreach ($employer as $k => $v){
+            $employer[$k]['company'] = company::where('id',$v['co_id'])->value('co_name');
+            $employer[$k]['department'] = department::where('id',$v['dept_id'])->value('dept_name');
+        }
+        return $this->returnMessage($employer);
     }
 }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
@@ -71,6 +72,11 @@ class CompanyController extends Controller
      *修改详情
      */
     public function co_edit(Request $request){
+        $user = Auth::user();
+        $can = $user->has('查看');
+        if ($can == 0){
+            return $this->returnMessage('','对不起没有相应的权限');
+        }
         $co_id = $request->input('co_id');
         $company = company::find($co_id);
         $company->co_name = $request->input('co_name');

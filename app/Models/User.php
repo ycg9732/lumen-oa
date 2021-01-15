@@ -39,12 +39,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function role(){
         return $this->belongsToMany(role::class,'user_role','user_id','role_id');
     }
+
     /**
      * by you
-     * @param $p_name|权限的名称
      * 判断用户是否拥有该权限
+     * @param $p_name|权限名称
+     * @return bool|string
      */
-    public function has_permission($p_name)
+    public function has($p_name)
     {
         $user_role = $this->role()->get();
         if (empty($user_role)){
@@ -65,9 +67,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             $p_role_id[] = $v2['id'];
         }
         if (empty(array_intersect($u_role_id,$p_role_id))){
-            return false;
+            return 0;
         }else{
-            return true;
+            return 1;
         }
     }
 }

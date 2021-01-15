@@ -12,7 +12,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-//todo 路由分组待优化
 $router->get('/', function () use ($router) {
     return '$router->app->version()';
 });
@@ -24,8 +23,6 @@ $router->get('/co_list','CompanyController@co_list');
 $router->get('/co_detil','CompanyController@co_detil');
 //添加公司
 $router->post('/co_add','CompanyController@co_add');
-//修改公司详情
-$router->post('/co_edit','CompanyController@co_edit');
 //组织架构搜索
 $router->post('/de_search','DepartmentController@de_search');
 //组织架构列表
@@ -171,6 +168,8 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->get('/message_num','UserController@message_num');
     //标记消息为已读
     $router->get('/mark_message','UserController@mark_message');
+    //修改公司详情
+        $router->post('/co_edit','CompanyController@co_edit');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');

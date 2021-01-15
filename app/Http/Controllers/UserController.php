@@ -59,8 +59,6 @@ class UserController extends Controller
             foreach ($msg as $k => $v){
                 $re[] = $v['data'];
             }
-//   标记为已读
-            $user->unreadNotifications()->update(['read_at' => Carbon::now()]);
             return $this->returnMessage($re);
         }elseif($read == 1){
             $msg = $user->readNotifications;
@@ -94,7 +92,14 @@ class UserController extends Controller
      * 标记消息为已读
      */
     public function mark_message(){
-
+        try {
+            $user = Auth::user();
+//   标记为已读
+            $user->unreadNotifications()->update(['read_at' => Carbon::now()]);
+            return $this->returnMessage();
+        }catch (\Exception $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
 
     /**

@@ -167,6 +167,8 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->get('/read','UserController@read');
     //消息数量
     $router->get('/message_num','UserController@message_num');
+    //标记消息为已读
+    $router->get('/mark_message','UserController@mark_message');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');

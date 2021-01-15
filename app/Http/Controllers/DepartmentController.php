@@ -108,7 +108,7 @@ class DepartmentController extends Controller
         return $this->returnMessage('','ok');
     }
     public function de_tree(){
-        $tree = department::with('children')->first()->toArray();
+        $tree = department::with('children')->where('co_id','81')->first()->toArray();
         $new_tree = $this->get_tree($tree);
         return $this->returnMessage($new_tree);
     }

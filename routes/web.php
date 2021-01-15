@@ -136,6 +136,8 @@ $router->get('/proj_img_delete','FileController@proj_img_delete');
 $router->get('/excel','FileController@excel');
 //供应商添加
 $router->post('/supplier_add','SupplierController@supplier_add');
+//供应商修改
+$router->post('/supplier_edit','SupplierController@supplier_edit');
 //供应商图片修改
 $router->get('/supplier_img_edit','SupplierController@supplier_img_edit');
 //客户添加

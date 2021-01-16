@@ -29,7 +29,7 @@ class EmployeeController extends Controller
      */
     public function ee_list(Request $request){
         if ($request->has('de_member')){
-            $de_member = employee::where('dept_id',null)->get(['id','ee_name']);
+            $de_member = employee::where('dept_id',null)->where('co_id',$request->input('co_id'))->get(['id','ee_name']);
             return $this->returnMessage($de_member);
         }else{
             $co_id = $request->input('co_id','81');
@@ -40,7 +40,6 @@ class EmployeeController extends Controller
             $ee_count = employee::all()->count();
             $all = ceil($ee_count/$perage);
             return $this->returnMessage($ee_list);
-
         }
     }
     /**

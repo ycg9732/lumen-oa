@@ -10,6 +10,7 @@ use App\Models\role;
 use App\Models\role_permission;
 use App\Models\User;
 use App\Models\user_role;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -21,7 +22,7 @@ use Illuminate\Http\Request;
  * Class ContractController
  * @package App\Http\Controllers
  */
-//todo 选中合同审批人的同时需要生成对应员工的消息
+//todo 选中合同审批人的同时需要生成对应员工的消息?
 class ContractController extends Controller
 {
     protected $request;
@@ -111,15 +112,44 @@ class ContractController extends Controller
      *list
      */
     public function con_list(){
-        $co_id = $this->request->input('co_id');
-        $con_state = $this->request->input('con_state');
-    if ($co_id != null and $con_state != null){
         //获取到当前currentpage 和perpage 每页多少条
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
+        $co_id = $this->request->input('co_id');
+        $date = $this->request->input('date');
+        $con_state = $this->request->input('con_state');
+        if ($co_id != null and $con_state != null){
+            switch ($date){
+                case 0:
+                    $start = Carbon::now()->startOfDay();
+                    $end = Carbon::now()->endOfDay();
+                    $list = $this->con_date_list($co_id,$con_state,$currentPage,$perage,$start,$end);
+                    return $this->returnMessage($list);
+                case 1:
+                    $start = Carbon::now()->startOfMonth();
+                    $end = Carbon::now()->endOfMonth();
+                    $list = $this->con_date_list($co_id,$con_state,$currentPage,$perage,$start,$end);
+                    return $this->returnMessage($list);
+                case 2:
+                    $start = Carbon::now()->startOfYear();
+                    $end = Carbon::now()->endOfYear();
+                    $list = $this->con_date_list($co_id,$con_state,$currentPage,$perage,$start,$end);
+                    return $this->returnMessage($list);
+                default:
+                    $list = $this->con_date_list($co_id,$con_state,$currentPage,$perage);
+                    return $this->returnMessage($list);
+            }
+        }else{
+        return $this->returnMessage('','请选择公司和状态');
+    }
+    }
+    private function con_date_list($co_id,$con_state,$currentPage,$perage,$start = null,$end = null){
         $limitprame = ($currentPage -1) * $perage;
-        $con_list = contract::where('con_state',$con_state)->where('co_id',$co_id)->skip($limitprame)->take($perage)->get();
-//        $con_list = contract::where('con_state',$con_state)->where('co_id',$co_id)->get();
+        if ($start == null){
+            $con_list = contract::where('con_state',$con_state)->where('co_id',$co_id)->skip($limitprame)->take($perage)->get();
+        }else{
+            $con_list = contract::where('con_state',$con_state)->where('co_id',$co_id)->whereBetween('created_at',[$start,$end])->skip($limitprame)->take($perage)->get();
+        }
         $con_count = contract::all()->count();
         $all = ceil($con_count/$perage);
         foreach ($con_list as $con) {
@@ -130,10 +160,7 @@ class ContractController extends Controller
             }
             $con['con_img'] =  $img_arr;
         }
-        return $this->returnMessage($con_list);
-        }else{
-        return $this->returnMessage([$co_id,$con_state],'请选择公司和状态');
-    }
+        return $con_list;
     }
     /**
      * 删除

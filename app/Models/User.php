@@ -39,12 +39,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function role(){
         return $this->belongsToMany(role::class,'user_role','user_id','role_id');
     }
-
     /**
      * by you
-     * 判断用户是否拥有该权限
-     * @param $p_name|权限名称
-     * @return bool|string
+     * @param $p_name|判断用户是否拥有改权限
+     * @return int|string
      */
     public function has($p_name)
     {

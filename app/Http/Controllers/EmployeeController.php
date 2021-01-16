@@ -21,7 +21,11 @@ class EmployeeController extends Controller
     public function ee_search(Request $request){
         $co_id = $request->input('co_id','81');
         $name = $request->input('ee_name');
-        $ee_list = employee::where('ee_name','like','%'.$name.'%')->where('co_id',$co_id)->get();
+        if (empty($name)){
+            $ee_list = employee::where('co_id',$co_id)->get();
+        }else{
+            $ee_list = employee::where('ee_name','like','%'.$name.'%')->where('co_id',$co_id)->get();
+        }
         return $this->returnMessage($ee_list);
     }
     /**

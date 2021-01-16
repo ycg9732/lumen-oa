@@ -43,6 +43,7 @@ class GoodsController extends Controller
         $req['good_img'] = $this->request->input('good_img');
         $req['good_cert'] = $this->request->input('good_cert');
         $req['self_life'] = $this->request->input('self_life');
+        $req['co_id'] = $this->request->input('co_id');
         try {
             DB::transaction(function () use ($req){
                 $good = new goods();
@@ -60,6 +61,7 @@ class GoodsController extends Controller
                 $good->price = $req['price'];
                 $good->prod_code = $req['prod_code'];
                 $good->self_life = $req['self_life'];
+                $good->co_id = $req['co_id'];
                 $good->user_id = Auth::id();
                 $good->save();
                 $good_id = $good->id;
@@ -95,9 +97,10 @@ class GoodsController extends Controller
     public function goods_list(){
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
+        $co_id = $this->request->input('co_id');
         $limitprame = ($currentPage -1) * $perage;
         $name = $this->request->input('good_name');
-        $goods_list = goods::skip($limitprame)->take($perage)->where('title','like','%'.$name.'%')->get(['title','price','created_at','user_id','id','su_id'])->toArray();
+        $goods_list = goods::skip($limitprame)->take($perage)->where('co_id',$co_id)->where('title','like','%'.$name.'%')->get(['title','price','created_at','user_id','id','su_id'])->toArray();
         $su_count = goods::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($goods_list as $k => $v){

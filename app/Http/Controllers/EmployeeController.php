@@ -32,7 +32,7 @@ class EmployeeController extends Controller
             $de_member = employee::where('dept_id',null)->get(['id','ee_name']);
             return $this->returnMessage($de_member);
         }else{
-            $co_id = $request->input('co_id');
+            $co_id = $request->input('co_id','81');
             $currentPage = (int)$request->input('current_page','1');
             $perage = (int)$request->input('perpage','20');
             $limitprame = ($currentPage -1) * $perage;

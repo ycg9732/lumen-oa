@@ -19,8 +19,9 @@ class EmployeeController extends Controller
      * 搜索接口(名称搜索)
      */
     public function ee_search(Request $request){
+        $co_id = $request->input('co_id','81');
         $name = $request->input('ee_name');
-        $ee_list = employee::where('ee_name','like','%'.$name.'%')->get();
+        $ee_list = employee::where('ee_name','like','%'.$name.'%')->where('co_id',$co_id)->get();
         return $this->returnMessage($ee_list);
     }
     /**

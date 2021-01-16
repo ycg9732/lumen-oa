@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Models\employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -26,6 +27,7 @@ class CustomerController extends Controller
             $charge_tel = $this->request->input('charge_tel');
             $from = $this->request->input('from');
             $co_id = $this->request->input('co_id');
+            $user_id = Auth::id();
 
             $cus = new customer();
             $cus->com_name = $name;
@@ -35,6 +37,7 @@ class CustomerController extends Controller
             $cus->charge_tel = $charge_tel;
             $cus->from = $from;
             $cus->co_id = $co_id;
+            $cus->user_id = $user_id;
 
             $cus->save();
             return $this->returnMessage('','ok');

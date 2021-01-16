@@ -137,8 +137,6 @@ $router->post('/supplier_add','SupplierController@supplier_add');
 $router->post('/supplier_edit','SupplierController@supplier_edit');
 //供应商图片修改
 $router->get('/supplier_img_edit','SupplierController@supplier_img_edit');
-//客户添加
-$router->get('/customer_add','CustomerController@customer_add');
 //客户删除
 $router->get('/customer_delete','CustomerController@customer_delete');
 //客户修改
@@ -170,6 +168,8 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->get('/mark_message','UserController@mark_message');
     //修改公司详情
         $router->post('/co_edit','CompanyController@co_edit');
+    //客户添加
+    $router->get('/customer_add','CustomerController@customer_add');
 });
 //供应商详情
 $router->get('/supplier_detil','SupplierController@supplier_detil');

@@ -101,11 +101,14 @@ class DepartmentController extends Controller
     public function de_add_ee(Request $request){
         $de_id = $request->input('de_id');
         $ee_id = $request->input('ee_id');
-        $employee = employee::find($ee_id);
-        $employee->dept_id = $de_id;
-        $employee->save();
-        //todo 捕获准确的操作结果
-        return $this->returnMessage('','ok');
+        try {
+            $employee = employee::find($ee_id);
+            $employee->dept_id = $de_id;
+            $employee->save();
+            return $this->returnMessage('','ok');
+        }catch (\PDOException $e){
+            return $this->returnMessage($e->getMessage());
+        }
     }
     //部门树状图
     public function de_tree(Request $request){

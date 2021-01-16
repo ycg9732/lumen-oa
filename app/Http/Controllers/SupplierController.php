@@ -274,7 +274,7 @@ class SupplierController extends Controller
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;
         $co_id = $this->request->input('co_id','81');
-        $supplier_list = supplier::skip($limitprame)->take($perage)->where('co_id',$co_id)->get(['su_name','level','user_id','created_at','id']);
+        $supplier_list = supplier::where('co_id',$co_id)->skip($limitprame)->take($perage)->get(['su_name','level','user_id','created_at','id']);
         $su_count = supplier::all()->count();
         $all = ceil($su_count/$perage);
         foreach ($supplier_list as $sup){

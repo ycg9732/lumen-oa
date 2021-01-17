@@ -229,7 +229,7 @@ class SupplierController extends Controller
             $fangyi = $this->request->input('fangyi_cert');
             $fangyi_timr = $this->request->input('fangyi_time');
 
-            $supplier = supplier::find($su_id);
+            $supplier = supplier::find($id);
             $supplier->user_id = Auth::id();
 //            $supplier->user_id = 1;
             $supplier->su_name = $name;

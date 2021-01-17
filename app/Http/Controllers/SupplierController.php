@@ -203,7 +203,7 @@ class SupplierController extends Controller
      */
     public function supplier_edit(){
         try {
-            $su_id = $this->request->input('sup_id');
+            $su_id = $this->request->input('id');
             $name = $this->request->input('su_name');
             $start_time = $this->request->input('start_time');
             $code = $this->request->input('code');
@@ -229,7 +229,7 @@ class SupplierController extends Controller
             $fangyi = $this->request->input('fangyi_cert');
             $fangyi_timr = $this->request->input('fangyi_time');
 
-            $supplier = supplier::find($id);
+            $supplier = supplier::find($su_id);
             $supplier->user_id = Auth::id();
 //            $supplier->user_id = 1;
             $supplier->su_name = $name;

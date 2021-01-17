@@ -203,7 +203,7 @@ class SupplierController extends Controller
      */
     public function supplier_edit(){
         try {
-            $su_id = $this->request->input('su_id');
+            $su_id = $this->request->input('sup_id');
             $name = $this->request->input('su_name');
             $start_time = $this->request->input('start_time');
             $code = $this->request->input('code');

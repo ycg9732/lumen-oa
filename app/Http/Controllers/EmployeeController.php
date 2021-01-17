@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             $ee_info[0]['dept_name'] = $dept_name;
             $ee_info[0]['user_name'] = $ee->user->name;
             $ee_info[0]['password'] = $ee->user->password;
-            $ee_info[0]['role'] = $user->role->first()->value('role_name');
+            $ee_info[0]['role'] = $user->role()->get(['role_name','role_id']);
             return $this->returnMessage($ee_info);
         }catch (\PDOException $e){
             return $this->returnMessage($e->getMessage());

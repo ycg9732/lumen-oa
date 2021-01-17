@@ -66,7 +66,7 @@ class ArchivesController extends Controller
      * 员工档案列表
      */
     public function arch_list(){
-        $co_id = $this->request->input('co_id');
+        $co_id = $this->request->input('id');
         $currentPage = (int)$this->request->input('current_page','1');
         $perage = (int)$this->request->input('perpage','20');
         $limitprame = ($currentPage -1) * $perage;

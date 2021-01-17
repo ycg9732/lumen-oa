@@ -26,12 +26,14 @@ class BbsController extends Controller
         $content = $this->request->input('content');
         $ower = $this->request->input('bbs_ower');
         $co_id = $this->request->input('co_id');
+        $table = $this->request->input('table');
         try {
-            DB::transaction(function ()use ($name,$content,$ower,$co_id){
+            DB::transaction(function ()use ($name,$content,$ower,$co_id,$table){
                 $bbs = new bbs;
                 $bbs->bbs_name = $name;
                 $bbs->bbs_content = $content;
                 $bbs->bbs_ower = $ower;
+                $bbs->table = $table;
                 $bbs->save();
                 $bbs_id = $bbs->id;
                 //插入多对多关联表

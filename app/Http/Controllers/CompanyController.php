@@ -62,8 +62,7 @@ class CompanyController extends Controller
             $company->address = $request->input('address');
             $company->fanwei = $request->input('fanwei');
             $company->parent = $request->input('parent');
-            $company->x = $request->input('x');
-            $company->y = $request->input('y');
+            $company->distribution = $request->input('distribution');
             $company->save();
             return $this->returnMessage('','ok');
         }
@@ -91,8 +90,7 @@ class CompanyController extends Controller
         $company->area = $request->input('area');
         $company->address = $request->input('address');
         $company->fanwei = $request->input('fanwei');
-        $company->x = $request->input('x');
-        $company->y = $request->input('y');
+        $company->distribution = $request->input('distribution');
         $company->save();
         return $this->returnMessage('','ok');
     }
@@ -160,7 +158,7 @@ class CompanyController extends Controller
                 if ($k != 'co_name'){
                     unset($tree[$k]);
                 }else{
-                    $tree['name'] = $tree[$k];
+                    $tree['name'] = $tree[$k].'('.company::where('co_name',$tree[$k])->value('distribution').')';
                     unset($tree[$k]);
                 }
             }

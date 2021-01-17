@@ -68,6 +68,7 @@ class ContractController extends Controller
             $contract->con_lead = $d['con_lead'];
             $contract->co_id = $d['co_id'];
             $contract->con_img = $img;
+            $contract->storage = $d['storage'];
             $contract->save();
             return $this->returnMessage('','ok');
 
@@ -85,7 +86,7 @@ class ContractController extends Controller
         $company->con_content = $this->request->input('con_content');
         $company->con_lead = $this->request->input('con_lead');
         $company->con_ower = $this->request->input('con_ower');
-
+        $company->storage = $this->request->input('storage');
         $company->save();
         return $this->returnMessage('','ok');
     }

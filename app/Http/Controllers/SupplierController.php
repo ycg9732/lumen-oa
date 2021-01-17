@@ -32,6 +32,7 @@ class SupplierController extends Controller
             $code = $this->request->input('code');
             $exp = $this->request->input('exp');
             $tel = $this->request->input('tel');
+            $level = $this->request->input('level');
             $contact_people = $this->request->input('contact_people');
             $zoon_cert = $this->request->input('zoon_cert');
             $zoon_time = $this->request->input('zoon_time') == ''?null:$this->request->input('zoon_time');
@@ -64,6 +65,7 @@ class SupplierController extends Controller
             $supplier->zoon_cert = $zoon_cert;
             $supplier->zoon_time = $zoon_time;
             $supplier->food_cert = $food_cert;
+            $supplier->level = $level;
             $supplier->food_time = $food_time;
             $supplier->sell_cert = $sell_cert;
             $supplier->sell_time = $sell_time;
@@ -209,6 +211,7 @@ class SupplierController extends Controller
             $code = $this->request->input('code');
             $exp = $this->request->input('exp');
             $tel = $this->request->input('tel');
+            $level = $this->request->input('level');
             $contact_people = $this->request->input('contact_people');
             $zoon_cert = $this->request->input('zoon_cert');
             $zoon_time = $this->request->input('zoon_time');
@@ -237,6 +240,7 @@ class SupplierController extends Controller
             $supplier->code = $code;
             $supplier->exp = $exp;
             $supplier->tel = $tel;
+            $supplier->level = $level;
             $supplier->contact_people = $contact_people;
             $supplier->zoon_cert = $zoon_cert;
             $supplier->zoon_time = $zoon_time;

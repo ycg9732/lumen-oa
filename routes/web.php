@@ -75,8 +75,6 @@ $router->get('/de_per_co','CompanyController@de_per_co');
 $router->post('/add_bbs','BbsController@add_bbs');
 //查看公告
 $router->get('/see_bbs','BbsController@see_bbs');
-//公告列表
-$router->get('/bbs_list','BbsController@bbs_list');
 //公告删除
 $router->get('/bbs_delete','BbsController@bbs_delete');
 //组织关系图
@@ -170,6 +168,8 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->get('/customer_add','CustomerController@customer_add');
 //供应商修改
     $router->post('/supplier_edit','SupplierController@supplier_edit');
+//公告列表
+    $router->get('/bbs_list','BbsController@bbs_list');
 
 });
 //供应商详情

@@ -159,7 +159,7 @@ class CompanyController extends Controller
                 if ($k != 'co_name'){
                     unset($tree[$k]);
                 }else{
-                    $tree['name'] = $tree[$k].'('.company::where('co_name',$tree[$k])->value('distribution').')';
+                    $tree['name'] = !empty(company::where('co_name',$tree[$k])->value('distribution'))?$tree[$k].'('.company::where('co_name',$tree[$k])->value('distribution').')':$tree[$k];
                     unset($tree[$k]);
                 }
             }

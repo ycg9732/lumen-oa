@@ -131,6 +131,7 @@ class FileController extends Controller
      * by you
      * 员工档案图片上传
      */
+    //todo 图片文件删除
     public function arch_img_add(){
         $img_name = Str::random(10).'.'.$this->request->file('file')->getClientOriginalExtension();
         $img= $this->request->file('file')->move(env('APP_STORAGE').'arch',$img_name);
@@ -146,6 +147,7 @@ class FileController extends Controller
      * by you
      * 员工档案图片删除
      */
+    //todo 图片文件删除
     public function arch_img_delete(){
         $id = $this->request->input('id');
         try {
@@ -162,6 +164,7 @@ class FileController extends Controller
      * by you
      * 项目管理图片删除
      */
+    //todo 图片文件删除
     public function proj_img_delete(){
         $img_name = $this->request->input('img_name');
         $id = $this->request->input('id');

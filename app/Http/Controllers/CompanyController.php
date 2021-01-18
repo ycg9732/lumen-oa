@@ -61,8 +61,9 @@ class CompanyController extends Controller
             $company->area = $request->input('area');
             $company->address = $request->input('address');
             $company->fanwei = $request->input('fanwei');
-            $company->parent = $request->input('parent');
+            $company->p_id = $request->input('parent');
             $company->distribution = $request->input('distribution');
+            $company->is_right = $request->input('is_right','1');
             $company->save();
             return $this->returnMessage('','ok');
         }

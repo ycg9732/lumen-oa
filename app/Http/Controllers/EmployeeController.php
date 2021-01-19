@@ -119,7 +119,7 @@ class EmployeeController extends Controller
                     return $this->returnMessage('对不起,没有修改密码权限!请将修改密码栏留空。');
                 }
             }
-            DB::transaction(function () use ($request,$user_log_in){
+            DB::transaction(function () use ($request){
                 $ee_id = $request->input('ee_id');
                 $employee = employee::find($ee_id);
                 $employee->ee_name = $request->input('ee_name');

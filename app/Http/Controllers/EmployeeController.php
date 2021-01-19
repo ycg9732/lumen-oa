@@ -130,9 +130,10 @@ class EmployeeController extends Controller
                 }
                 //修改角色
                 if (!empty($role_id)){
-                    $user_id = $employee->first()->value('user_id');
+                    $employee = employee::find($ee_id);
+                    $user_id = $employee->value('user_id');
                     throw new \Exception($user_id);
-                    $user = User::find($user_id);
+                    $user = User::find($ee_id);
                     $ids = explode(',',$role_id);
                     $user->role()->sync($ids);
                 }

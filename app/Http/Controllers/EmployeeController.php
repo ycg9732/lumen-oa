@@ -131,14 +131,14 @@ class EmployeeController extends Controller
                 //修改角色
                 if (!empty($role_id)){
                     $user_id = $employee->first()->value('user_id');
-                    return $user_id;
+                    throw new \Exception($user_id);
                     $user = User::find($user_id);
                     $ids = explode(',',$role_id);
                     $user->role()->sync($ids);
                 }
             },2);
             return $this->returnMessage('','ok');
-        }catch (\PDOException $e){
+        }catch (\Exception $e){
             return $this->returnMessage($e->getMessage());
         }
     }

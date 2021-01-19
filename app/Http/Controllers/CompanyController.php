@@ -38,6 +38,9 @@ class CompanyController extends Controller
     public function co_detil(Request $request){
         $co_id = $request->input('co_id');
         $co_info = company::where('id',$co_id)->get();
+        foreach ($co_info as $k => $v){
+            $co_info[$k]['parent'] = empty(company::where('id',$v['pid'])->value('co_name'))?'':company::where('id',$v['pid'])->value('co_name');
+        }
         return $this->returnMessage($co_info);
     }
     /**

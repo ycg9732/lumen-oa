@@ -144,6 +144,7 @@ class CompanyController extends Controller
     /**
      * 单选框接口
      */
+    //todo 父部门不能是自己
     public function co_select(){
         $select = company::get(['id','co_name']);
         return $this->returnMessage($select);

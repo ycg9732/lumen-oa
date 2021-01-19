@@ -11,6 +11,7 @@ use App\Models\role_permission;
 use App\Models\User;
 use App\Models\user_role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -71,9 +72,10 @@ class EmployeeController extends Controller
      * 添加员工
      */
     public function ee_add(Request $request){
-        $user_name = employee::where('ee_name',$request->input('ee_name'))->count();
-        if ($user_name > 0){
-            return 'employee exist';
+        $ee_name = employee::where('ee_name',$request->input('ee_name'))->count();
+        $user_name = User::where('name',$request->input('user_name'))->count();
+        if ($ee_name > 0 or $user_name >0){
+            return $this->returnMessage('员工姓名或者用户名重复');
         }else{
             try {
                 DB::transaction(function () use ($request){
@@ -100,7 +102,7 @@ class EmployeeController extends Controller
                 });
                 return $this->returnMessage('','ok');
             }catch (\PDOException $e){
-                return $this->returnMessage('',$e);
+                return $this->returnMessage($e->getMessage());
             }
         }
     }
@@ -109,7 +111,15 @@ class EmployeeController extends Controller
      */
     public function ee_edit(Request $request){
         try {
-            DB::transaction(function () use ($request){
+            $user_log_in = Auth::user();
+            //判断是否可以修改密码
+            $has = $user_log_in->has('修改密码');
+            if (!empty($request->input('password'))){
+                if ($has != 1){
+                    return $this->returnMessage('对不起,没有修改密码权限!');
+                }
+            }
+            DB::transaction(function () use ($request,$user_log_in){
                 $ee_id = $request->input('ee_id');
                 $employee = employee::find($ee_id);
                 $employee->ee_name = $request->input('ee_name');
@@ -121,10 +131,18 @@ class EmployeeController extends Controller
                 $user_name = $request->input('user_name');
                 $password = $request->input('password');
                 $role_id = $request->input('role_id');
-                //修改用户名密码
-                if (!empty($user_name) and !empty($password)){
-                    $user = User::find($employee->first()->value('user_id'));
+                //修改账号
+                if (!empty($user_name)){
+                    $user_id = employee::where('id',$ee_id)->value('user_id');
+                    $user = User::find($user_id);
                     $user->name = $user_name;
+//                $user->password = sha1('userloginregister'.$password);
+                    $user->save();
+                }
+                if (!empty($password)){
+                    $user_id_1 = employee::where('id',$ee_id)->value('user_id');
+                    $user = User::find($user_id_1);
+//                    $user->name = $user_name;
                     $user->password = sha1('userloginregister'.$password);
                     $user->save();
                 }

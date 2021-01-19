@@ -41,8 +41,6 @@ $router->get('/ee_list','EmployeeController@ee_list');
 $router->get('/ee_detil','EmployeeController@ee_detil');
 //添加员工
 $router->post('/ee_add','EmployeeController@ee_add');
-//修改员工详情
-$router->post('/ee_edit','EmployeeController@ee_edit');
 //公司关系图
 $router->get('/co_tree','CompanyController@tree');
 //单选框接口
@@ -170,6 +168,8 @@ $router->group(['middleware' => 'auth'],function () use ($router){
     $router->post('/supplier_edit','SupplierController@supplier_edit');
 //公告列表
     $router->get('/bbs_list','BbsController@bbs_list');
+    //修改员工详情
+    $router->post('/ee_edit','EmployeeController@ee_edit');
 
 });
 //供应商详情

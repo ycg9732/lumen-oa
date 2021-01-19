@@ -19,6 +19,11 @@ class department extends Model
     }
 
     public function children(){
+        return $this->all_children()->with('children');
+    }
+    public function all_children(){
+
         return $this->hasMany(get_class($this),'pid','id');
+
     }
 }

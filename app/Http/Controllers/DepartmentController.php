@@ -113,7 +113,6 @@ class DepartmentController extends Controller
     //部门树状图
     public function de_tree(Request $request){
         $co_id = $request->input('co_id','81');
-        //todo 前端需要更改
         $tree = department::with('children')->where('co_id',$co_id)->first()->toArray();
         $new_tree = $this->get_tree($tree);
         return $this->returnMessage($new_tree);

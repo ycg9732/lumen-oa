@@ -122,7 +122,7 @@ class EmployeeController extends Controller
                 $password = $request->input('password');
                 $role_id = $request->input('role_id');
                 //修改用户名密码
-                if (!empty($user_name) or !empty($password)){
+                if (!empty($user_name) and !empty($password)){
                     $user = User::find($employee->first()->value('user_id'));
                     $user->name = $user_name;
                     $user->password = sha1('userloginregister'.$password);

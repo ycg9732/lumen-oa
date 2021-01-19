@@ -61,7 +61,7 @@ class CompanyController extends Controller
             $company->area = $request->input('area');
             $company->address = $request->input('address');
             $company->fanwei = $request->input('fanwei');
-            $company->p_id = $request->input('parent');
+            $company->pid = $request->input('pid');
             $company->distribution = $request->input('distribution');
             $company->is_right = $request->input('is_right','1');
             $company->save();

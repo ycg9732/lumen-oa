@@ -138,7 +138,7 @@ class EmployeeController extends Controller
                 }
             },2);
             return $this->returnMessage('','ok');
-        }catch (\Exception $e){
+        }catch (\PDOException $e){
             return $this->returnMessage($e->getMessage());
         }
     }

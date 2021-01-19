@@ -95,6 +95,7 @@ class CompanyController extends Controller
         $company->address = $request->input('address');
         $company->fanwei = $request->input('fanwei');
         $company->distribution = $request->input('distribution');
+        $company->pid = $request->input('pid');
         $company->save();
         return $this->returnMessage('','ok');
     }

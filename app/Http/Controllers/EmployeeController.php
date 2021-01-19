@@ -132,8 +132,8 @@ class EmployeeController extends Controller
                 if (!empty($role_id)){
                     $employee = employee::find($ee_id);
                     $user_id = $employee->value('user_id');
-                    throw new \Exception($user_id);
-                    $user = User::find($ee_id);
+                    throw new \Exception($ee_id);
+                    $user = User::find($user_id);
                     $ids = explode(',',$role_id);
                     $user->role()->sync($ids);
                 }

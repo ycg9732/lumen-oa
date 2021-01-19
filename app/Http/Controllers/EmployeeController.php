@@ -116,7 +116,7 @@ class EmployeeController extends Controller
             $has = $user_log_in->has('修改密码');
             if (!empty($request->input('password'))){
                 if ($has != 1){
-                    return $this->returnMessage('对不起,没有修改密码权限!请讲修改密码栏留空。');
+                    return $this->returnMessage('对不起,没有修改密码权限!请将修改密码栏留空。');
                 }
             }
             DB::transaction(function () use ($request,$user_log_in){

@@ -131,7 +131,7 @@ class EmployeeController extends Controller
                 //修改角色
                 if (!empty($role_id)){
                     $user_id = employee::where('id',$ee_id)->value('user_id');
-                    throw new \Exception($user_id);
+//                    throw new \Exception($user_id);
                     $user = User::find($user_id);
                     $ids = explode(',',$role_id);
                     $user->role()->sync($ids);

@@ -25,9 +25,6 @@ class ResumableController extends Controller
     protected $chunkFile;
 
     /**
-     *
-    $request = new SimpleRequest();
-    $response = new SimpleResponse();
      * Resumable constructor.
      * @param Request $request
      * @param Response $response
@@ -37,7 +34,6 @@ class ResumableController extends Controller
         $this->request = $request;
         $this->response = $response;
     }
-
     /**
      *开始续传
      */
@@ -48,7 +44,6 @@ class ResumableController extends Controller
             } else {
                 return 'ncaknc';
             }
-
     }
     /**
      *
@@ -63,7 +58,6 @@ class ResumableController extends Controller
         $chunkNumber = $this->request->input('resumableChunkNumber');
         $chunkSize = $this->request->input('resumableChunkSize');
         $totalSize = $this->request->input('resumableTotalSize');
-//        return 'tmp' . DIRECTORY_SEPARATOR . $identifier;
 //判断上传的分块是否存在  如果不存在则存到tmp 下相关分块文件夹
         if (!$this->isChunkUploaded($identifier,$filename,$chunkNumber)) {
             $chunkFile = $this->tmpChunkDir($identifier).DIRECTORY_SEPARATOR.$this->tmpChunkFilename($filename, $chunkNumber);

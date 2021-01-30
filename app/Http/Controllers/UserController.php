@@ -106,7 +106,7 @@ class UserController extends Controller
      * by you
      * 用户修改密码
      */
-    //todo 修改密码后需要重新登录
+    //  todo 修改密码后需要重新登录
     public function change_password(){
         $user_id = Auth::id();
         $old_password = sha1($this->salt.$this->request->input('old'));
